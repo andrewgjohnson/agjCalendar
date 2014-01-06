@@ -1934,7 +1934,7 @@
 							'Powered by' +
 						'</span>' +
 						' ' +
-						'<a href="http://www.ctccalendar.com/" title="ctcCalendar" id="ctc-calendar-powered-by">' +
+						'<a href="https://github.com/ctcCalendar/ctcCalendar" target="_blank" title="ctcCalendar" id="ctc-calendar-powered-by">' +
 							'ctcCalendar' +
 						'</a>' +
 					'</div>' +
@@ -2049,11 +2049,6 @@
 				'</div>' +
 			'</div>';
 		$("body").prepend(ctcCalendar_markup);
-
-		$("#ctc-calendar-powered-by").click(function() {
-			window.open(this.href,"_new");
-			return false;
-		});
 
 		$("#ctc-calendar-hide").click(function() {
 			$.ctcCalendar.hide();
