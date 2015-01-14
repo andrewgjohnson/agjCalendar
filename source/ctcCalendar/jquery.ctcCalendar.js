@@ -1986,8 +1986,16 @@
 						'<div class="ctc-calendar-month">' +
 							'<div class="ctc-calendar-month-inner" colspan="5">' +
 								'<strong id="ctc-calendar-second-month-name" />' +
-								'<a href="#" title="Next Month" class="ctc-calendar-next-month">Next Month</a>' +
-								'<a href="#" title="Previous Month" class="ctc-calendar-previous-month">Previous Month</a>' +
+								'<a href="#" title="Next Month" class="ctc-calendar-next-month">' +
+									'<span class="ctc-calendar-next-month-inner">' +
+										'Next Month' +
+									'</span>' +
+								'</a>' +
+								'<a href="#" title="Previous Month" class="ctc-calendar-previous-month">' +
+									'<span class="ctc-calendar-previous-month-inner">' +
+										'Previous Month' +
+									'</span>' +
+								'</a>' +
 							'</div>' +
 						'</div>' +
 						'<div class="ctc-calendar-days">' +
@@ -2018,8 +2026,16 @@
 						'<div class="ctc-calendar-month">' +
 							'<div class="ctc-calendar-month-inner" colspan="5">' +
 								'<strong id="ctc-calendar-third-month-name" />' +
-								'<a href="#" title="Next Month" class="ctc-calendar-next-month">Next Month</a>' +
-								'<a href="#" title="Previous Month" class="ctc-calendar-previous-month">Previous Month</a>' +
+								'<a href="#" title="Next Month" class="ctc-calendar-next-month">' +
+									'<span class="ctc-calendar-next-month-inner">' +
+										'Next Month' +
+									'</span>' +
+								'</a>' +
+								'<a href="#" title="Previous Month" class="ctc-calendar-previous-month">' +
+									'<span class="ctc-calendar-previous-month-inner">' +
+										'Previous Month' +
+									'</span>' +
+								'</a>' +
 							'</div>' +
 						'</div>' +
 						'<div class="ctc-calendar-days">' +
