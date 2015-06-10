@@ -1,7 +1,7 @@
 /*
- * ctcCalendar v0.9.1
+ * ctcCalendar v0.9.2
  *
- * Copyright (c) 2013 Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * Copyright (c) 2013-2015 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -23,7 +23,7 @@
 	var last_body_overflow_value = "";
 	var last_body_margin_right_value = "";
 
-	get_true_height = function(element) {
+	var get_true_height = function(element) {
 		var true_height = element.height();
 		if (!isNaN(parseInt(element.css("borderTopWidth"),10)))
 			true_height += parseInt(element.css("borderTopWidth"),10);
@@ -40,7 +40,7 @@
 		return true_height;
 	};
 
-	get_true_width = function(element) {
+	var get_true_width = function(element) {
 		var true_width = element.width();
 		if (!isNaN(parseInt(element.css("borderLeftWidth"),10)))
 			true_width += parseInt(element.css("borderLeftWidth"),10);
@@ -57,7 +57,7 @@
 		return true_width;
 	};
 
-	get_month_name = function(month,full_name,language) {
+	var get_month_name = function(month,full_name,language) {
 		if (full_name === undefined)
 			full_name = true;
 		if (language === undefined)
@@ -94,7 +94,7 @@
 		return "";
 	};
 
-	get_month_number = function(month,language) {
+	var get_month_number = function(month,language) {
 		if (language === undefined)
 			language = "en";
 
@@ -129,7 +129,7 @@
 		return "";
 	};
 
-	get_day_name = function(day,full_name,language) {
+	var get_day_name = function(day,full_name,language) {
 		if (full_name === undefined)
 			full_name = true;
 		if (language === undefined)
@@ -156,7 +156,7 @@
 		return "";
 	};
 
-	get_month_text = function(language) {
+	var get_month_text = function(language) {
 		if (language === undefined)
 			language = "en";
 
@@ -166,7 +166,7 @@
 		return "";
 	};
 
-	get_day_text = function(language) {
+	var get_day_text = function(language) {
 		if (language === undefined)
 			language = "en";
 
@@ -176,7 +176,7 @@
 		return "";
 	};
 
-	get_days_in_month = function(year,month) {
+	var get_days_in_month = function(year,month) {
 		if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
 			return 31;
 		else if (month == 4 || month == 6 || month == 9 || month == 11)
@@ -187,7 +187,7 @@
 		return 0;
 	};
 
-	number_to_text = function(number) {
+	var number_to_text = function(number) {
 		if (!isNaN(number))
 			number = parseInt(number,10);
 

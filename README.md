@@ -14,6 +14,9 @@ This project was started by [Andrew G. Johnson](https://github.com/andrewgjohnso
 
 ## Changelog
 
+######v0.9.2 (June 10, 2015)
+ * Fixed issue that caused ctcCalendar to pollute the global namespace
+
 ######v0.9.1 (January 6, 2013)
  * Fix for some versions of Firefox
 
