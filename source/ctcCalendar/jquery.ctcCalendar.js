@@ -129,28 +129,46 @@
 		return "";
 	};
 
-	var get_day_name = function(day,full_name,language) {
-		if (full_name === undefined)
-			full_name = true;
+	var get_day_name = function(day,language) {
 		if (language === undefined)
 			language = "en";
 
 		if (language == "en")
 		{
-			if (day == 1)
-				return full_name ? "Sunday" : "Sun";
-			else if (day == 2)
-				return full_name ? "Monday" : "Mon";
-			else if (day == 3)
-				return full_name ? "Tuesday" : "Tue";
-			else if (day == 4)
-				return full_name ? "Wednesday" : "Wed";
-			else if (day == 5)
-				return full_name ? "Thursday" : "Thu";
-			else if (day == 6)
-				return full_name ? "Friday" : "Fri";
-			else if (day == 7)
-				return full_name ? "Saturday" : "Sat";
+			if (!ctcCalendars[active_ctcCalendar]["startWeekOnMonday"])
+			{
+				if (day == 1)
+					return "Sunday";
+				else if (day == 2)
+					return "Monday";
+				else if (day == 3)
+					return "Tuesday";
+				else if (day == 4)
+					return "Wednesday";
+				else if (day == 5)
+					return "Thursday";
+				else if (day == 6)
+					return "Friday";
+				else if (day == 7)
+					return "Saturday";
+			}
+			else
+			{
+				if (day == 1)
+					return "Monday";
+				else if (day == 2)
+					return "Tuesday";
+				else if (day == 3)
+					return "Wednesday";
+				else if (day == 4)
+					return "Thursday";
+				else if (day == 5)
+					return "Friday";
+				else if (day == 6)
+					return "Saturday";
+				else if (day == 7)
+					return "Sunday";
+			}
 		}
 
 		return "";
@@ -218,6 +236,73 @@
 		}
 
 		return "";
+	};
+
+	var get_days_of_week = function() {
+
+		var calendar_markup = '';
+
+		var day_name_length = (function() {
+			if (ctcCalendars[active_ctcCalendar]["dayNameFormat"] == "full")
+				return Number.MAX_SAFE_INTEGER;
+			else if (ctcCalendars[active_ctcCalendar]["dayNameFormat"] == "medium")
+				return 3;
+			else
+				return 1;
+		})();
+
+		if (!ctcCalendars[active_ctcCalendar]["startWeekOnMonday"])
+		{
+			calendar_markup += '' +
+				'<div class="ctc-calendar-sunday">' +
+					get_day_name(1).substring(0,day_name_length) +
+				'</div>' +
+				'<div class="ctc-calendar-monday">' +
+					get_day_name(2).substring(0,day_name_length) +
+				'</div>' +
+				'<div class="ctc-calendar-tuesday">' +
+					get_day_name(3).substring(0,day_name_length) +
+				'</div>' +
+				'<div class="ctc-calendar-wednesday">' +
+					get_day_name(4).substring(0,day_name_length) +
+				'</div>' +
+				'<div class="ctc-calendar-thursday">' +
+					get_day_name(5).substring(0,day_name_length) +
+				'</div>' +
+				'<div class="ctc-calendar-friday">' +
+					get_day_name(6).substring(0,day_name_length) +
+				'</div>' +
+				'<div class="ctc-calendar-saturday">' +
+					get_day_name(7).substring(0,day_name_length) +
+				'</div>';
+		}
+		else
+		{
+			calendar_markup += '' +
+				'<div class="ctc-calendar-monday">' +
+					get_day_name(1).substring(0,day_name_length) +
+				'</div>' +
+				'<div class="ctc-calendar-tuesday">' +
+					get_day_name(2).substring(0,day_name_length) +
+				'</div>' +
+				'<div class="ctc-calendar-wednesday">' +
+					get_day_name(3).substring(0,day_name_length) +
+				'</div>' +
+				'<div class="ctc-calendar-thursday">' +
+					get_day_name(4).substring(0,day_name_length) +
+				'</div>' +
+				'<div class="ctc-calendar-friday">' +
+					get_day_name(5).substring(0,day_name_length) +
+				'</div>' +
+				'<div class="ctc-calendar-saturday">' +
+					get_day_name(6).substring(0,day_name_length) +
+				'</div>' +
+				'<div class="ctc-calendar-sunday">' +
+					get_day_name(7).substring(0,day_name_length) +
+				'</div>';
+		}
+
+		return calendar_markup;
 	};
 
 	$(document).resize(function() {
@@ -300,15 +385,34 @@
 				ctcCalendar["allowBlankDates"] = true;
 		}
 
+		ctcCalendar["startWeekOnMonday"] = false;
+		if (options["startWeekOnMonday"])
+		{
+			if (options["startWeekOnMonday"] === true)
+				ctcCalendar["startWeekOnMonday"] = true;
+		}
+
+		ctcCalendar["dayNameFormat"] = "short";
+		if (options["dayNameFormat"])
+		{
+			if (options["dayNameFormat"] == "short")
+				ctcCalendar["dayNameFormat"] = "short";
+			else if (options["dayNameFormat"] == "medium")
+				ctcCalendar["dayNameFormat"] = "medium";
+			else if (options["dayNameFormat"] == "full")
+				ctcCalendar["dayNameFormat"] = "full";
+		}
+
 		/*
 		 * dateFormat.1 = MM/DD/YYYY, e.g. "01/02/2003"
 		 * dateFormat.2 = MMM D, YYYY, e.g. "Jan 2, 2003"
 		 * dateFormat.3 = DD/MM/YYYY, e.g. "02/01/2003"
+		 * dateFormat.4 = YYYY-MM-DD, e.g. "2003-01-02"
 		 */
 		ctcCalendar["dateFormat"] = 1;
 		if (options["dateFormat"])
 		{
-			if (options["dateFormat"] == 2 || options["dateFormat"] == 3)
+			if (options["dateFormat"] == 2 || options["dateFormat"] == 3 || options["dateFormat"] == 4)
 				ctcCalendar["dateFormat"] = options["dateFormat"];
 		}
 
@@ -476,7 +580,7 @@
 				active_ctcCalendar = former_active_ctcCalendar;
 
 				display_calendar = function() {
-					if (active_ctcCalendar != newest_ctcCalendar || active_ctcCalendar_is_end)
+					if (active_ctcCalendar != newest_ctcCalendar || active_ctcCalendar_is_end || $(date_element).is(":focus"))
 					{
 						active_ctcCalendar = newest_ctcCalendar;
 						active_ctcCalendar_is_end = false;
@@ -538,7 +642,7 @@
 				});
 
 				display_end_calendar = function() {
-					if (active_ctcCalendar != newest_ctcCalendar || !active_ctcCalendar_is_end)
+					if (active_ctcCalendar != newest_ctcCalendar || !active_ctcCalendar_is_end || $(end_date_element).is(":focus"))
 					{
 						active_ctcCalendar = newest_ctcCalendar;
 						active_ctcCalendar_is_end = true;
@@ -708,6 +812,12 @@
 			elements_found = month_element.length == 1 && day_element.length == 1 && (!active_ctcCalendar_is_end || (start_month_element.length == 1 && start_day_element.length == 1));
 		}
 
+		if (ctcCalendars[active_ctcCalendar]["startWeekOnMonday"] === true)
+			$("#ctc-calendar-body").removeClass().addClass("start-week-on-monday");
+		else
+			$("#ctc-calendar-body").removeClass().removeClass("start-week-on-monday");
+		$("div.ctc-calendar-days").empty().append(get_days_of_week());
+
 		if (elements_found)
 		{
 			var calendar_element;
@@ -804,11 +914,28 @@
 					else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 3)
 					{
 						if (/([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/.test(date_element.val()))
-							current_date.setFullYear(date_element.val().substring(6,10),parseInt(date_element.val().substring(3,5),10) - 1,1);
+							current_date.setFullYear(date_element.val().substring(6,10),parseInt(date_element.val().substring(3,5),10) - 1,parseInt(date_element.val().substring(0,2),10));
 						else
 						{
 							if (active_ctcCalendar_is_end && /([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/.test(start_date_element.val()))
 								current_date.setFullYear(start_date_element.val().substring(6,10),parseInt(start_date_element.val().substring(3,5),10) - 1,parseInt(start_date_element.val().substring(0,2),10) + ctcCalendars[active_ctcCalendar]["minimumRange"]);
+							else
+							{
+								if (!active_ctcCalendar_is_end)
+									current_date.setFullYear(ctcCalendars[active_ctcCalendar]["minimumDate"].getFullYear(),ctcCalendars[active_ctcCalendar]["minimumDate"].getMonth(),ctcCalendars[active_ctcCalendar]["minimumDate"].getDate());
+								else
+									current_date.setFullYear(ctcCalendars[active_ctcCalendar]["minimumDate"].getFullYear(),ctcCalendars[active_ctcCalendar]["minimumDate"].getMonth(),ctcCalendars[active_ctcCalendar]["minimumDate"].getDate() + ctcCalendars[active_ctcCalendar]["minimumRange"]);
+							}
+						}
+					}
+					else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 4)
+					{
+						if (/([0-9]{4})-([0-9]{2})-([0-9]{2})$/.test(date_element.val()))
+							current_date.setFullYear(date_element.val().substring(0,4),parseInt(date_element.val().substring(5,7),10) - 1,parseInt(date_element.val().substring(8,10),10));
+						else
+						{
+							if (active_ctcCalendar_is_end && /([0-9]{4})-([0-9]{2})-([0-9]{2})$/.test(start_date_element.val()))
+								current_date.setFullYear(start_date_element.val().substring(0,4),parseInt(start_date_element.val().substring(5,7),10) - 1,parseInt(start_date_element.val().substring(8,10),10) + ctcCalendars[active_ctcCalendar]["minimumRange"]);
 							else
 							{
 								if (!active_ctcCalendar_is_end)
@@ -1216,6 +1343,8 @@
 					}
 					else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 3 && /([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/.test(start_date_element.val()))
 						minimum_date.setFullYear(start_date_element.val().substring(6,10),parseInt(start_date_element.val().substring(3,5),10) - 1,parseInt(start_date_element.val().substring(0,2),10) + ctcCalendars[active_ctcCalendar]["minimumRange"]);
+					else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 4 && /([0-9]{4})-([0-9]{2})-([0-9]{2})$/.test(start_date_element.val()))
+						minimum_date.setFullYear(start_date_element.val().substring(0,4),parseInt(start_date_element.val().substring(5,7),10) - 1,parseInt(start_date_element.val().substring(8,10),10) + ctcCalendars[active_ctcCalendar]["minimumRange"]);
 					else
 						minimum_date.setFullYear(minimum_date.getFullYear(),minimum_date.getMonth(),minimum_date.getDate() + ctcCalendars[active_ctcCalendar]["minimumRange"]);
 				}
@@ -1263,6 +1392,11 @@
 					{
 						start_date = new Date();
 						start_date.setFullYear(start_date_element.val().substring(6,10),parseInt(start_date_element.val().substring(3,5),10) - 1,parseInt(start_date_element.val().substring(0,2),10));
+					}
+					else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 4 && /([0-9]{4})-([0-9]{2})-([0-9]{2})$/.test(start_date_element.val()))
+					{
+						start_date = new Date();
+						start_date.setFullYear(start_date_element.val().substring(0,4),parseInt(start_date_element.val().substring(5,7),10) - 1,parseInt(start_date_element.val().substring(8,10),10));
 					}
 				}
 
@@ -1411,6 +1545,25 @@
 						}
 					}
 				}
+				else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 4)
+				{
+					if (parseInt(date_element.val().substring(8,10),10) <= get_days_in_month(parseInt(date_element.val().substring(0,4)),parseInt(date_element.val().substring(5,7),10)) && /([0-9]{4})-([0-9]{2})-([0-9]{2})$/.test(date_element.val()))
+					{
+						active_date = new Date();
+						active_date.setFullYear(date_element.val().substring(0,4),parseInt(date_element.val().substring(5,7),10) - 1,parseInt(date_element.val().substring(8,10),10));
+						active_date.setHours(0,0,0,0);
+
+						if (ctcCalendars[active_ctcCalendar]["allowRange"])
+						{
+							if (parseInt(other_date_element.val().substring(8,10),10) <= get_days_in_month(parseInt(other_date_element.val().substring(0,4)),parseInt(other_date_element.val().substring(5,7),10)) && /([0-9]{4})-([0-9]{2})-([0-9]{2})$/.test(other_date_element.val()))
+							{
+								other_active_date = new Date();
+								other_active_date.setFullYear(other_date_element.val().substring(0,4),parseInt(other_date_element.val().substring(5,7),10) - 1,parseInt(other_date_element.val().substring(8,10),10));
+								other_active_date.setHours(0,0,0,0);
+							}
+						}
+					}
+				}
 			}
 		}
 		else if (ctcCalendars[active_ctcCalendar]["inputType"] == "dropdown")
@@ -1427,9 +1580,15 @@
 		}
 
 		var ctc_calendar_dropdown_element = $("#ctc-calendar-dropdown");
+		var calendarCount = ctcCalendars[active_ctcCalendar]["calendarCount"];
 
-		for (var calendar = 1;calendar <= 3;calendar++)
+		for (var calendar = 1;calendar <= calendarCount;calendar++)
 		{
+			if (!ctcCalendars[active_ctcCalendar]["startWeekOnMonday"])
+				var get_day = draw_date.getDay();
+			else
+				var get_day = (draw_date.getDay() + 6) % 7;
+
 			var calendar_name;
 			if (calendar == 1)
 				calendar_name = "#ctc-calendar-first";
@@ -1444,10 +1603,10 @@
 				$(calendar_name + "-month-name").text(get_month_name(draw_date.getMonth() + 1) + " " + draw_date.getFullYear());
 
 			var calendar_markup = "",current_day = 0;
-			if (draw_date.getDay() > 0)
+			if (get_day > 0)
 			{
 				calendar_markup += '<div class="ctc-calendar-week ctc-calendar-week-one">';
-				for (day = 1;day <= draw_date.getDay();day++)
+				for (day = 1;day <= get_day;day++)
 					calendar_markup += '<div class="ctc-calendar-blank ctc-calendar-' + get_day_name(++current_day % 7).toLowerCase() + '" />';
 			}
 
@@ -1487,6 +1646,13 @@
 					{
 						if (/([0-9]{2})\/([0-9]{2})\/([0-9]{4})/.test(other_date_element.val()))
 							minimum_date.setFullYear(other_date_element.val().substring(6,10),parseInt(other_date_element.val().substring(3,5),10) - 1,parseInt(other_date_element.val().substring(0,2),10) + ctcCalendars[active_ctcCalendar]["minimumRange"]);
+						else
+							minimum_date.setFullYear(minimum_date.getFullYear(),minimum_date.getMonth(),minimum_date.getDate() + ctcCalendars[active_ctcCalendar]["minimumRange"]);
+					}
+					else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 4)
+					{
+						if (/([0-9]{4})-([0-9]{2})-([0-9]{2})/.test(other_date_element.val()))
+							minimum_date.setFullYear(other_date_element.val().substring(0,4),parseInt(other_date_element.val().substring(5,7),10) - 1,parseInt(other_date_element.val().substring(8,10),10) + ctcCalendars[active_ctcCalendar]["minimumRange"]);
 						else
 							minimum_date.setFullYear(minimum_date.getFullYear(),minimum_date.getMonth(),minimum_date.getDate() + ctcCalendars[active_ctcCalendar]["minimumRange"]);
 					}
@@ -1555,6 +1721,18 @@
 									start_date.setFullYear(other_date_element.val().substring(6,10),parseInt(other_date_element.val().substring(3,5),10) - 1,parseInt(other_date_element.val().substring(0,2),10));
 							}
 						}
+						else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 4)
+						{
+							if (/([0-9]{4})-([0-9]{2})-([0-9]{2})/.test(other_date_element.val()))
+							{
+								start_date = new Date();
+								start_date.setFullYear(other_date_element.val().substring(0,4),parseInt(other_date_element.val().substring(5,7),10) - 1,1);
+								if (get_days_in_month(start_date.getFullYear(),start_date.getMonth() + 1) < parseInt(other_date_element.val().substring(8,10),10))
+									start_date.setFullYear(other_date_element.val().substring(0,4),parseInt(other_date_element.val().substring(5,7),10) - 1,get_days_in_month(start_date.getFullYear(),start_date.getMonth() + 1));
+								else
+									start_date.setFullYear(other_date_element.val().substring(0,4),parseInt(other_date_element.val().substring(5,7),10) - 1,parseInt(other_date_element.val().substring(8,10),10));
+							}
+						}
 					}
 					else if (ctcCalendars[active_ctcCalendar]["inputType"] == "dropdown")
 					{
@@ -1580,7 +1758,7 @@
 			}
 			maximum_date.setHours(23,59,59,999);
 
-			for (day = 1;day <= 42 - draw_date.getDay();day++)
+			for (day = 1;day <= 42 - get_day;day++)
 			{
 				if (current_day % 7 == 0)
 				{
@@ -1683,6 +1861,8 @@
 					date_element.val("Select a Date").change();
 				else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 3)
 					date_element.val("dd/mm/yyyy").change();
+				else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 4)
+					date_element.val("yyyy-mm-dd").change();
 			}
 			else
 			{
@@ -1692,6 +1872,8 @@
 					date_element.val(get_month_name(new_date.getMonth() + 1,false) + " " + new_date.getDate() + ", " + new_date.getFullYear()).change();
 				else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 3)
 					date_element.val((new_date.getDate() < 10 ? "0" + "" + new_date.getDate() : new_date.getDate()) + "/" + (new_date.getMonth() + 1 < 10 ? "0" + (new_date.getMonth() + 1) : new_date.getMonth() + 1)+ "/" + new_date.getFullYear()).change();
+				else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 4)
+					date_element.val(new_date.getFullYear() + "-" + (new_date.getMonth() + 1 < 10 ? "0" + (new_date.getMonth() + 1) : new_date.getMonth() + 1) + "-" + (new_date.getDate() < 10 ? "0" + "" + new_date.getDate() : new_date.getDate())).change();
 			}
 		}
 		else if (ctcCalendars[active_ctcCalendar]["inputType"] == "dropdown")
@@ -1876,6 +2058,48 @@
 						}
 					}
 				}
+				else if (ctcCalendars[ctcCalendar]["dateFormat"] == 4)
+				{
+					if (/([0-9]{4})-([0-9]{2})-([0-9]{2})/.test(start_date_element.val()))
+					{
+						if (/([0-9]{4})-([0-9]{2})-([0-9]{2})/.test(end_date_element.val()))
+						{
+							var start_date,end_date,compare_date;
+
+							start_date= new Date();
+							start_date.setFullYear(start_date_element.val().substring(0,4),parseInt(start_date_element.val().substring(5,7),10) - 1,parseInt(start_date_element.val().substring(8,10),10));
+
+							end_date = new Date();
+							end_date.setFullYear(end_date_element.val().substring(0,4),parseInt(end_date_element.val().substring(5,7),10) - 1,parseInt(end_date_element.val().substring(8,10),10));
+							end_date.setHours(0,0,0,0);
+
+							compare_date = new Date();
+							compare_date.setFullYear(start_date.getFullYear(),start_date.getMonth(),start_date.getDate() + ctcCalendars[ctcCalendar]["minimumRange"]);
+							compare_date.setHours(0,0,0,0);
+
+							if (compare_date > end_date)
+							{
+								compare_date.setFullYear(start_date.getFullYear(),start_date.getMonth(),start_date.getDate() + ctcCalendars[ctcCalendar]["defaultRange"]);
+
+								var former_active_ctcCalendar = active_ctcCalendar;
+								active_ctcCalendar = ctcCalendar;
+								$.ctcCalendar.set_new_date(compare_date,true);
+								active_ctcCalendar = former_active_ctcCalendar;
+							}
+						}
+						else if (ctcCalendars[ctcCalendar]["autoSetEndDate"])
+						{
+							var new_date;
+							new_date = new Date();
+							new_date.setFullYear(start_date_element.val().substring(0,4),parseInt(start_date_element.val().substring(5,7),10) - 1,parseInt(start_date_element.val().substring(8,10),10) + ctcCalendars[ctcCalendar]["defaultRange"]);
+
+							var former_active_ctcCalendar = active_ctcCalendar;
+							active_ctcCalendar = ctcCalendar;
+							$.ctcCalendar.set_new_date(new_date,true);
+							active_ctcCalendar = former_active_ctcCalendar;
+						}
+					}
+				}
 			}
 		}
 		else if (ctcCalendars[ctcCalendar]["inputType"] == "dropdown")
@@ -1919,6 +2143,7 @@
 	};
 
 	$.ctcCalendar.add_to_dom = function() {
+		var days_of_week = get_days_of_week();
 		var ctcCalendar_markup = '';
 		if ($.browser.msie && parseInt($.browser.version) === 6)
 			ctcCalendar_markup += '<iframe id="ctc-calendar-iframe" frameborder="0" />';
@@ -1939,7 +2164,10 @@
 						'</a>' +
 					'</div>' +
 				'</div>' +
-				'<div id="ctc-calendar-body">' +
+				'<div id="ctc-calendar-body"';
+					if (ctcCalendars[active_ctcCalendar]["startWeekOnMonday"])
+						ctcCalendar_markup += ' class="start-week-on-monday"';
+					ctcCalendar_markup += '>' +
 					'<div id="ctc-calendar-first">' +
 						'<div class="ctc-calendar-month">' +
 							'<div class="ctc-calendar-month-inner-1">' +
@@ -1959,27 +2187,7 @@
 							'</div>' +
 						'</div>' +
 						'<div class="ctc-calendar-days">' +
-							'<div class="ctc-calendar-sunday">' +
-								get_day_name(1,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-monday">' +
-								get_day_name(2,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-tuesday">' +
-								get_day_name(3,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-wednesday">' +
-								get_day_name(4,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-thursday">' +
-								get_day_name(5,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-friday">' +
-								get_day_name(6,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-saturday">' +
-								get_day_name(7,false).substring(0,1) +
-							'</div>' +
+							days_of_week +
 						'</div>' +
 					'</div>' +
 					'<div id="ctc-calendar-second">' +
@@ -1999,27 +2207,7 @@
 							'</div>' +
 						'</div>' +
 						'<div class="ctc-calendar-days">' +
-							'<div class="ctc-calendar-sunday">' +
-								get_day_name(1,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-monday">' +
-								get_day_name(2,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-tuesday">' +
-								get_day_name(3,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-wednesday">' +
-								get_day_name(4,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-thursday">' +
-								get_day_name(5,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-friday">' +
-								get_day_name(6,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-saturday">' +
-								get_day_name(7,false).substring(0,1) +
-							'</div>' +
+							days_of_week +
 						'</div>' +
 					'</div>' +
 					'<div id="ctc-calendar-third">' +
@@ -2039,27 +2227,7 @@
 							'</div>' +
 						'</div>' +
 						'<div class="ctc-calendar-days">' +
-							'<div class="ctc-calendar-sunday">' +
-								get_day_name(1,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-monday">' +
-								get_day_name(2,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-tuesday">' +
-								get_day_name(3,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-wednesday">' +
-								get_day_name(4,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-thursday">' +
-								get_day_name(5,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-friday">' +
-								get_day_name(6,false).substring(0,1) +
-							'</div>' +
-							'<div class="ctc-calendar-saturday">' +
-								get_day_name(7,false).substring(0,1) +
-							'</div>' +
+							days_of_week +
 						'</div>' +
 					'</div>' +
 				'</div>' +
