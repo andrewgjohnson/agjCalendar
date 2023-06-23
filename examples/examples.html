@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-	ctcCalendar v0.9.2
+	ctcCalendar v0.9.4
 
-	Copyright (c) 2013-2015 Andrew G. Johnson <andrew@andrewgjohnson.com>
+	Copyright (c) 2013-2023 Andrew G. Johnson <andrew@andrewgjohnson.com>
 	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 	The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -145,70 +145,20 @@
 				{
 					clear:both
 				}
+
+			/* https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css */ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}.hljs{background:#f3f3f3;color:#444}.hljs-comment{color:#697070}.hljs-punctuation,.hljs-tag{color:#444a}.hljs-tag .hljs-attr,.hljs-tag .hljs-name{color:#444}.hljs-attribute,.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-name,.hljs-selector-tag{font-weight:700}.hljs-deletion,.hljs-number,.hljs-quote,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-template-tag,.hljs-type{color:#800}.hljs-section,.hljs-title{color:#800;font-weight:700}.hljs-link,.hljs-operator,.hljs-regexp,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-symbol,.hljs-template-variable,.hljs-variable{color:#ab5656}.hljs-literal{color:#695}.hljs-addition,.hljs-built_in,.hljs-bullet,.hljs-code{color:#397300}.hljs-meta{color:#1f7199}.hljs-meta .hljs-string{color:#38a}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}
+			/* disable their extra padding */ pre code.hljs{padding:0}code.hljs{padding:0}
 		</style>
 		<style type="text/css">@import "../source/ctcCalendar/jquery.ctcCalendar.css";</style>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.js"></script>
 		<script type="text/javascript" src="../source/ctcCalendar/jquery.ctcCalendar.js"></script>
-		<!-- START google-code-prettify -->
-		<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
-		<script type="text/javascript">
-		<!--
-			function addLoadEvent(func)
-			{
-				var oldonload = window.onload;
-				if (typeof window.onload != 'function')
-				{
-					window.onload = func;
-				}
-				else
-				{
-					window.onload = function()
-					{
-						if (oldonload)
-						{
-							oldonload();
-						}
-						func();
-					}
-				}
-			}
-			addLoadEvent(function (event) { prettyPrint(); });
-		-->
-		</script>
-		<style type="text/css">
-			.str { color:#080; }
-			.kwd { color:#008; }
-			.com { color:#800; }
-			.typ { color:#606; }
-			.lit { color:#066; }
-			.pun { color:#660; }
-			.pln { color:#000; }
-			.tag { color:#008; }
-			.atn { color:#606; }
-			.atv { color:#080; }
-			.dec { color:#606; }
-
-			@media print {
-				.str { color:#060; }
-				.kwd { color:#006; font-weight:bold; }
-				.com { color:#600; font-style:italic; }
-				.typ { color:#404; font-weight:bold; }
-				.lit { color:#044; }
-				.pun { color:#440; }
-				.pln { color:#000; }
-				.tag { color:#006; font-weight:bold; }
-				.atn { color:#404; }
-				.atv { color:#060; }
-			}
-		</style>
-		<!-- END google-code-prettify -->
 	</head>
 	<body>
 		<div id="container">
 
 
 
-			<h1><a href="http://www.ctccalendar.com/" title="ctcCalendar jQuery Plugin">ctcCalendar jQuery Plugin</a></h1>
+			<h1><a href="https://github.com/andrewgjohnson/ctcCalendar" title="ctcCalendar jQuery Plugin">ctcCalendar jQuery Plugin</a></h1>
 			<p>
 				Welcome to the ctcCalendar jQuery Plugin.
 			</p>
@@ -253,15 +203,13 @@
 					<input type="text" value="09/10/2010" id="one-date" />
 					<img src="../resources/calendar-icon.gif" alt="Calendar Icon" id="one-calendar" />
 				</p>
-				<pre class="prettyprint linenums">&lt;script type="text/javascript"&gt;
-&lt;!--
+				<pre><code>&lt;script type="text/javascript"&gt;
     $.ctcCalendar({
         inputType:"text",
         dateSelector:"#one-date",
         expanderSelector:"#one-calendar"
     });
---&gt;
-&lt;/script&gt;</pre>
+&lt;/script&gt;</code></pre>
 			</form>
 			<script type="text/javascript">
 			<!--
@@ -332,16 +280,14 @@
 					</select>
 					<img src="../resources/calendar-icon.gif" alt="Calendar Icon" id="two-calendar" />
 				</p>
-				<pre class="prettyprint linenums">&lt;script type="text/javascript"&gt;
-&lt;!--
+				<pre><code>&lt;script type="text/javascript"&gt;
     $.ctcCalendar({
         inputType:"dropdown",
         monthSelector:"#two-month",
         daySelector:"#two-day",
         expanderSelector:"#two-calendar"
     });
---&gt;
-&lt;/script&gt;</pre>
+&lt;/script&gt;</code></pre>
 			</form>
 			<script type="text/javascript">
 			<!--
@@ -466,8 +412,7 @@
 					</select>
 					<img src="../resources/calendar-icon.gif" alt="Calendar Icon" id="three-triple-calendar" />
 				</p>
-				<pre class="prettyprint linenums">&lt;script type="text/javascript"&gt;
-&lt;!--
+				<pre><code>&lt;script type="text/javascript"&gt;
     $.ctcCalendar({
         calendarCount:2,
         inputType:"dropdown",
@@ -483,8 +428,7 @@
         daySelector:"#three-triple-day",
         expanderSelector:"#three-triple-calendar"
     });
---&gt;
-&lt;/script&gt;</pre>
+&lt;/script&gt;</code></pre>
 			</form>
 			<script type="text/javascript">
 			<!--
@@ -619,8 +563,7 @@
 					</select>
 					<img src="../resources/calendar-icon.gif" alt="Calendar Icon" id="four-end-calendar" />
 				</p>
-				<pre class="prettyprint linenums">&lt;script type="text/javascript"&gt;
-&lt;!--
+				<pre><code>&lt;script type="text/javascript"&gt;
     $.ctcCalendar({
         calendarCount:3,
         inputType:"dropdown",
@@ -632,8 +575,7 @@
         endDaySelector:"#four-end-day",
         endExpanderSelector:"#four-end-calendar"
     });
---&gt;
-&lt;/script&gt;</pre>
+&lt;/script&gt;</code></pre>
 			</form>
 			<script type="text/javascript">
 			<!--
@@ -663,8 +605,7 @@
 					<input type="text" value="09/11/2010" id="five-end-date" />
 					<img src="../resources/calendar-icon.gif" alt="Calendar Icon" id="five-end-calendar" />
 				</p>
-				<pre class="prettyprint linenums">&lt;script type="text/javascript"&gt;
-&lt;!--
+				<pre><code>&lt;script type="text/javascript"&gt;
     $.ctcCalendar({
         inputType:"text",
         dateSelector:"#five-begin-date",
@@ -672,8 +613,7 @@
         endDateSelector:"#five-end-date",
         endExpanderSelector:"#five-end-calendar"
     });
---&gt;
-&lt;/script&gt;</pre>
+&lt;/script&gt;</code></pre>
 			</form>
 			<script type="text/javascript">
 			<!--
@@ -712,8 +652,7 @@
 					<input type="text" value="11/09/2010" id="six-df3-end-date" />
 					<img src="../resources/calendar-icon.gif" alt="Calendar Icon" id="six-df3-end-calendar" />
 				</p>
-				<pre class="prettyprint linenums">&lt;script type="text/javascript"&gt;
-&lt;!--
+				<pre><code>&lt;script type="text/javascript"&gt;
     $.ctcCalendar({
         inputType:"text",
         dateSelector:"#six-df1-begin-date",
@@ -743,8 +682,7 @@
         allowRange:true,
         dateFormat:3
     });
---&gt;
-&lt;/script&gt;</pre>
+&lt;/script&gt;</code></pre>
 			</form>
 			<script type="text/javascript">
 			<!--
@@ -797,8 +735,7 @@
 					<input type="text" value="09/10/2010" id="seven-full-date" />
 					<img src="../resources/calendar-icon.gif" alt="Calendar Icon" id="seven-full-calendar" />
 				</p>
-				<pre class="prettyprint linenums">&lt;script type="text/javascript"&gt;
-&lt;!--
+				<pre><code>&lt;script type="text/javascript"&gt;
     $.ctcCalendar({
         inputType:"text",
         dateSelector:"#seven-inline-date",
@@ -819,8 +756,7 @@
         expanderSelector:"#seven-full-calendar",
         calendarDisplay:"full"
     });
---&gt;
-&lt;/script&gt;</pre>
+&lt;/script&gt;</code></pre>
 			</form>
 			<script type="text/javascript">
 			<!--
@@ -857,5 +793,10 @@
 
 
 		</div>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript">
+            hljs.initHighlighting.called = false;
+            hljs.initHighlighting();
+        </script>
 	</body>
 </html>

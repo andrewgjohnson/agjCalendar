@@ -1,23 +1,21 @@
 /*
- * ctcCalendar v0.9.3
+ * ctcCalendar v0.9.4
  *
- * Copyright (c) 2013-2016 Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * Copyright (c) 2013-2023 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
- * @copyright Copyright (c) 2013 Andrew G. Johnson <andrew@andrewgjohnson.com>
- * @link http://github.com/ctcCalendar/ctcCalendar
+ * @copyright Copyright (c) 2013-2023 Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * @link http://github.com/andrewgjohnson/ctcCalendar
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
- * @version 0.9.3
+ * @version 0.9.4
  * @package ctcCalendar
  *
  */
 
 ;(function($) {
-	/*https://github.com/jquery/jquery-browser*/if(!$.browser){(function(e){var t,n=navigator.userAgent||"";e.uaMatch=function(e){e=e.toLowerCase();var t=/(chrome)[ \/]([\w.]+)/.exec(e)||/(webkit)[ \/]([\w.]+)/.exec(e)||/(opera)(?:.*version)?[ \/]([\w.]+)/.exec(e)||/(msie) ([\w.]+)/.exec(e)||e.indexOf("compatible")<0&&/(mozilla)(?:.*? rv:([\w.]+))?/.exec(e)||[];return{browser:t[1]||"",version:t[2]||"0"}};t=e.uaMatch(n);e.browser={};if(t.browser){e.browser[t.browser]=true;e.browser.version=t.version}if(e.browser.webkit){e.browser.safari=true}})(jQuery)}
-
 	var ctcCalendars = new Array();
 	var active_ctcCalendar = -1,active_ctcCalendar_is_end = false;
 	var last_body_overflow_value = "";
@@ -305,9 +303,9 @@
 		return calendar_markup;
 	};
 
-	$(document).resize(function() {
+	$(document).on("resize", function() {
 		$.ctcCalendar.set_position();
-	}).click(function(event) {
+	}).on("click", function(event) {
 		if ($("#ctc-calendar").length > 0 && active_ctcCalendar >= 0)
 		{
 			if (ctcCalendars[active_ctcCalendar]["inputType"] == "text")
@@ -323,22 +321,22 @@
 			}
 		}
 		return true;
-	}).keyup(function(event) {
+	}).on("keyup", function(event) {
 		if (event.keyCode == 27 && active_ctcCalendar >= 0 && (ctcCalendars[active_ctcCalendar]["calendarDisplay"] == "modal" || ctcCalendars[active_ctcCalendar]["calendarDisplay"] == "full") && $("#ctc-calendar").length > 0)
 		{
-			$("*:focus").blur();
+			$("*:focus").trigger("blur");
 			$.ctcCalendar.hide();
 			return false;
 		}
 		return true;
 	});
 
-	$(window).scroll(function() {
+	$(window).on("scroll", function() {
 		if (active_ctcCalendar >= 0)
 			$.ctcCalendar.set_position();
 	});
 
-	$(window).resize(function() {
+	$(window).on("resize", function() {
 		if (active_ctcCalendar >= 0)
 			$.ctcCalendar.set_position();
 	});
@@ -587,12 +585,14 @@
 						$.ctcCalendar.show();
 					}
 					else
+					{
 						$.ctcCalendar.hide();
+					}
 
 					return false;
 				};
-				expander_element.click(display_calendar);
-				date_element.focus(display_calendar).keydown(function(event) {
+				expander_element.on("click", display_calendar);
+				date_element.on("focus", display_calendar).on("keydown", function(event) {
 					if (event.keyCode == 9)
 					{
 						if (options["allowRange"])
@@ -625,12 +625,12 @@
 				active_ctcCalendar = former_active_ctcCalendar;
 				active_ctcCalendar_is_end = false;
 
-				date_element.blur(function() {
+				date_element.on("blur", function() {
 					if (/([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/.test($(this).val()))
 						$.ctcCalendar.check_end_date(newest_ctcCalendar);
 				})
 
-				end_date_element.keydown(function(event) {
+				end_date_element.on("keydown", function(event) {
 					if (event.keyCode == 9)
 					{
 						setTimeout(function() {
@@ -653,8 +653,8 @@
 
 					return false;
 				};
-				end_expander_element.click(display_end_calendar);
-				end_date_element.focus(display_end_calendar);
+				end_expander_element.on("click", display_end_calendar);
+				end_date_element.on("focus", display_end_calendar);
 			}
 		}
 		else if (ctcCalendar["inputType"] == "dropdown")
@@ -695,7 +695,7 @@
 				$.ctcCalendar.set_new_date(ctcCalendar["defaultDate"]);
 				active_ctcCalendar = former_active_ctcCalendar;
 
-				expander_element.click(function() {
+				expander_element.on("click", function() {
 					if (active_ctcCalendar != newest_ctcCalendar || active_ctcCalendar_is_end)
 					{
 						active_ctcCalendar = newest_ctcCalendar;
@@ -708,7 +708,7 @@
 					return false;
 				});
 
-				month_element.change(function() {
+				month_element.on("change", function() {
 					$.ctcCalendar.update_day_selectors(newest_ctcCalendar);
 					if (options["allowRange"])
 					{
@@ -759,13 +759,13 @@
 					active_ctcCalendar = former_active_ctcCalendar;
 					active_ctcCalendar_is_end = false;
 
-					day_element.change(function() {
+					day_element.on("change", function() {
 						$.ctcCalendar.check_end_date(newest_ctcCalendar);
 						$.ctcCalendar.update_month_selectors(newest_ctcCalendar,true);
 						$.ctcCalendar.update_day_selectors(newest_ctcCalendar,true);
 					});
 
-					end_expander_element.click(function() {
+					end_expander_element.on("click", function() {
 						if (active_ctcCalendar != newest_ctcCalendar || !active_ctcCalendar_is_end)
 						{
 							active_ctcCalendar = newest_ctcCalendar;
@@ -778,7 +778,7 @@
 						return false;
 					});
 
-					end_month_element.change(function() {
+					end_month_element.on("change", function() {
 						$.ctcCalendar.update_day_selectors(newest_ctcCalendar,true);
 					});
 				}
@@ -818,15 +818,17 @@
 			$("#ctc-calendar-body").removeClass().removeClass("start-week-on-monday");
 		$("div.ctc-calendar-days").empty().append(get_days_of_week());
 
+
+
 		if (elements_found)
 		{
 			var calendar_element;
-			calendar_element = $("#ctc-calendar,#ctc-calendar-iframe");
+			calendar_element = $("#ctc-calendar");
 
 			if (calendar_element.length == 0)
 			{
 				$.ctcCalendar.add_to_dom();
-				calendar_element = $("#ctc-calendar,#ctc-calendar-iframe");
+				calendar_element = $("#ctc-calendar");
 			}
 
 			show_calendar = function() {
@@ -968,19 +970,19 @@
 
 				if (ctcCalendars[active_ctcCalendar]["calendarCount"] == 1)
 				{
-					$("#ctc-calendar,#ctc-calendar-iframe").addClass("ctc-calendar-single").removeClass("ctc-calendar-double").removeClass("ctc-calendar-triple");
+					$("#ctc-calendar").addClass("ctc-calendar-single").removeClass("ctc-calendar-double").removeClass("ctc-calendar-triple");
 					$("#ctc-calendar-first").show();
 					$("#ctc-calendar-second,#ctc-calendar-third").hide();
 				}
 				else if (ctcCalendars[active_ctcCalendar]["calendarCount"] == 2)
 				{
-					$("#ctc-calendar,#ctc-calendar-iframe").removeClass("ctc-calendar-single").addClass("ctc-calendar-double").removeClass("ctc-calendar-triple");
+					$("#ctc-calendar").removeClass("ctc-calendar-single").addClass("ctc-calendar-double").removeClass("ctc-calendar-triple");
 					$("#ctc-calendar-first,#ctc-calendar-second").show();
 					$("#ctc-calendar-third").hide();
 				}
 				else if (ctcCalendars[active_ctcCalendar]["calendarCount"] == 3)
 				{
-					$("#ctc-calendar,#ctc-calendar-iframe").removeClass("ctc-calendar-single").removeClass("ctc-calendar-double").addClass("ctc-calendar-triple");
+					$("#ctc-calendar").removeClass("ctc-calendar-single").removeClass("ctc-calendar-double").addClass("ctc-calendar-triple");
 					$("#ctc-calendar-first,#ctc-calendar-second,#ctc-calendar-third").show();
 				}
 				calendar_element.show();
@@ -999,9 +1001,9 @@
 		if (ctcCalendars[active_ctcCalendar]["calendarDisplay"] == "full")
 		{
 			setTimeout(function() {
-				$(document).resize();
-				$(window).resize();
-				$(window).scroll();
+				$(document).trigger("resize");
+				$(window).trigger("resize");
+				$(window).trigger("scroll");
 			},100);
 		}
 	};
@@ -1014,11 +1016,11 @@
 				if (ctcCalendars[active_ctcCalendar]["inputType"] == "text")
 				{
 					var calendar_element,date_element,expander_element;
-					calendar_element = $("#ctc-calendar,#ctc-calendar-iframe");
+					calendar_element = $("#ctc-calendar");
 					date_element = $(ctcCalendars[active_ctcCalendar][!active_ctcCalendar_is_end ? "dateSelector" : "endDateSelector"]);
 					expander_element = $(ctcCalendars[active_ctcCalendar][!active_ctcCalendar_is_end ? "expanderSelector" : "endExpanderSelector"]);
 
-					if ((calendar_element.length == 1 || calendar_element.length == 2) && expander_element.length > 0 && date_element.length == 1)
+					if (calendar_element.length == 1 && expander_element.length > 0 && date_element.length == 1)
 					{
 						var expander_bottom,month_bottom,date_bottom,calendar_top;
 						expander_bottom = expander_element.offset().top + get_true_height(expander_element);
@@ -1045,12 +1047,12 @@
 				else if (ctcCalendars[active_ctcCalendar]["inputType"] == "dropdown")
 				{
 					var calendar_element,month_element,day_element,expander_element;
-					calendar_element = $("#ctc-calendar,#ctc-calendar-iframe");
+					calendar_element = $("#ctc-calendar");
 					month_element = $(ctcCalendars[active_ctcCalendar][!active_ctcCalendar_is_end ? "monthSelector" : "endMonthSelector"]);
 					day_element = $(ctcCalendars[active_ctcCalendar][!active_ctcCalendar_is_end ? "daySelector" : "endDaySelector"]);
 					expander_element = $(ctcCalendars[active_ctcCalendar][!active_ctcCalendar_is_end ? "expanderSelector" : "endExpanderSelector"]);
 
-					if ((calendar_element.length == 1 || calendar_element.length == 2) && expander_element.length > 0 && month_element.length == 1 && day_element.length == 1)
+					if (calendar_element.length == 1 && expander_element.length > 0 && month_element.length == 1 && day_element.length == 1)
 					{
 						var expander_bottom,month_bottom,day_bottom,calendar_top;
 						expander_bottom = expander_element.offset().top + get_true_height(expander_element);
@@ -1071,7 +1073,7 @@
 					}
 				}
 
-				var calendar_element = $("#ctc-calendar,#ctc-calendar-iframe");
+				var calendar_element = $("#ctc-calendar");
 				calendar_element.removeClass("ctc-calendar-full").css({
 					position:"absolute"
 				});
@@ -1079,7 +1081,7 @@
 			}
 			else if (ctcCalendars[active_ctcCalendar]["calendarDisplay"] == "modal")
 			{
-				var calendar_element = $("#ctc-calendar,#ctc-calendar-iframe");
+				var calendar_element = $("#ctc-calendar");
 				calendar_element.removeClass("ctc-calendar-full").css({
 					left:($(window).width() / 2) - (get_true_width(calendar_element) / 2),
 					position:"fixed",
@@ -1089,7 +1091,7 @@
 			}
 			else if (ctcCalendars[active_ctcCalendar]["calendarDisplay"] == "full")
 			{
-				var calendar_element = $("#ctc-calendar,#ctc-calendar-iframe");
+				var calendar_element = $("#ctc-calendar");
 				calendar_element.addClass("ctc-calendar-full").css({
 					left:0,
 					position:"fixed",
@@ -1102,7 +1104,7 @@
 
 	$.ctcCalendar.hide = function() {
 		var calendar_element;
-		calendar_element = $("#ctc-calendar,#ctc-calendar-iframe");
+		calendar_element = $("#ctc-calendar");
 
 		if (ctcCalendars[active_ctcCalendar]["calendarDisplay"] == "modal" || ctcCalendars[active_ctcCalendar]["calendarDisplay"] == "full")
 		{
@@ -1113,7 +1115,7 @@
 			$("#ctc-calendar-modal-background").hide();
 		}
 
-		if (calendar_element.length == 1 || calendar_element.length == 2)
+		if (calendar_element.length == 1)
 		{
 			calendar_element.hide();
 			active_ctcCalendar = -1;
@@ -1607,7 +1609,7 @@
 			{
 				calendar_markup += '<div class="ctc-calendar-week ctc-calendar-week-one">';
 				for (day = 1;day <= get_day;day++)
-					calendar_markup += '<div class="ctc-calendar-blank ctc-calendar-' + get_day_name(++current_day % 7).toLowerCase() + '" />';
+					calendar_markup += '<div class="ctc-calendar-blank ctc-calendar-' + get_day_name(++current_day % 7).toLowerCase() + '"></div>';
 			}
 
 			var minimum_date,maximum_date;
@@ -1797,14 +1799,14 @@
 					calendar_markup += '<div class="ctc-calendar-' + get_day_name((current_day++ % 7) + 1).toLowerCase() + class_markup + '">';
 
 					if (current_date >= minimum_date && current_date <= maximum_date)
-						calendar_markup += '<a href="#" title="' + get_month_name(draw_date.getMonth() + 1) + ' ' + day + ', ' + draw_date.getFullYear() + '" id="ctc-calendar-' + draw_date.getFullYear() + '-' + (draw_date.getMonth() + 1 < 10 ? '0' + (draw_date.getMonth() + 1) : draw_date.getMonth() + 1) + '-' + day + '">';
+						calendar_markup += '<a href="#" title="' + get_month_name(draw_date.getMonth() + 1) + ' ' + day + ', ' + draw_date.getFullYear() + '" id="ctc-calendar-' + draw_date.getFullYear() + '-' + (draw_date.getMonth() + 1 < 10 ? '0' + (draw_date.getMonth() + 1) : draw_date.getMonth() + 1) + '-' + (day < 10 ? '0' + '' + day : day) + '">';
 					calendar_markup += day;
 					if (current_date >= ctcCalendars[active_ctcCalendar]["minimumDate"] && current_date <= maximum_date)
 						calendar_markup += '</a>';
 					calendar_markup += '</div>';
 				}
 				else
-					calendar_markup += '<div class="ctc-calendar-blank ctc-calendar-' + get_day_name((current_day++ % 7) + 1).toLowerCase() + '" />';
+					calendar_markup += '<div class="ctc-calendar-blank ctc-calendar-' + get_day_name((current_day++ % 7) + 1).toLowerCase() + '"></div>';
 			}
 			calendar_markup += '</div>';
 
@@ -1821,7 +1823,7 @@
 			draw_date.setFullYear(draw_date.getFullYear(),draw_date.getMonth() + 1,1);
 		}
 
-		$("#ctc-calendar div.ctc-calendar-week a").click(function() {
+		$("#ctc-calendar div.ctc-calendar-week a").on("click", function() {
 			var new_date = new Date();
 			new_date.setFullYear(this.id.substring(13,17),parseInt(this.id.substring(18,20),10) - 1,this.id.substring(21,23));
 			$.ctcCalendar.set_new_date(new_date,active_ctcCalendar_is_end);
@@ -1856,24 +1858,24 @@
 			if (new_date == "blank")
 			{
 				if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 1)
-					date_element.val("mm/dd/yyyy").change();
+					date_element.val("mm/dd/yyyy").trigger("change");
 				else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 2)
-					date_element.val("Select a Date").change();
+					date_element.val("Select a Date").trigger("change");
 				else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 3)
-					date_element.val("dd/mm/yyyy").change();
+					date_element.val("dd/mm/yyyy").trigger("change");
 				else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 4)
-					date_element.val("yyyy-mm-dd").change();
+					date_element.val("yyyy-mm-dd").trigger("change");
 			}
 			else
 			{
 				if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 1)
-					date_element.val((new_date.getMonth() + 1 < 10 ? "0" + (new_date.getMonth() + 1) : new_date.getMonth() + 1) + "/" + (new_date.getDate() < 10 ? "0" + "" + new_date.getDate() : new_date.getDate()) + "/" + new_date.getFullYear()).change();
+					date_element.val((new_date.getMonth() + 1 < 10 ? "0" + (new_date.getMonth() + 1) : new_date.getMonth() + 1) + "/" + (new_date.getDate() < 10 ? "0" + "" + new_date.getDate() : new_date.getDate()) + "/" + new_date.getFullYear()).trigger("change");
 				else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 2)
-					date_element.val(get_month_name(new_date.getMonth() + 1,false) + " " + new_date.getDate() + ", " + new_date.getFullYear()).change();
+					date_element.val(get_month_name(new_date.getMonth() + 1,false) + " " + new_date.getDate() + ", " + new_date.getFullYear()).trigger("change");
 				else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 3)
-					date_element.val((new_date.getDate() < 10 ? "0" + "" + new_date.getDate() : new_date.getDate()) + "/" + (new_date.getMonth() + 1 < 10 ? "0" + (new_date.getMonth() + 1) : new_date.getMonth() + 1)+ "/" + new_date.getFullYear()).change();
+					date_element.val((new_date.getDate() < 10 ? "0" + "" + new_date.getDate() : new_date.getDate()) + "/" + (new_date.getMonth() + 1 < 10 ? "0" + (new_date.getMonth() + 1) : new_date.getMonth() + 1)+ "/" + new_date.getFullYear()).trigger("change");
 				else if (ctcCalendars[active_ctcCalendar]["dateFormat"] == 4)
-					date_element.val(new_date.getFullYear() + "-" + (new_date.getMonth() + 1 < 10 ? "0" + (new_date.getMonth() + 1) : new_date.getMonth() + 1) + "-" + (new_date.getDate() < 10 ? "0" + "" + new_date.getDate() : new_date.getDate())).change();
+					date_element.val(new_date.getFullYear() + "-" + (new_date.getMonth() + 1 < 10 ? "0" + (new_date.getMonth() + 1) : new_date.getMonth() + 1) + "-" + (new_date.getDate() < 10 ? "0" + "" + new_date.getDate() : new_date.getDate())).trigger("change");
 			}
 		}
 		else if (ctcCalendars[active_ctcCalendar]["inputType"] == "dropdown")
@@ -1894,9 +1896,9 @@
 
 			if (month_element.find("option[value=" + month_value + "]").length > 0 && (new_date == "blank" || parseInt(day_value,10) <= get_days_in_month(new_date.getFullYear(),new_date.getMonth() + 1)))
 			{
-				month_element.val(month_value).change();
+				month_element.val(month_value).trigger("change");
 				$.ctcCalendar.update_day_selectors(active_ctcCalendar,update_end_ctcCalendar);
-				day_element.val(day_value).change();
+				day_element.val(day_value).trigger("change");
 			}
 		}
 	};
@@ -2145,10 +2147,8 @@
 	$.ctcCalendar.add_to_dom = function() {
 		var days_of_week = get_days_of_week();
 		var ctcCalendar_markup = '';
-		if ($.browser.msie && parseInt($.browser.version) === 6)
-			ctcCalendar_markup += '<iframe id="ctc-calendar-iframe" frameborder="0" />';
 		ctcCalendar_markup += '' +
-			'<div id="ctc-calendar-modal-background" />' +
+			'<div id="ctc-calendar-modal-background"></div>' +
 			'<div id="ctc-calendar">' +
 				'<div id="ctc-calendar-header">' +
 					'<div id="ctc-calendar-header-inner">' +
@@ -2159,7 +2159,7 @@
 							'Powered by' +
 						'</span>' +
 						' ' +
-						'<a href="https://github.com/ctcCalendar/ctcCalendar" target="_blank" title="ctcCalendar" id="ctc-calendar-powered-by">' +
+						'<a href="https://github.com/andrewgjohnson/ctcCalendar" target="_blank" title="ctcCalendar" id="ctc-calendar-powered-by">' +
 							'ctcCalendar' +
 						'</a>' +
 					'</div>' +
@@ -2172,7 +2172,7 @@
 						'<div class="ctc-calendar-month">' +
 							'<div class="ctc-calendar-month-inner-1">' +
 								'<div class="ctc-calendar-month-inner-2">' +
-									'<select id="ctc-calendar-dropdown" />' +
+									'<select id="ctc-calendar-dropdown"></select>' +
 									'<a href="#" title="Next Month" class="ctc-calendar-next-month">' +
 										'<span class="ctc-calendar-next-month-inner">' +
 											'Next Month' +
@@ -2193,7 +2193,7 @@
 					'<div id="ctc-calendar-second">' +
 						'<div class="ctc-calendar-month">' +
 							'<div class="ctc-calendar-month-inner" colspan="5">' +
-								'<strong id="ctc-calendar-second-month-name" />' +
+								'<strong id="ctc-calendar-second-month-name"></strong>' +
 								'<a href="#" title="Next Month" class="ctc-calendar-next-month">' +
 									'<span class="ctc-calendar-next-month-inner">' +
 										'Next Month' +
@@ -2213,7 +2213,7 @@
 					'<div id="ctc-calendar-third">' +
 						'<div class="ctc-calendar-month">' +
 							'<div class="ctc-calendar-month-inner" colspan="5">' +
-								'<strong id="ctc-calendar-third-month-name" />' +
+								'<strong id="ctc-calendar-third-month-name"></strong>' +
 								'<a href="#" title="Next Month" class="ctc-calendar-next-month">' +
 									'<span class="ctc-calendar-next-month-inner">' +
 										'Next Month' +
@@ -2234,12 +2234,12 @@
 			'</div>';
 		$("body").prepend(ctcCalendar_markup);
 
-		$("#ctc-calendar-hide").click(function() {
+		$("#ctc-calendar-hide").on("click", function() {
 			$.ctcCalendar.hide();
 			return false;
 		});
 
-		$("#ctc-calendar-dropdown").change(function() {
+		$("#ctc-calendar-dropdown").on("change", function() {
 			if (/([0-9]{4})-([0-9]{2})/.test($(this).val()))
 			{
 				var date = new Date();
@@ -2248,7 +2248,7 @@
 			}
 		});
 
-		$("#ctc-calendar a.ctc-calendar-previous-month,#ctc-calendar a.ctc-calendar-next-month").click(function() {
+		$("#ctc-calendar a.ctc-calendar-previous-month,#ctc-calendar a.ctc-calendar-next-month").on("click", function() {
 			if (/([0-9]{4})-([0-9]{2})/.test($("#ctc-calendar-dropdown").val()))
 			{
 				var date = new Date();
@@ -2259,7 +2259,7 @@
 
 				var new_dropdown_value = date.getFullYear() + '-' + (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
 				if ($("#ctc-calendar-dropdown option[value=" + new_dropdown_value + "]").length > 0)
-					$("#ctc-calendar-dropdown").val(new_dropdown_value).change();
+					$("#ctc-calendar-dropdown").val(new_dropdown_value).trigger("change");
 			}
 			return false;
 		});
