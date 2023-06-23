@@ -1,14 +1,14 @@
 /*
  * ctcCalendar v0.9.4
  *
- * Copyright (c) 2013-2016 Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * Copyright (c) 2013-2023 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
- * @copyright Copyright (c) 2013 Andrew G. Johnson <andrew@andrewgjohnson.com>
- * @link http://github.com/ctcCalendar/ctcCalendar
+ * @copyright Copyright (c) 2013-2023 Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * @link http://github.com/andrewgjohnson/ctcCalendar
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
  * @version 0.9.4
  * @package ctcCalendar
@@ -57,20 +57,17 @@ div.ctc-calendar-modal-background-full
 
 div.ctc-calendar-single
 {
-	width:179px;
-	_width:181px
+	width:179px
 }
 
 div.ctc-calendar-double
 {
-	width:353px;
-	_width:355px
+	width:353px
 }
 
 div.ctc-calendar-triple
 {
-	width:527px;
-	_width:529px
+	width:527px
 }
 
 div.ctc-calendar-full
@@ -274,8 +271,7 @@ div.ctc-calendar-full #ctc-calendar-second,div.ctc-calendar-full #ctc-calendar-t
 	{
 		border-top-width:1px;
 		padding:5px 6px 0 5px;
-		width:156px;
-		_width:169px
+		width:156px
 	}
 
 	div.ctc-calendar-full #ctc-calendar-body div.ctc-calendar-month
@@ -404,8 +400,7 @@ div.ctc-calendar-full #ctc-calendar-second,div.ctc-calendar-full #ctc-calendar-t
 
 	#ctc-calendar-body div.ctc-calendar-days
 	{
-		border-bottom-width:1px;
-		_width:169px
+		border-bottom-width:1px
 	}
 
 	div.ctc-calendar-full #ctc-calendar-body div.ctc-calendar-days
@@ -426,14 +421,12 @@ div.ctc-calendar-full #ctc-calendar-second,div.ctc-calendar-full #ctc-calendar-t
 			padding:0 0 0 1px;
 			text-align:center;
 			text-transform:lowercase;
-			width:23px;
-			_width:24px
+			width:23px
 		}
 
 		#ctc-calendar-body div.ctc-calendar-days div.ctc-calendar-sunday
 		{
-			padding-left:0;
-			_width:23px
+			padding-left:0
 		}
 
 		div.ctc-calendar-full #ctc-calendar-body div.ctc-calendar-days div
@@ -460,8 +453,7 @@ div.ctc-calendar-full #ctc-calendar-second,div.ctc-calendar-full #ctc-calendar-t
 		float:left;
 		height:23px;
 		position:relative;
-		width:167px;
-		_width:169px
+		width:167px
 	}
 
 	#ctc-calendar-body div.ctc-calendar-week-six
@@ -507,52 +499,52 @@ div.ctc-calendar-full #ctc-calendar-second,div.ctc-calendar-full #ctc-calendar-t
 			text-align:center;
 			text-transform:lowercase;
 			top:0;
-			width:23px;
-			_width:24px
+			width:23px
 		}
 
 		#ctc-calendar-body div.ctc-calendar-week div.ctc-calendar-saturday,
 		#ctc-calendar-body.start-week-on-monday div.ctc-calendar-week div.ctc-calendar-sunday
 		{
 			border-left-width:1px;
-			left:197px
+			left:143px;
+			width:22px
 		}
 		#ctc-calendar-body div.ctc-calendar-week div.ctc-calendar-friday,
 		#ctc-calendar-body.start-week-on-monday div.ctc-calendar-week div.ctc-calendar-saturday
 		{
 			border-left-width:1px;
-			left:164px
+			left:119px
 		}
 		#ctc-calendar-body div.ctc-calendar-week div.ctc-calendar-thursday,
 		#ctc-calendar-body.start-week-on-monday div.ctc-calendar-week div.ctc-calendar-friday
 		{
 			border-left-width:1px;
-			left:131px
+			left:95px
 		}
 		#ctc-calendar-body div.ctc-calendar-week div.ctc-calendar-wednesday,
 		#ctc-calendar-body.start-week-on-monday div.ctc-calendar-week div.ctc-calendar-thursday
 		{
 			border-left-width:1px;
-			left:98px
+			left:71px
 		}
 		#ctc-calendar-body div.ctc-calendar-week div.ctc-calendar-tuesday,
 		#ctc-calendar-body.start-week-on-monday div.ctc-calendar-week div.ctc-calendar-wednesday
 		{
 			border-left-width:1px;
-			left:65px
+			left:47px
 		}
 		#ctc-calendar-body div.ctc-calendar-week div.ctc-calendar-monday,
 		#ctc-calendar-body.start-week-on-monday div.ctc-calendar-week div.ctc-calendar-tuesday
 		{
 			border-left-width:1px;
-			left:32px
+			left:23px
 		}
 		#ctc-calendar-body div.ctc-calendar-week div.ctc-calendar-sunday,
 		#ctc-calendar-body.start-week-on-monday div.ctc-calendar-week div.ctc-calendar-monday
 		{
 			border-left-width:0;
 			left:0;
-			_width:23px
+			width:22px
 		}
 
 		div.ctc-calendar-full #ctc-calendar-body div.ctc-calendar-week div
@@ -619,8 +611,7 @@ div.ctc-calendar-full #ctc-calendar-second,div.ctc-calendar-full #ctc-calendar-t
 
 		#ctc-calendar-body div.ctc-calendar-week div.ctc-calendar-today a.ctc-calendar-active
 		{
-			*font-size:10px;
-			_font-size:11px
+			*font-size:10px
 		}
 
 		div.ctc-calendar-full #ctc-calendar-body div.ctc-calendar-week a
@@ -652,7 +643,7 @@ div.ctc-calendar-full #ctc-calendar-second,div.ctc-calendar-full #ctc-calendar-t
 @media only screen and (min-width:240px)
 {
 	div.ctc-calendar-full #ctc-calendar-header,div.ctc-calendar-full #ctc-calendar-body,div.ctc-calendar-full #ctc-calendar-dropdown { font-size:16px }
-	div.ctc-calendar-full #ctc-calendar-body div.ctc-calendar-month a { right:15px }4
+	div.ctc-calendar-full #ctc-calendar-body div.ctc-calendar-month a { right:15px }
 	div.ctc-calendar-full #ctc-calendar-body div.ctc-calendar-month a.ctc-calendar-previous-month { left:15px }
 	div.ctc-calendar-full #ctc-calendar-body div.ctc-calendar-month a span { border-width:7px 0 7px 15px;top:-7px }
 	div.ctc-calendar-full #ctc-calendar-body div.ctc-calendar-month a.ctc-calendar-previous-month span { border-right-width:15px }
