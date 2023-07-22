@@ -4,7 +4,7 @@
     "homepage": "https://agjCalendar.agjjQuery.org/",
     "description": "agjCalendar is a plugin for the jQuery Javascript library to deal with calendars, dates and date ranges",
     "license": "MIT",
-    "version": "0.9.5",
+    "version": "0.9.4",
     "repository": "https://github.com/andrewgjohnson/agjCalendar",
     "main": "source/agjCalendar/jquery.agjCalendar.min.js",
     "devDependencies": {
