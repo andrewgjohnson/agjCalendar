@@ -8,11 +8,7 @@
 [![Issues](https://img.shields.io/github/issues/andrewgjohnson/agjCalendar.png?colorB=0366d6&style=flat-square&logoColor=white&logo=github)](https://github.com/andrewgjohnson/agjCalendar/issues)
 [![Patreon](https://img.shields.io/endpoint.png?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dagjopensource%26type%3Dpatrons&colorB=0366d6&style=flat-square&logoColor=white&logo=patreon)](https://patreon.com/agjopensource)
 
-<p align="center"><a href="https://agjcalendar.agjjquery.org/" title=""><img src="/documentation/agjCalendar.agjjQuery.org/images/avatar.png" alt="" title="" width="400" id="avatar" /></a></p>
-
-<!--
 <p align="center"><a href="https://agjcalendar.agjjquery.org/" title=""><img src="https://agjcalendar.agjjquery.org/documentation/agjCalendar.agjjQuery.org/images/avatar.png" alt="" title="" width="400" id="avatar" /></a></p>
--->
 
 ## Description
 
