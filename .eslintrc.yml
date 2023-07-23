@@ -1,0 +1,22 @@
+env:
+  browser: true
+  es2021: true
+extends: [
+  "eslint:recommended", 
+  "google"
+]
+parserOptions:
+  ecmaVersion: latest
+rules: {
+  "no-redeclare": 0,
+  "no-var": 0,
+  "max-len": 1,
+  "key-spacing": [
+    "error",
+    "align": {
+      "beforeColon": false,
+      "afterColon": true,
+      "on": "value"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+extends: "stylelint-config-standard"
+rules: {
+  "color-hex-length": "long",
+  "declaration-block-no-redundant-longhand-properties": [
+    true,
+    "ignoreShorthands": [
+      "inset"
+    ]
+  ],
+  "declaration-block-single-line-max-declarations": null,
+  "function-no-unknown": [
+    true,
+    "ignoreFunctions": [
+      "alpha"
+    ]
+  ],
+  "media-feature-range-notation": "prefix",
+  "no-descending-specificity": null,
+  "no-eol-whitespace": true,
+  "property-no-vendor-prefix": [
+    true,
+    "ignoreProperties": [
+      "filter"
+    ]
+  ],
+  "selector-class-pattern": [
+    "agjCalendar-[a-z-]+",
+  ],
+  "selector-id-pattern": [
+    "agjCalendar",
+    "agjCalendar-[a-z-]+"
+  ],
+  "selector-pseudo-element-colon-notation": "single"
+}
