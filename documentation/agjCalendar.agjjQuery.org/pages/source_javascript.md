@@ -1,6 +1,6 @@
 ---
 layout:    layout
-title:     agjCalendar&#58; Source&#58; Javascript
+title:     agjCalendar&#58; Javascript Source
 permalink: /source/javascript/
 ---
 

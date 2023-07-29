@@ -2,7 +2,7 @@
 $.agjCalendar({
   dateSelector:    '#example5-basic-start',
   allowRange:      true,
-  endDateSelector: '#example5-basic-end',
+  endDateSelector: '#example5-basic-end'
 });
 
 // an integration with an advanced date range
@@ -13,11 +13,11 @@ $.agjCalendar({
   minimumRange:    1,
   maximumRange:    7,
   defaultRange:    2,
-  autoSetEndDate:  true,
+  autoSetEndDate:  'always',
   minimumDate:     '2023-01-01',
   maximumDate:     '2023-12-31',
   allowBlankDates: true,
-  defaultDate:     'blank',
+  defaultDate:     'blank'
 });
 
 // an integration with a date range using dropdowns
@@ -29,5 +29,5 @@ $.agjCalendar({
   allowRange:          true,
   endMonthSelector:    '#example5-month-end',
   endDaySelector:      '#example5-day-end',
-  endExpanderSelector: '#example5-icon-end',
+  endExpanderSelector: '#example5-icon-end'
 });

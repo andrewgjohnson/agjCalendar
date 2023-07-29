@@ -7,7 +7,7 @@ nav:       3
 
 # Examples/Demo
 
-**agjCalendar** is designed to be easily integrated into existing projects quickly and without compatability issues or any other conflicts. Because it’s a jQuery plugin you will first need to include an HTML reference to the [jQuery library](https://jquery.com) if you don’t already have one. From there, simply add HTML references to [jquery.agjCalendar.js](/source/javascript/) and [jquery.agjCalendar.css](/source/css/) to start using the agjCalendar plugin.
+**agjCalendar** is designed to be easily integrated into existing projects quickly and without compatability issues or any other conflicts. Because it’s a jQuery plugin you will first need to include an HTML reference to the [jQuery Javascript library](https://jquery.com) if you don’t already have one. From there, simply add HTML references to [jquery.agjCalendar.js](/source/javascript/) and [jquery.agjCalendar.css](/source/css/) to start using the agjCalendar plugin.
 
     // reference to the jQuery Javascript library
     <script type="text/javascript" src="//code.jquery.com/jquery-3.7.0.js"></script>
@@ -61,11 +61,11 @@ Instead of a single text input, you can set the `inputType` option to `dropdown`
 -->
 </script>
 
-## Example Three: Minimum, Maximum and Default Dates
+## Example Three: Minimum, Maximum, Default and Excluded Dates
 
 You can specify a minimum and/or maximum date by using the `minimumDate` and/or `maximumDate` options. Simply pass a string in the format `YYYY-MM-DD` to control which dates can be selected via the calendar. Further, you can choose either a default date to be prefilled using the `defaultDate` option with a `YYYY-MM-DD` formatted string or `blank` along with the `allowBlankDates` option set to `true`.
 
-[**example3-minimum-maximum-and-default-dates.js**](https://github.com/andrewgjohnson/agjCalendar/blob/master/examples/example3-minimum-maximum-and-default-dates.js)
+[**example3-minimum-maximum-default-and-excluded-dates.js**](https://github.com/andrewgjohnson/agjCalendar/blob/master/examples/example3-minimum-maximum-default-and-excluded-dates.js)
 
 <form method="post" action="/examples-and-demo/" onsubmit="return false;" class="demo">
     <p>
@@ -76,12 +76,15 @@ You can specify a minimum and/or maximum date by using the `minimumDate` and/or 
         <br />
         <br />
         <input type="text" value="" id="example3-object" />
+        <br />
+        <br />
+        <input type="text" value="" id="example3-exclusions" />
     </p>
-    <pre><code>{% include examples/example3-minimum-maximum-and-default-dates.js %}</code></pre>
+    <pre><code>{% include examples/example3-minimum-maximum-default-and-excluded-dates.js %}</code></pre>
 </form>
 <script type="text/javascript">
 <!--
-{% include examples/example3-minimum-maximum-and-default-dates.js %}
+{% include examples/example3-minimum-maximum-default-and-excluded-dates.js %}
 -->
 </script>
 
@@ -93,6 +96,11 @@ There are other formatting and display choices for your integration. You can use
 
 <form method="post" action="/examples-and-demo/" onsubmit="return false;" class="demo">
     <p>
+        <input type="text" value="" id="example4-english" />
+        <br />
+        <input type="text" value="" id="example4-french" />
+        <br />
+        <br />
         <input type="text" value="" id="example4-single" />
         <br />
         <input type="text" value="" id="example4-double" />
@@ -105,13 +113,15 @@ There are other formatting and display choices for your integration. You can use
         <input type="text" value="" id="example4-start-on-monday" />
         <br />
         <br />
-        <input type="text" value="" id="example4-dateformat1" />
+        <input type="text" value="" id="example4-date-format-1" />
         <br />
-        <input type="text" value="" id="example4-dateformat2" />
+        <input type="text" value="" id="example4-date-format-2" />
         <br />
-        <input type="text" value="" id="example4-dateformat3" />
+        <input type="text" value="" id="example4-date-format-3" />
         <br />
-        <input type="text" value="" id="example4-dateformat4" />
+        <input type="text" value="" id="example4-date-format-4" />
+        <br />
+        <input type="text" value="" id="example4-date-format-5" />
         <br />
         <br />
         <input type="text" value="" id="example4-short-day-names" />

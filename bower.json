@@ -2,8 +2,8 @@
   "name": "agjcalendar",
   "description": "agjCalendar is a plugin for the jQuery Javascript library to deal with calendars, dates and date ranges",
   "main": [
-    "source/agjCalendar/jquery.agjCalendar.min.js",
-    "source/agjCalendar/jquery.agjCalendar.min.css"
+    "source/agjCalendar/jquery.agjCalendar.js",
+    "source/agjCalendar/jquery.agjCalendar.css"
   ],
   "dependencies": {},
   "devDependencies": {},
@@ -13,11 +13,14 @@
     "agjcalendar",
     "agjjquery",
     "jquery-plugin",
-    "ecosystem:jquery"
+    "ecosystem:jquery",
+    "calendar",
+    "date",
+    "dates"
   ],
   "homepage": "https://agjCalendar.agjjQuery.org/",
   "authors": [
-    "Andrew G Johnson <andrew@andrewgjohnson.com>"
+    "Andrew G. Johnson <andrew@andrewgjohnson.com>"
   ],
   "license": "MIT",
   "ignore": [
