@@ -97,7 +97,7 @@ startWeekOnMonday|`boolean`|`false`|`true`<br />`false`|If set to `true` the wee
 
 ## Javascript Functions
 
-The majority of the functionality for the agjCalendar plugin is self-contained but there are four functions that are added to extend jQuery. We use the dollars sign ($) instead of the jQuery global for documentation but either can be referenced.
+The majority of the functionality for the agjCalendar plugin is self-contained but there are four functions that are added to extend jQuery. We use the dollar sign ($) instead of the jQuery global for documentation but either can be referenced.
 
 ### $.agjCalendar(_[options]_)
 
