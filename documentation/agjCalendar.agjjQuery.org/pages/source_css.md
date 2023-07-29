@@ -1,6 +1,6 @@
 ---
 layout:    layout
-title:     agjCalendar&#58; Source&#58; CSS
+title:     agjCalendar&#58; CSS Source
 permalink: /source/css/
 ---
 

@@ -1,5 +1,5 @@
 /**
- * agjCalendar v1.0.0
+ * CSS source code of agjCalendar v1.0.0.
  *
  * Copyright (c) 2013-2023 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -17,14 +17,13 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
- *
- * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * @file The CSS source code for the agjCalendar jQuery plugin stylesheet.
  * @copyright 2013-2023 Andrew G. Johnson <andrew@andrewgjohnson.com>
- * @link http://github.com/andrewgjohnson/agjCalendar
- * @license https://opensource.org/license/mit/ The MIT License
+ * @license MIT
+ * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub repository}
+ * @see {@link https://agjCalendar.agjjQuery.org/ Online documentation}
+ * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
  * @version 1.0.0
- * @package agjCalendar
- *
  */
 
 #agjCalendar-modal-background
@@ -66,6 +65,7 @@ div.agjCalendar-modal-background-full
   text-align:left;
   z-index:2147483647
 }
+body.agjCalendar-active #agjCalendar { display:block }
 
 div.agjCalendar-single
 {
@@ -220,7 +220,13 @@ div.agjCalendar-full #agjCalendar-body
 
 #agjCalendar-second,#agjCalendar-third
 {
+  display:none;
   margin:0 0 0 5px
+}
+
+div.agjCalendar-double #agjCalendar-second,div.agjCalendar-triple #agjCalendar-second,div.agjCalendar-triple #agjCalendar-third
+{
+  display:block
 }
 
 div.agjCalendar-full #agjCalendar-first
@@ -299,7 +305,7 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
       height:18px;
       padding:0;
       text-transform:uppercase;
-      width:90px
+      width:100px
     }
 
     div.agjCalendar-full #agjCalendar-dropdown
@@ -402,6 +408,7 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
 
     #agjCalendar-body div.agjCalendar-days div
     {
+      cursor:default;
       display:block;
       float:left;
       font-weight:normal;
@@ -492,7 +499,7 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
     }
 
     #agjCalendar-body div.agjCalendar-week div.agjCalendar-saturday,
-    #agjCalendar-body.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-sunday
+    #agjCalendar.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-sunday
     {
       border-left-width:1px;
       left:143px;
@@ -500,42 +507,42 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
     }
 
     #agjCalendar-body div.agjCalendar-week div.agjCalendar-friday,
-    #agjCalendar-body.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-saturday
+    #agjCalendar.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-saturday
     {
       border-left-width:1px;
       left:119px
     }
 
     #agjCalendar-body div.agjCalendar-week div.agjCalendar-thursday,
-    #agjCalendar-body.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-friday
+    #agjCalendar.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-friday
     {
       border-left-width:1px;
       left:95px
     }
 
     #agjCalendar-body div.agjCalendar-week div.agjCalendar-wednesday,
-    #agjCalendar-body.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-thursday
+    #agjCalendar.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-thursday
     {
       border-left-width:1px;
       left:71px
     }
 
     #agjCalendar-body div.agjCalendar-week div.agjCalendar-tuesday,
-    #agjCalendar-body.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-wednesday
+    #agjCalendar.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-wednesday
     {
       border-left-width:1px;
       left:47px
     }
 
     #agjCalendar-body div.agjCalendar-week div.agjCalendar-monday,
-    #agjCalendar-body.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-tuesday
+    #agjCalendar.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-tuesday
     {
       border-left-width:1px;
       left:23px
     }
 
     #agjCalendar-body div.agjCalendar-week div.agjCalendar-sunday,
-    #agjCalendar-body.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-monday
+    #agjCalendar.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-monday
     {
       border-left-width:0;
       left:0;

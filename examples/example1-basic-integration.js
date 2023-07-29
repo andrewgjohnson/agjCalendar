@@ -3,5 +3,5 @@ $('#example1-basic').agjCalendar();
 
 // an alternative way of doing the same thing
 $.agjCalendar({
-  dateSelector: '#example1-alternative',
+  dateSelector: '#example1-alternative'
 });
