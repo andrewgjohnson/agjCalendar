@@ -4,7 +4,7 @@ All notable changes to the [agjCalendar plugin](https://github.com/andrewgjohnso
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this plugin adheres to [Semantic Versioning](http://semver.org/).
 
-## v1.0.0 (July 23, 2023)
+## v1.0.0 (July 30, 2023)
  * Renamed ctcCalendar to agjCalendar (the `$.ctcCalender()` function is still supported for backwards compatability)
  * Added support for `npm`, `Yarn` and `Bower` dependency managers
  * Added `.github` folder for extended GitHub support
