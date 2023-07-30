@@ -20,8 +20,8 @@
  * @file The Javascript source code for the agjCalendar jQuery plugin.
  * @copyright 2013-2023 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * @license MIT
- * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub repository}
- * @see {@link https://agjCalendar.agjjQuery.org/ Online documentation}
+ * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
+ * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
  * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
  * @version 1.0.0
  */
@@ -88,32 +88,32 @@
       },
       months: {
         full: {
-          1:  'January',
-          2:  'February',
-          3:  'March',
-          4:  'April',
-          5:  'May',
-          6:  'June',
-          7:  'July',
-          8:  'August',
-          9:  'September',
-          10: 'October',
-          11: 'November',
-          12: 'December'
+          0:  'January',
+          1:  'February',
+          2:  'March',
+          3:  'April',
+          4:  'May',
+          5:  'June',
+          6:  'July',
+          7:  'August',
+          8:  'September',
+          9:  'October',
+          10: 'November',
+          11: 'December'
         },
         abbreviated: {
-          1:  'Jan',
-          2:  'Feb',
-          3:  'Mar',
-          4:  'Apr',
-          5:  'May',
-          6:  'Jun',
-          7:  'Jul',
-          8:  'Aug',
-          9:  'Sep',
-          10: 'Oct',
-          11: 'Nov',
-          12: 'Dec'
+          0:  'Jan',
+          1:  'Feb',
+          2:  'Mar',
+          3:  'Apr',
+          4:  'May',
+          5:  'Jun',
+          6:  'Jul',
+          7:  'Aug',
+          8:  'Sep',
+          9:  'Oct',
+          10: 'Nov',
+          11: 'Dec'
         }
       },
       hideCalendar:  'Hide Calendar',
@@ -156,32 +156,32 @@
       },
       months: {
         full: {
-          1:  'janvier',
-          2:  'février',
-          3:  'mars',
-          4:  'avril',
-          5:  'mai',
-          6:  'juin',
-          7:  'juillet',
-          8:  'août',
-          9:  'septembre',
-          10: 'octobre',
-          11: 'novembre',
-          12: 'décembre'
+          0:  'janvier',
+          1:  'février',
+          2:  'mars',
+          3:  'avril',
+          4:  'mai',
+          5:  'juin',
+          6:  'juillet',
+          7:  'août',
+          8:  'septembre',
+          9:  'octobre',
+          10: 'novembre',
+          11: 'décembre'
         },
         abbreviated: {
-          1:  'janv',
-          2:  'févr',
-          3:  'mars',
-          4:  'avr',
-          5:  'mai',
-          6:  'juin',
-          7:  'juil',
-          8:  'août',
-          9:  'sept',
-          10: 'octo',
-          11: 'nov',
-          12: 'déc'
+          0:  'janv',
+          1:  'févr',
+          2:  'mars',
+          3:  'avr',
+          4:  'mai',
+          5:  'juin',
+          6:  'juil',
+          7:  'août',
+          8:  'sept',
+          9:  'octo',
+          10: 'nov',
+          11: 'déc'
         }
       },
       hideCalendar:  'Masquer le calendrier',
@@ -506,15 +506,11 @@
   var createDomElements = function() {
     var calendarElement = $('body').append(
       '<div id="agjCalendar-modal-background"></div>' +
-      '<div id="agjCalendar" data-active="-1" data-active-is-end="false">' +
+      '<div id="agjCalendar">' +
         '<div id="agjCalendar-header">' +
           '<div id="agjCalendar-header-inner">' +
-            '<a href="#" title="Hide Calendar" id="agjCalendar-hide">' +
-              'Hide Calendar' +
-            '</a>' +
-            '<span>' +
-              'Powered by' +
-            '</span>' +
+            '<a href="#" id="agjCalendar-hide"></a>' +
+            '<span></span>' +
             ' ' +
             '<a' +
               ' href="https://agjcalendar.agjjquery.org/"' +
@@ -532,23 +528,11 @@
               '<div class="agjCalendar-month-inner-1">' +
                 '<div class="agjCalendar-month-inner-2">' +
                   '<select id="agjCalendar-dropdown"></select>' +
-                  '<a' +
-                    ' href="#"' +
-                    ' title="Next Month"' +
-                    ' class="agjCalendar-next-month"' +
-                  '>' +
-                    '<span class="agjCalendar-next-month-inner">' +
-                      'Next Month' +
-                    '</span>' +
+                  '<a href="#" class="agjCalendar-next-month">' +
+                    '<span class="agjCalendar-next-month-inner"></span>' +
                   '</a>' +
-                  '<a' +
-                    ' href="#"' +
-                    ' title="Previous Month"' +
-                    ' class="agjCalendar-previous-month"' +
-                  '>' +
-                    '<span class="agjCalendar-previous-month-inner">' +
-                      'Previous Month' +
-                    '</span>' +
+                  '<a href="#" class="agjCalendar-previous-month">' +
+                    '<span class="agjCalendar-previous-month-inner"></span>' +
                   '</a>' +
                 '</div>' +
               '</div>' +
@@ -559,23 +543,11 @@
             '<div class="agjCalendar-month">' +
               '<div class="agjCalendar-month-inner" colspan="5">' +
                 '<strong id="agjCalendar-second-month-name"></strong>' +
-                '<a' +
-                  ' href="#"' +
-                  ' title="Next Month"' +
-                  ' class="agjCalendar-next-month"' +
-                '>' +
-                  '<span class="agjCalendar-next-month-inner">' +
-                    'Next Month' +
-                  '</span>' +
+                '<a href="#" class="agjCalendar-next-month">' +
+                  '<span class="agjCalendar-next-month-inner"></span>' +
                 '</a>' +
-                '<a' +
-                  ' href="#"' +
-                  ' title="Previous Month"' +
-                  ' class="agjCalendar-previous-month"' +
-                '>' +
-                  '<span class="agjCalendar-previous-month-inner">' +
-                    'Previous Month' +
-                  '</span>' +
+                '<a href="#" class="agjCalendar-previous-month">' +
+                  '<span class="agjCalendar-previous-month-inner"></span>' +
                 '</a>' +
               '</div>' +
             '</div>' +
@@ -585,23 +557,11 @@
             '<div class="agjCalendar-month">' +
               '<div class="agjCalendar-month-inner" colspan="5">' +
                 '<strong id="agjCalendar-third-month-name"></strong>' +
-                '<a' +
-                  ' href="#"' +
-                  ' title="Next Month"' +
-                  ' class="agjCalendar-next-month"' +
-                '>' +
-                  '<span class="agjCalendar-next-month-inner">' +
-                    'Next Month' +
-                  '</span>' +
+                '<a href="#" class="agjCalendar-next-month">' +
+                  '<span class="agjCalendar-next-month-inner"></span>' +
                 '</a>' +
-                '<a' +
-                  ' href="#"' +
-                  ' title="Previous Month"' +
-                  ' class="agjCalendar-previous-month"' +
-                '>' +
-                  '<span class="agjCalendar-previous-month-inner">' +
-                    'Previous Month' +
-                  '</span>' +
+                '<a href="#" class="agjCalendar-previous-month">' +
+                  '<span class="agjCalendar-previous-month-inner"></span>' +
                 '</a>' +
               '</div>' +
             '</div>' +
@@ -742,35 +702,29 @@
    * @param {Date} date - The date to format into a string.
    * @param {number} dateFormat - The format to use to format the date.
    * @param {string} language - The language to use.
-   * @returns {string}} - The date formatted as a string.
+   * @returns {string} - The date formatted as a string.
    */
   var dateToString = function(date, dateFormat, language) {
-    switch (language) {
-      case 'fr':
-        break;
-
-      default:
-        language = 'en';
-    }
+    language = language === 'fr' ? language : 'en';
 
     var dateFormats = {
       DD: function(date) {
-        return (date.getDate() + 1 < 10 ? '0' : '') + date.getDate();
+        return (date.getDate() < 10 ? '0' : '') + date.getDate();
       },
       D: function(date) {
         return date.getDate();
       },
       MMMM: function(date) {
-        return monthNumberToName(date.getMonth() + 1, true, language);
+        return monthNumberToName(date.getMonth(), true, language);
       },
       MMM: function(date) {
-        return monthNumberToName(date.getMonth() + 1, false, language);
+        return monthNumberToName(date.getMonth(), false, language);
       },
       MM: function(date) {
         return (date.getMonth() + 1 < 10 ? '0' : '') + (date.getMonth() + 1);
       },
       M: function(date) {
-        return (date.getMonth() + 1);
+        return date.getMonth() + 1;
       },
       YYYY: function(date) {
         return date.getFullYear();
@@ -1078,7 +1032,7 @@
    * @returns {string|number} - Returns the month’s name if found or -1 if not.
    */
   var monthNumberToName = function(monthNumber, fullName, language) {
-    if (monthNumber >= 1 && monthNumber <= 12) {
+    if (monthNumber >= 0 && monthNumber <= 11) {
       var variation = fullName ? 'full' : 'abbreviated';
       return translations[language]['months'][variation][monthNumber];
     }
@@ -1358,10 +1312,9 @@
           for (var day = 1; day <= getDay; day++) {
             currentDay++;
             calendarMarkup += '<div';
-            calendarMarkup += ' class="';
-            calendarMarkup += 'agjCalendar-blank ';
-            calendarMarkup += 'agjCalendar-' + dayNumberToName(
-              currentDay % 7,
+            calendarMarkup += ' class="agjCalendar-blank';
+            calendarMarkup += ' agjCalendar-' + dayNumberToName(
+              (currentDay - (agjCalendar['startWeekOnMonday'] ? 0 : 1)) % 7,
               'full',
               'en'
             ).toLowerCase();
@@ -1426,8 +1379,7 @@
               calendarMarkup += '</div>';
             }
             calendarMarkup += '<div';
-            calendarMarkup += ' class="';
-            calendarMarkup += 'agjCalendar-week';
+            calendarMarkup += ' class="agjCalendar-week';
             calendarMarkup += ' agjCalendar-week-' + numberToText(
               Math.round(currentDay / 7) + 1
             ).toLowerCase() + '">';
@@ -1566,10 +1518,9 @@
             calendarMarkup += '</div>';
           } else {
             calendarMarkup += '<div';
-            calendarMarkup += ' class="';
-            calendarMarkup += 'agjCalendar-blank';
+            calendarMarkup += ' class="agjCalendar-blank';
             calendarMarkup += ' agjCalendar-' + dayNumberToName(
-              currentDay % 7,
+              (currentDay + (agjCalendar['startWeekOnMonday'] ? 1 : 0)) % 7,
               'full',
               'en'
             ).toLowerCase();
@@ -1830,7 +1781,7 @@
           if (monthNumber !== -1) {
             var dateFromString = new Date(
               string.substring(string.length - 4, string.length),
-              monthNumber - 1,
+              monthNumber,
               string.substring(string.indexOf(' ') + 1, string.indexOf(','))
             );
             return dateFromString;
@@ -1869,7 +1820,7 @@
           if (monthNumber !== -1) {
             var dateFromString = new Date(
               string.substring(string.lastIndexOf(' ') + 1),
-              monthNumber - 1,
+              monthNumber,
               string.substring(0, string.indexOf(' '))
             );
             return dateFromString;
@@ -2788,8 +2739,8 @@
         break;
     }
 
-    // the integration was successfully setup, save the configuration in the
-    // agjCalendars global
+    // the integration was successfully initialized, save the configuration in
+    // the agjCalendars global
     agjCalendars.push(agjCalendar);
     return true;
   };
@@ -2821,7 +2772,7 @@
   };
 
   /**
-   * The ctcCalendar is the previous name of the agjCalendar plugin, this
+   * The previous name of the agjCalendar plugin was ctcCalendar so this
    * function acts solely as an alias to support backwards compatability.
    * @param {object} options - A JSON object of confiuguration options.
    * @returns {boolean} - Returns true on success or false on error.

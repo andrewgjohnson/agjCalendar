@@ -11,8 +11,6 @@ plugins: [
   "jsdoc"
 ]
 rules: {
-  "valid-jsdoc": 0, #valid-jsdoc is deprecated (the jsdoc plugin is used instead)
-  "require-jsdoc": 0, #require-jsdoc is deprecated (the jsdoc plugin is used instead)
   "no-redeclare": 0,
   "no-var": 0,
   "comma-dangle": [
@@ -50,9 +48,11 @@ rules: {
       "on": "value"
     }
   ],
+  "require-jsdoc": 0, #require-jsdoc is deprecated (the jsdoc plugin is used instead)
+  "valid-jsdoc": 0, #valid-jsdoc is deprecated (the jsdoc plugin is used instead)
   "jsdoc/check-access": "error", # Recommended by the jsdoc plugin
   "jsdoc/check-alignment": "error", # Recommended by the jsdoc plugin
-  #"jsdoc/check-examples": "error", # https://github.com/eslint/eslint/issues/14745
+  "jsdoc/check-examples": 0,
   "jsdoc/check-indentation": "error",
   "jsdoc/check-line-alignment": "error",
   "jsdoc/check-param-names": "error", # Recommended by the jsdoc plugin

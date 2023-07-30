@@ -5,7 +5,7 @@ All notable changes to the [agjCalendar plugin](https://github.com/andrewgjohnso
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this plugin adheres to [Semantic Versioning](http://semver.org/).
 
 ## v1.0.0 (July 23, 2023)
- * Renamed ctcCalendar to agjCalendar (the `jQuery.ctcCalender()` function is still supported for backwards compatability)
+ * Renamed ctcCalendar to agjCalendar (the `$.ctcCalender()` function is still supported for backwards compatability)
  * Added support for `npm`, `Yarn` and `Bower` dependency managers
  * Added `.github` folder for extended GitHub support
  * Added `ESLint` support for Javascript
@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
  * Added date format 5 for the `dateFormat` option, primarily for use in French integrations
  * Added tooltips to the days of the week header
  * Added console error messages when invalid selectors are used
+ * Added retina display support to the CSS image icons
  * Fixed a bug causing a Javascript error when an invalid date was pre-entered into a text input
  * Fixed a bug causing a Javascript error when using a `<select>` element containing no `<option>` elements
  * Fixed a bug causing the calendar to prematurely hide if an ID selector wasn’t used

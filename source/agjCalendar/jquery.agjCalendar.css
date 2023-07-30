@@ -20,8 +20,8 @@
  * @file The CSS source code for the agjCalendar jQuery plugin stylesheet.
  * @copyright 2013-2023 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * @license MIT
- * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub repository}
- * @see {@link https://agjCalendar.agjjQuery.org/ Online documentation}
+ * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
+ * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
  * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
  * @version 1.0.0
  */
@@ -171,6 +171,9 @@ div.agjCalendar-full #agjCalendar-header
     text-indent:-5000px;
     top:0;
     width:13px
+  }
+  @media only screen and (-webkit-min-device-pixel-ratio : 2),only screen and (min--moz-device-pixel-ratio : 2),only screen and (-o-min-device-pixel-ratio : 2/1),only screen and (min-device-pixel-ratio : 2),only screen and (min-resolution : 192dpi),only screen and (min-resolution : 2dppx){
+    #agjCalendar-hide { background-image:url("../agjCalendar/hide2x.png");background-size:13px 13px }
   }
 
   div.agjCalendar-full #agjCalendar-hide
@@ -332,7 +335,6 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
 
     #agjCalendar-body div.agjCalendar-month a
     {
-      background-image:url("../agjCalendar/right-arrow.gif");
       background-position:0 50%;
       background-repeat:no-repeat;
       display:block;
@@ -344,9 +346,20 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
       width:13px
     }
 
+    #agjCalendar-body div.agjCalendar-month a.agjCalendar-next-month
+    {
+      background-image:url("../agjCalendar/right-arrow.gif")
+    }
+    @media only screen and (-webkit-min-device-pixel-ratio : 2),only screen and (min--moz-device-pixel-ratio : 2),only screen and (-o-min-device-pixel-ratio : 2/1),only screen and (min-device-pixel-ratio : 2),only screen and (min-resolution : 192dpi),only screen and (min-resolution : 2dppx){
+      #agjCalendar-body div.agjCalendar-month a.agjCalendar-next-month { background-image:url("../agjCalendar/right-arrow2x.png");background-size:13px 13px }
+    }
+
     #agjCalendar-body div.agjCalendar-month a.agjCalendar-previous-month
     {
       background-image:url("../agjCalendar/left-arrow.gif")
+    }
+    @media only screen and (-webkit-min-device-pixel-ratio : 2),only screen and (min--moz-device-pixel-ratio : 2),only screen and (-o-min-device-pixel-ratio : 2/1),only screen and (min-device-pixel-ratio : 2),only screen and (min-resolution : 192dpi),only screen and (min-resolution : 2dppx){
+      #agjCalendar-body div.agjCalendar-month a.agjCalendar-previous-month { background-image:url("../agjCalendar/left-arrow2x.png");background-size:13px 13px }
     }
 
     div.agjCalendar-full #agjCalendar-body div.agjCalendar-month a

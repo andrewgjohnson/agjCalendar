@@ -127,7 +127,7 @@ The `$.agjCalendar.deactivate()` function will deactivate any active date picker
         alert('There is no date picker currently active. =(');
     }
 
-The `$.agjCalendar.isActive()` function will determine whether or not any date pickers are active. Returns `true` if a date picker is active or `false` if is not.
+The `$.agjCalendar.isActive()` function will determine whether or not any date pickers are active. Returns `true` if a date picker is active or `false` if none are.
 
 ## Usage/Installation
 
