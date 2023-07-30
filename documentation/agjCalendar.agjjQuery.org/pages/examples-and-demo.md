@@ -51,7 +51,7 @@ Instead of a single text input, you can set the `inputType` option to `dropdown`
     <p>
         <select id="example2-month"></select>
         <select id="example2-day"></select>
-        <img src="/resources/calendar-icon.gif" alt="Calendar Icon" id="example2-icon" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example2-icon" />
     </p>
     <pre><code>{% include examples/example2-dropdowns-and-expander.js %}</code></pre>
 </form>
@@ -130,13 +130,13 @@ There are other formatting and display choices for your integration. You can use
         <br />
         <br />
         <input type="text" value="" id="example4-inline" />
-        <img src="/resources/calendar-icon.gif" alt="Calendar Icon" id="example4-inline-icon" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example4-inline-icon" />
         <br />
         <input type="text" value="" id="example4-modal" />
-        <img src="/resources/calendar-icon.gif" alt="Calendar Icon" id="example4-modal-icon" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example4-modal-icon" />
         <br />
         <input type="text" value="" id="example4-full" />
-        <img src="/resources/calendar-icon.gif" alt="Calendar Icon" id="example4-full-icon" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example4-full-icon" />
     </p>
     <pre><code>{% include examples/example4-formatting-and-display-options.js %}</code></pre>
 </form>
@@ -166,11 +166,11 @@ Instead of being limited to a single date, you can set the `allowRange` option t
         <br />
         <select id="example5-month-start"></select>
         <select id="example5-day-start"></select>
-        <img src="/resources/calendar-icon.gif" alt="Calendar Icon" id="example5-icon-start" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example5-icon-start" />
         <br />
         <select id="example5-month-end"></select>
         <select id="example5-day-end"></select>
-        <img src="/resources/calendar-icon.gif" alt="Calendar Icon" id="example5-icon-end" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example5-icon-end" />
     </p>
     <pre><code>{% include examples/example5-date-ranges.js %}</code></pre>
 </form>
