@@ -1496,7 +1496,7 @@
                 case 'fr':
                   fullDateText = dateToString(
                     drawDate,
-                    'DD MMMM YYYY',
+                    'D MMMM YYYY',
                     agjCalendar['language']
                   );
                   break;
