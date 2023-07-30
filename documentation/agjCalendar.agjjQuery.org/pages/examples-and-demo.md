@@ -179,3 +179,46 @@ Instead of being limited to a single date, you can set the `allowRange` option t
 {% include examples/example5-date-ranges.js %}
 -->
 </script>
+
+## Example Six: Existing Values
+
+If there is an existing value on the text or dropdown elements, it will be preserved once the integration is initialized. With a text input such as `<input value="01/02/2003" … />` the date will be preserved regardless of if it is valid or not. With a dropdown such as `<select … ><option value="2003-02" selected="selected">Feb 2003</option>…` the date will be preserved if an option exists with a matching value (`2003-02` in the case of the example) after the integration has been initialized.
+
+[**example6-existing-values.js**](https://github.com/andrewgjohnson/agjCalendar/blob/master/examples/example6-existing-values.js)
+
+<form method="post" action="/examples-and-demo/" onsubmit="return false;" class="demo">
+    <p>
+        <input type="text" value="02/01/2000" id="example6-start" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example6-text-icon-start" />
+        <br />
+        <input type="text" value="02/03/2000" id="example6-end" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example6-text-icon-end" />
+        <br />
+        <br />
+        <select id="example6-month-start">
+            <option value=""></option>
+            <option value="2000-02" selected="selected">February</option>
+        </select>
+        <select id="example6-day-start">
+            <option value=""></option>
+            <option value="01" selected="selected">1</option>
+        </select>
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example6-dropdown-icon-start" />
+        <br />
+        <select id="example6-month-end">
+            <option value=""></option>
+            <option value="2000-02" selected="selected">February</option>
+        </select>
+        <select id="example6-day-end">
+            <option value=""></option>
+            <option value="03" selected="selected">3</option>
+        </select>
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example6-dropdown-icon-end" />
+    </p>
+    <pre><code>{% include examples/example6-existing-values.js %}</code></pre>
+</form>
+<script type="text/javascript">
+<!--
+{% include examples/example6-existing-values.js %}
+-->
+</script>

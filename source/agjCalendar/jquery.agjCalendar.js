@@ -2573,6 +2573,8 @@
           );
           return false;
         } else {
+          agjCalendar['dateSelector'] = options['dateSelector'];
+
           /**
            * The inputBlurEvent() function will handle events when an
            * integration’s input loses focus.
@@ -2599,7 +2601,7 @@
             return true;
           };
 
-          agjCalendar['dateSelector'] = options['dateSelector'];
+          var originalValue = dateElement.val();
 
           dateElement
             .on('blur', {
@@ -2610,6 +2612,9 @@
             }, inputFocusEvent);
 
           setDate(agjCalendar, agjCalendar['defaultDate']);
+          if (originalValue.length > 0) {
+            dateElement.val(originalValue);
+          }
 
           if (agjCalendar['allowRange']) {
             var endDateElement = $(options['endDateSelector']);
@@ -2622,6 +2627,8 @@
               return false;
             } else {
               agjCalendar['endDateSelector'] = options['endDateSelector'];
+
+              originalValue = endDateElement.val();
 
               endDateElement
                 .on('blur', {
@@ -2643,6 +2650,9 @@
                 );
               }
               setDate(agjCalendar, endDefaultDate, true);
+              if (originalValue.length > 0) {
+                endDateElement.val(originalValue);
+              }
             }
           }
         }
@@ -2666,6 +2676,9 @@
             );
             return false;
           } else {
+            agjCalendar['monthSelector'] = options['monthSelector'];
+            agjCalendar['daySelector'] = options['daySelector'];
+
             /**
              * The inputBlurEvent() function will handle events when an
              * integration’s input loses focus.
@@ -2686,8 +2699,8 @@
               }
             };
 
-            agjCalendar['monthSelector'] = options['monthSelector'];
-            agjCalendar['daySelector'] = options['daySelector'];
+            var originalMonthValue = monthElement.val();
+            var originalDayValue = dayElement.val();
 
             monthElement.on('change', {
               isEnd: false
@@ -2695,6 +2708,26 @@
 
             updateMonthElement(agjCalendar);
             updateDayElement(agjCalendar);
+
+            if (
+              originalMonthValue !== null &&
+              originalMonthValue.length > 0 &&
+              monthElement.find(
+                'option[value=' + originalMonthValue + ']'
+              ).length > 0
+            ) {
+              monthElement.val(originalMonthValue).trigger('change');
+            }
+
+            if (
+              originalDayValue !== null &&
+              originalDayValue.length > 0 &&
+              dayElement.find(
+                'option[value=' + originalDayValue + ']'
+              ).length > 0
+            ) {
+              dayElement.val(originalDayValue).trigger('change');
+            }
 
             if (agjCalendar['allowRange']) {
               var endMonthElement = $(options['endMonthSelector']);
@@ -2718,6 +2751,9 @@
                   agjCalendar['endMonthSelector'] = options['endMonthSelector'];
                   agjCalendar['endDaySelector'] = options['endDaySelector'];
 
+                  var originalMonthValue = endMonthElement.val();
+                  var originalDayValue = endDayElement.val();
+
                   dayElement.on('change', function() {
                     autoSetEndDate(agjCalendar);
                     updateMonthElement(agjCalendar, true);
@@ -2730,6 +2766,26 @@
 
                   updateMonthElement(agjCalendar, true);
                   updateDayElement(agjCalendar, true);
+
+                  if (
+                    originalMonthValue !== null &&
+                    originalMonthValue.length > 0 &&
+                    endMonthElement.find(
+                      'option[value=' + originalMonthValue + ']'
+                    ).length > 0
+                  ) {
+                    endMonthElement.val(originalMonthValue).trigger('change');
+                  }
+
+                  if (
+                    originalDayValue !== null &&
+                    originalDayValue.length > 0 &&
+                    endDayElement.find(
+                      'option[value=' + originalDayValue + ']'
+                    ).length > 0
+                  ) {
+                    endDayElement.val(originalDayValue).trigger('change');
+                  }
                 }
               }
             }
