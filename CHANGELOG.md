@@ -4,6 +4,14 @@ All notable changes to the [agjCalendar plugin](https://github.com/andrewgjohnso
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this plugin adheres to [Semantic Versioning](http://semver.org/).
 
+## v1.0.1 (July 30, 2023)
+ * Added retina display support for images
+ * Updated `Stylelint` to allow retina display support in the CSS stylesheet
+ * Added support for original/existing values and added an example showing how they work
+ * Removed leading zero from tooltips on the date picker when `language` is set to French
+ * Updated comments on layout.html template
+ * Images were optimized by [@ImgBotApp](https://github.com/ImgBotApp)
+
 ## v1.0.0 (July 30, 2023)
  * Renamed ctcCalendar to agjCalendar (the `$.ctcCalender()` function is still supported for backwards compatability)
  * Added support for `npm`, `Yarn` and `Bower` dependency managers

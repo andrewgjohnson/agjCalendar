@@ -1,5 +1,5 @@
 /**
- * CSS source code of agjCalendar v1.0.0.
+ * CSS source code of agjCalendar v1.0.1.
  *
  * Copyright (c) 2013-2023 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,7 +23,7 @@
  * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
  * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
  * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 #agjCalendar-modal-background
@@ -172,7 +172,8 @@ div.agjCalendar-full #agjCalendar-header
     top:0;
     width:13px
   }
-  @media only screen and (-webkit-min-device-pixel-ratio : 2),only screen and (min--moz-device-pixel-ratio : 2),only screen and (-o-min-device-pixel-ratio : 2/1),only screen and (min-device-pixel-ratio : 2),only screen and (min-resolution : 192dpi),only screen and (min-resolution : 2dppx){
+
+  @media only screen and (-webkit-min-device-pixel-ratio : 2),only screen and (min--moz-device-pixel-ratio : 2),only screen and (-o-min-device-pixel-ratio : 2/1),only screen and (min-device-pixel-ratio : 2),only screen and (min-resolution : 192dpi),only screen and (min-resolution : 2dppx) {
     #agjCalendar-hide { background-image:url("../agjCalendar/hide2x.png");background-size:13px 13px }
   }
 
@@ -350,7 +351,8 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
     {
       background-image:url("../agjCalendar/right-arrow.gif")
     }
-    @media only screen and (-webkit-min-device-pixel-ratio : 2),only screen and (min--moz-device-pixel-ratio : 2),only screen and (-o-min-device-pixel-ratio : 2/1),only screen and (min-device-pixel-ratio : 2),only screen and (min-resolution : 192dpi),only screen and (min-resolution : 2dppx){
+
+    @media only screen and (-webkit-min-device-pixel-ratio : 2),only screen and (min--moz-device-pixel-ratio : 2),only screen and (-o-min-device-pixel-ratio : 2/1),only screen and (min-device-pixel-ratio : 2),only screen and (min-resolution : 192dpi),only screen and (min-resolution : 2dppx) {
       #agjCalendar-body div.agjCalendar-month a.agjCalendar-next-month { background-image:url("../agjCalendar/right-arrow2x.png");background-size:13px 13px }
     }
 
@@ -358,7 +360,8 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
     {
       background-image:url("../agjCalendar/left-arrow.gif")
     }
-    @media only screen and (-webkit-min-device-pixel-ratio : 2),only screen and (min--moz-device-pixel-ratio : 2),only screen and (-o-min-device-pixel-ratio : 2/1),only screen and (min-device-pixel-ratio : 2),only screen and (min-resolution : 192dpi),only screen and (min-resolution : 2dppx){
+
+    @media only screen and (-webkit-min-device-pixel-ratio : 2),only screen and (min--moz-device-pixel-ratio : 2),only screen and (-o-min-device-pixel-ratio : 2/1),only screen and (min-device-pixel-ratio : 2),only screen and (min-resolution : 192dpi),only screen and (min-resolution : 2dppx) {
       #agjCalendar-body div.agjCalendar-month a.agjCalendar-previous-month { background-image:url("../agjCalendar/left-arrow2x.png");background-size:13px 13px }
     }
 

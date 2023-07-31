@@ -1,5 +1,5 @@
 /**
- * Javascript source code of agjCalendar v1.0.0.
+ * Javascript source code of agjCalendar v1.0.1.
  *
  * Copyright (c) 2013-2023 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,7 +23,7 @@
  * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
  * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
  * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 /* global jQuery */
