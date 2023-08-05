@@ -65,18 +65,19 @@ When intializing an agjCalendar integration you can set its configuration option
 
 A complete list of all options, their default values, valid values and notes is available below.
 
-key | type | default | values | notes
-----|------|---------|--------|-------
+key|type|default|values|notes
+---|----|-------|------|-----
 allowBlankDates|`boolean`|`false`|`true`<br />`false`|If set to `true` blank dates (e.g. mm/dd/yyyy) will be permitted
 allowRange|`boolean`|`false`|`true`<br />`false`|If set to `true` a second date can be entered with the `endDateSelector` option or the `endMonthSelector` and `endDaySelector` options
 autoSetEndDate|`string`|`"dates"`|`"blanks"`<br />`"dates"`<br />`"always"`<br />`"never"`|This option controls whether or not the end date will automatically change when the start date changes;<br />`"blanks"` will only trigger when the end date is blank,<br />`"dates"` will only trigger when the end date is a date,<br />`"always"` will trigger for both and<br />`"never"` will trigger for neither<br />(only used when `allowRange` is set to `true`)
-calendarCount|`integer`|`1`|`1`<br />`2`<br />`3`|Defines whether the date picker uses a single, double or triple calendar (only used when `calendarDisplay` is set to `inline`)
+calendarCount|`integer`|`1`|`1`<br />`2`<br />`3`|Defines whether the date picker uses a single, double or triple calendar (only used when `calendarDisplay` is set to `"inline"` or `"modal"`)
 calendarDisplay|`string`|`"inline"`|`"inline"`<br />`"modal"`<br />`"full"`|Toggles whether the date picker is displayed as `"inline"`, `"modal"` or `"full"`
-dateFormat|`integer`|`1`|`1`<br />`2`<br />`3`<br />`4`|Determines which date format is used for text inputs (only used when `inputType` is set to `"text"`)<br /><br />`1` = MM/DD/YYYY, e.g. 01/02/2003<br />`2` = MMM D, YYYY, e.g. Jan 2, 2003<br />`3` = DD/MM/YYYY, e.g. 02/01/2003<br />`4` = YYYY-MM-DD, e.g. 2003-01-02
+dateFormat|`integer`|`1`|`1`<br />`2`<br />`3`<br />`4`<br />`5`|Determines which date format is used for text inputs (only used when `inputType` is set to `"text"`)<br /><br />`1` = MM/DD/YYYY, e.g. 01/02/2003<br />`2` = MMM D, YYYY, e.g. Jan 2, 2003<br />`3` = DD/MM/YYYY, e.g. 02/01/2003<br />`4` = YYYY-MM-DD, e.g. 2003-01-02<br />`5` = D MMMM YYYY, e.g. 2 January 2003
 dateSelector|`string`|`null`||Accepts a string value for your target text element such as `#text-input` (only used when `inputType` is set to `"text"`)
 dayNameFormat|`string`|`"short"`|`"short"`<br />`"medium"`<br />`"full"`|Determines which day format is used for days of the week on the date picker<br /><br />`"short"` = one letter, e.g. F<br />`"medium"` = abbreviated, e.g. Fri<br />`"full"` = full name, e.g. Friday
 daySelector|`string`|`null`||Accepts a string value for your target day dropdown element such as `#day-select` (only used when `inputType` is set to `"dropdown"`)
-defaultDate|`string`|Today’s date|A Date object, a string formatted as YYYY-MM-DD or `"blank"`|The initial date to prefill
+defaultDate|`string`|Today’s date|A Date object, a string formatted as YYYY-MM-DD or `"blank"`|The default date to prefill
+defaultEndDate|`string`|Today’s date plus the `defaultRange`|A Date object, a string formatted as YYYY-MM-DD or `"blank"`|The default end date to prefill (only used when `allowRange` is set to `true`)
 defaultRange|`integer`|`0` if the `minimumDate` and `maximumDate` options are set to the same date otherwise `1`|Any non-negative integer|The default date range (only used when `allowRange` is set to `true`)
 endDateSelector|`string`|`null`||The same as `dateSelector` but for the end date (only used when `allowRange` is set to `true` and `inputType` is set to `"text"`)
 endDaySelector|`string`|`null`||The same as `daySelector` but for the end date (only used when `allowRange` is set to `true` and `inputType` is set to `"dropdown"`)
@@ -85,7 +86,7 @@ endMonthSelector|`string`|`null`||The same as `monthSelector` but for the end da
 excludeDates|`array`|`[]`|An array of Date objects and/or strings formatted as YYYY-MM-DD|Individual dates that will be excluded from the date picker
 expanderSelector|`string`|`null`||Accepts a string value for an additional target element to expand the calendar such as `#calendar-icon`
 inputType|`string`|`"text"`|`"text"`<br />`"dropdown"`|If set to `"text"` will use the `dateSelector` option to store the date or if set to `"dropdown"` will use the `monthSelector` and `daySelector` options to store the date
-language|`string`|`"en"`|`"en"`<br />`"fr"`|The language for the text elements on the date picker
+language|`string`|`"en"`|`"en"`<br />`"fr"`|The language for the text elements on the date picker<br /><br />`"en"` = English<br />`"fr"` = Français (French)
 maximumDate|`string`|Today’s date plus one year|A Date object or a string formatted as YYYY-MM-DD|The maximum date that can be picked
 maximumRange|`integer`|The number of days between the `minimumDate` and `maximumDate` options|Any non-negative integer|The maximum date range (only used when `allowRange` is set to `true`)
 minimumDate|`string`|Today’s date|A Date object or a string formatted as YYYY-MM-DD|The minimum date that can be picked
@@ -101,9 +102,14 @@ The majority of the functionality for the agjCalendar plugin is self-contained b
 
 ### $.agjCalendar(_[options]_)
 
-    $.agjCalendar({
+    var integration = $.agjCalendar({
       dateSelector: '#text-input'
     });
+    if (integration) {
+      alert('The integration was a success!');
+    } else {
+      alert('The integration failed; check your Javascript console for details.');
+    }
 
 The `$.agjCalendar()` function accepts an options JSON object of values to initialize a new agjCalendar integration. Returns `true` if the integration was successful or `false` if it was not.
 
@@ -122,9 +128,9 @@ The `$.agjCalendar.deactivate()` function will deactivate any active date picker
 ### $.agjCalendar.isActive()
 
     if ($.agjCalendar.isActive()) {
-        alert('There is a date picker currently active! =)');
+      alert('There is a date picker currently active!');
     } else {
-        alert('There is no date picker currently active. =(');
+      alert('There is no date picker currently active.');
     }
 
 The `$.agjCalendar.isActive()` function will determine whether or not any date pickers are active. Returns `true` if a date picker is active or `false` if none are.

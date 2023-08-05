@@ -4,6 +4,19 @@ All notable changes to the [agjCalendar plugin](https://github.com/andrewgjohnso
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this plugin adheres to [Semantic Versioning](http://semver.org/).
 
+## v1.0.2 (August 5, 2023)
+ * Cleaned up [example 6](https://github.com/andrewgjohnson/agjCalendar/blob/master/examples/example6-existing-values.js) to better illustrate existing/original values
+ * Enabled the `eqeqeq` rule in ESLint and ensured all comparisons are `===`/`!==` instead of `==`/`!=`
+ * Fixed a typo in the documentation of the `dateToString()` function
+ * Fixed a bug in the `updateDropdown()` function that caused extra months to be presented in the date picker dropdown for end dates when a start date was already set
+ * Fixed a bug that would cause the date picker to be correctly positioned when switching between `"modal"` and `"full"` integrations
+ * Added the `defaultEndDate` option
+ * Updated the `getDaysInMonth()` function to use base 0 for the months rather than base 1
+ * Updated the `monthNameToNumber()` function with a minor optimization
+ * Updated calendar-icon.gif to be retina display friendly on the documentation website
+ * Updated `highlight.js` on the documentation website to v11.8.0 and explicitly defined the languages (CSS and Javascript) used in code snippets
+ * Added some details to README.md
+
 ## v1.0.1 (July 30, 2023)
  * Added retina display support for images
  * Updated `Stylelint` to allow retina display support in the CSS stylesheet

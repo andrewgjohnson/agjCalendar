@@ -33,7 +33,7 @@ To initialize a basic integration simply select a jQuery element and call its `a
         <br />
         <input type="text" value="" id="example1-alternative" />
     </p>
-    <pre><code>{% include examples/example1-basic-integration.js %}</code></pre>
+    <pre><code class="language-javascript">{% include examples/example1-basic-integration.js %}</code></pre>
 </form>
 <script type="text/javascript">
 <!--
@@ -51,9 +51,9 @@ Instead of a single text input, you can set the `inputType` option to `dropdown`
     <p>
         <select id="example2-month"></select>
         <select id="example2-day"></select>
-        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example2-icon" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" height="17" width="16" id="example2-icon" />
     </p>
-    <pre><code>{% include examples/example2-dropdowns-and-expander.js %}</code></pre>
+    <pre><code class="language-javascript">{% include examples/example2-dropdowns-and-expander.js %}</code></pre>
 </form>
 <script type="text/javascript">
 <!--
@@ -80,7 +80,7 @@ You can specify a minimum and/or maximum date by using the `minimumDate` and/or 
         <br />
         <input type="text" value="" id="example3-exclusions" />
     </p>
-    <pre><code>{% include examples/example3-minimum-maximum-default-and-excluded-dates.js %}</code></pre>
+    <pre><code class="language-javascript">{% include examples/example3-minimum-maximum-default-and-excluded-dates.js %}</code></pre>
 </form>
 <script type="text/javascript">
 <!--
@@ -130,15 +130,15 @@ There are other formatting and display choices for your integration. You can use
         <br />
         <br />
         <input type="text" value="" id="example4-inline" />
-        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example4-inline-icon" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" height="17" width="16" id="example4-inline-icon" />
         <br />
         <input type="text" value="" id="example4-modal" />
-        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example4-modal-icon" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" height="17" width="16" id="example4-modal-icon" />
         <br />
         <input type="text" value="" id="example4-full" />
-        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example4-full-icon" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" height="17" width="16" id="example4-full-icon" />
     </p>
-    <pre><code>{% include examples/example4-formatting-and-display-options.js %}</code></pre>
+    <pre><code class="language-javascript">{% include examples/example4-formatting-and-display-options.js %}</code></pre>
 </form>
 <script type="text/javascript">
 <!--
@@ -166,13 +166,13 @@ Instead of being limited to a single date, you can set the `allowRange` option t
         <br />
         <select id="example5-month-start"></select>
         <select id="example5-day-start"></select>
-        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example5-icon-start" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" height="17" width="16" id="example5-icon-start" />
         <br />
         <select id="example5-month-end"></select>
         <select id="example5-day-end"></select>
-        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example5-icon-end" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" height="17" width="16" id="example5-icon-end" />
     </p>
-    <pre><code>{% include examples/example5-date-ranges.js %}</code></pre>
+    <pre><code class="language-javascript">{% include examples/example5-date-ranges.js %}</code></pre>
 </form>
 <script type="text/javascript">
 <!--
@@ -182,40 +182,40 @@ Instead of being limited to a single date, you can set the `allowRange` option t
 
 ## Example Six: Existing Values
 
-If there is an existing value on the text or dropdown elements, it will be preserved once the integration is initialized. With a text input such as `<input value="01/02/2003" … />` the date will be preserved regardless of if it is valid or not. With a dropdown such as `<select … ><option value="2003-02" selected="selected">Feb 2003</option>…` the date will be preserved if an option exists with a matching value (`2003-02` in the case of the example) after the integration has been initialized.
+If there is an existing value on the text or dropdown elements, it will be preserved once the integration is initialized. With a text input such as `<input value="02/01/2000" … />` the date will be preserved regardless of if it is valid or not. With a dropdown such as `<select … ><option value="2000-02" selected="selected">February 2000</option>…` the date will be preserved if an option exists with a matching value (`2000-02` in the case of the example) after the integration has been initialized.
 
 [**example6-existing-values.js**](https://github.com/andrewgjohnson/agjCalendar/blob/master/examples/example6-existing-values.js)
 
 <form method="post" action="/examples-and-demo/" onsubmit="return false;" class="demo">
     <p>
         <input type="text" value="02/01/2000" id="example6-start" />
-        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example6-text-icon-start" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" height="17" width="16" id="example6-text-icon-start" />
         <br />
         <input type="text" value="02/03/2000" id="example6-end" />
-        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example6-text-icon-end" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" height="17" width="16" id="example6-text-icon-end" />
         <br />
         <br />
         <select id="example6-month-start">
             <option value=""></option>
-            <option value="2000-02" selected="selected">February</option>
+            <option value="2000-02" selected="selected">February 2000</option>
         </select>
         <select id="example6-day-start">
             <option value=""></option>
             <option value="01" selected="selected">1</option>
         </select>
-        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example6-dropdown-icon-start" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" height="17" width="16" id="example6-dropdown-icon-start" />
         <br />
         <select id="example6-month-end">
             <option value=""></option>
-            <option value="2000-02" selected="selected">February</option>
+            <option value="2000-02" selected="selected">February 2000</option>
         </select>
         <select id="example6-day-end">
             <option value=""></option>
             <option value="03" selected="selected">3</option>
         </select>
-        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" id="example6-dropdown-icon-end" />
+        <img src="/documentation/agjCalendar.agjjQuery.org/images/calendar-icon.gif" alt="Calendar Icon" height="17" width="16" id="example6-dropdown-icon-end" />
     </p>
-    <pre><code>{% include examples/example6-existing-values.js %}</code></pre>
+    <pre><code class="language-javascript">{% include examples/example6-existing-values.js %}</code></pre>
 </form>
 <script type="text/javascript">
 <!--

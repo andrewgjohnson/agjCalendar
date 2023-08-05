@@ -17,6 +17,10 @@ rules: {
     "error",
     "never"
   ],
+  "eqeqeq": [
+    "error",
+    "always"
+  ],
   "indent": [
     "error",
     2,

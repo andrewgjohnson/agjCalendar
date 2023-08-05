@@ -1,5 +1,5 @@
 /**
- * Javascript source code of agjCalendar v1.0.1.
+ * Javascript source code of agjCalendar v1.0.2.
  *
  * Copyright (c) 2013-2023 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,7 +23,7 @@
  * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
  * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
  * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
- * @version 1.0.1
+ * @version 1.0.2
  */
 
 /* global jQuery */
@@ -195,43 +195,43 @@
   /**
    * The activateCalendar() function will activate an integration.
    * @param {object} agjCalendar - The integration to activate.
-   * @param {boolean} showEndDate - Whether or not to activate the end date.
+   * @param {boolean} activateEnd - Whether or not to activate on the end input.
    * @returns {void}
    */
-  var activateCalendar = function(agjCalendar, showEndDate) {
-    if (showEndDate !== true) {
-      showEndDate = false;
+  var activateCalendar = function(agjCalendar, activateEnd) {
+    if (activateEnd !== true) {
+      activateEnd = false;
     }
 
     // if there is an active date picker but it isn’t this one
     if (
       $.agjCalendar.isActive() &&
-      !checkIfActive(agjCalendar['position'], showEndDate)
+      !checkIfActive(agjCalendar['position'], activateEnd)
     ) {
       hideModalBackground();
     }
 
     switch (agjCalendar['inputType']) {
       case 'text':
-        $(agjCalendar[showEndDate ? 'endDateSelector' : 'dateSelector'])
+        $(agjCalendar[activateEnd ? 'endDateSelector' : 'dateSelector'])
           .addClass('agjCalendar-active-input');
         break;
 
       case 'dropdown':
-        $(agjCalendar[showEndDate ? 'endMonthSelector' : 'monthSelector'])
+        $(agjCalendar[activateEnd ? 'endMonthSelector' : 'monthSelector'])
           .addClass('agjCalendar-active-input');
-        $(agjCalendar[showEndDate ? 'endDaySelector' : 'daySelector'])
+        $(agjCalendar[activateEnd ? 'endDaySelector' : 'daySelector'])
           .addClass('agjCalendar-active-input');
         break;
     }
 
     var calendarElement = $('#agjCalendar');
-    if (calendarElement.length == 0) {
+    if (calendarElement.length === 0) {
       calendarElement = createDomElements();
     }
     calendarElement.attr({
       'data-active':        agjCalendar['position'],
-      'data-active-is-end': showEndDate
+      'data-active-is-end': activateEnd
     });
 
     calendarElement.find('#agjCalendar-hide').attr(
@@ -258,12 +258,6 @@
     );
 
     switch (agjCalendar['calendarCount']) {
-      case 1:
-        calendarElement
-          .removeClass('agjCalendar-double agjCalendar-triple')
-          .addClass('agjCalendar-single');
-        break;
-
       case 2:
         calendarElement
           .removeClass('agjCalendar-single agjCalendar-triple')
@@ -274,6 +268,12 @@
         calendarElement
           .removeClass('agjCalendar-single agjCalendar-double')
           .addClass('agjCalendar-triple');
+        break;
+
+      default:
+        calendarElement
+          .removeClass('agjCalendar-double agjCalendar-triple')
+          .addClass('agjCalendar-single');
         break;
     }
 
@@ -344,7 +344,7 @@
         lastScrollLeft = $(window).scrollLeft();
         lastScrollTop = $(window).scrollTop();
 
-        if (agjCalendar['calendarDisplay'] == 'full') {
+        if (agjCalendar['calendarDisplay'] === 'full') {
           // because full calendar display uses the entire display we scroll to
           // the top of the page to ensure the address bar is not visible on
           // mobile/touch devices
@@ -357,9 +357,9 @@
         break;
     }
 
-    updateDropdown(agjCalendar, showEndDate);
+    updateDropdown(agjCalendar, activateEnd);
 
-    var monthToDraw = getActiveDate(agjCalendar, showEndDate);
+    var monthToDraw = getActiveDate(agjCalendar, activateEnd);
     if (monthToDraw === -1) {
       var startDate = getActiveDate(agjCalendar, false);
       if (startDate !== -1) {
@@ -374,7 +374,7 @@
           agjCalendar['minimumDate'].getMonth(),
           agjCalendar['minimumDate'].getDate()
         );
-        if (showEndDate) {
+        if (activateEnd) {
           monthToDraw.setFullYear(
             monthToDraw.getFullYear(),
             monthToDraw.getMonth(),
@@ -385,7 +385,7 @@
     }
     redrawCalendars(monthToDraw);
 
-    positionCalendar(agjCalendar, showEndDate);
+    positionCalendar(agjCalendar, activateEnd);
     $('body').addClass('agjCalendar-active');
   };
 
@@ -433,8 +433,8 @@
           endDate !== -1 &&
           (endDate < endDateMinimum || endDate > endDateMaximum) &&
           (
-            agjCalendar['autoSetEndDate'] == 'always' ||
-            agjCalendar['autoSetEndDate'] == 'dates'
+            agjCalendar['autoSetEndDate'] === 'always' ||
+            agjCalendar['autoSetEndDate'] === 'dates'
           )
         ) {
           // endDate is a date and is either earlier than the minimum or later
@@ -443,8 +443,8 @@
         } else if (
           endDate === -1 &&
           (
-            agjCalendar['autoSetEndDate'] == 'always' ||
-            agjCalendar['autoSetEndDate'] == 'blanks'
+            agjCalendar['autoSetEndDate'] === 'always' ||
+            agjCalendar['autoSetEndDate'] === 'blanks'
           )
         ) {
           // endDate is a blank
@@ -479,16 +479,15 @@
   /**
    * The checkIfActive() function will check if a specific integration is
    * active.
-   * @param {number} agjCalendarPosition - The position of the integration.
+   * @param {number} position - The position of the integration.
    * @param {boolean} isEnd - Check if the end date is active.
    * @returns {boolean} - Returns true if the integration whose position was
    * passed is active or false if not.
    */
-  var checkIfActive = function(agjCalendarPosition, isEnd) {
+  var checkIfActive = function(position, isEnd) {
     if ($.agjCalendar.isActive()) {
       var calendarElement = $('#agjCalendar');
-      var activeAgjCalendar = calendarElement.attr('data-active');
-      if (activeAgjCalendar == agjCalendarPosition) {
+      if (parseInt(calendarElement.attr('data-active'), 10) === position) {
         var activeAgjCalendarIsEnd =
           calendarElement.attr('data-active-is-end') === true ||
           calendarElement.attr('data-active-is-end') === 'true';
@@ -571,12 +570,12 @@
       '</div>'
     ).find('#agjCalendar');
 
-    $('#agjCalendar-hide').on('click', function() {
+    calendarElement.find('#agjCalendar-hide').on('click', function() {
       $.agjCalendar.deactivate();
       return false;
     });
 
-    $('#agjCalendar-dropdown').on('change', function() {
+    calendarElement.find('#agjCalendar-dropdown').on('change', function() {
       if (regexPatterns['month'].test($(this).val())) {
         var firstDayOfTheMonth = new Date(
           $(this).val().substring(0, 4),
@@ -587,38 +586,43 @@
       }
     });
 
-    $('a.agjCalendar-previous-month, a.agjCalendar-next-month')
-      .on('click', function() {
-        if (regexPatterns['month'].test($('#agjCalendar-dropdown').val())) {
-          var firstDayOfTheMonth = new Date(
-            $('#agjCalendar-dropdown').val().substring(0, 4),
-            parseInt($('#agjCalendar-dropdown').val().substring(5, 7), 10) - 1,
-            1
+    calendarElement.find(
+      'a.agjCalendar-previous-month, a.agjCalendar-next-month'
+    ).on('click', function() {
+      if (regexPatterns['month'].test($('#agjCalendar-dropdown').val())) {
+        var firstDayOfTheMonth = new Date(
+          $('#agjCalendar-dropdown').val().substring(0, 4),
+          parseInt($('#agjCalendar-dropdown').val().substring(5, 7), 10) - 1,
+          1
+        );
+
+        if ($(this).hasClass('agjCalendar-previous-month')) {
+          firstDayOfTheMonth.setFullYear(
+            firstDayOfTheMonth.getFullYear(),
+            firstDayOfTheMonth.getMonth() - 1,
+            firstDayOfTheMonth.getDate()
           );
-
-          if ($(this).hasClass('agjCalendar-previous-month')) {
-            firstDayOfTheMonth.setFullYear(
-              firstDayOfTheMonth.getFullYear(),
-              firstDayOfTheMonth.getMonth() - 1,
-              firstDayOfTheMonth.getDate()
-            );
-          } else if ($(this).hasClass('agjCalendar-next-month')) {
-            firstDayOfTheMonth.setFullYear(
-              firstDayOfTheMonth.getFullYear(),
-              firstDayOfTheMonth.getMonth() + 1,
-              firstDayOfTheMonth.getDate()
-            );
-          }
-
-          var newDropdownValue = dateToString(firstDayOfTheMonth, 'YYYY-MM');
-          if ($(
-            '#agjCalendar-dropdown option[value=' + newDropdownValue + ']'
-          ).length > 0) {
-            $('#agjCalendar-dropdown').val(newDropdownValue).trigger('change');
-          }
+        } else if ($(this).hasClass('agjCalendar-next-month')) {
+          firstDayOfTheMonth.setFullYear(
+            firstDayOfTheMonth.getFullYear(),
+            firstDayOfTheMonth.getMonth() + 1,
+            firstDayOfTheMonth.getDate()
+          );
         }
-        return false;
-      });
+
+        var newDropdownValue = dateToString(firstDayOfTheMonth, 'YYYY-MM');
+        if (
+          calendarElement.find(
+            '#agjCalendar-dropdown option[value=' + newDropdownValue + ']'
+          ).length > 0
+        ) {
+          calendarElement.find('#agjCalendar-dropdown')
+            .val(newDropdownValue)
+            .trigger('change');
+        }
+      }
+      return false;
+    });
 
     /**
      * The windowSizeChanged() function will handle events where the window
@@ -653,7 +657,7 @@
 
         if ($.agjCalendar.isActive()) {
           var targetIsAgjCalendarOrChild =
-            $(event.target).attr('id') == 'agjCalendar' ||
+            $(event.target).attr('id') === 'agjCalendar' ||
             $(event.target).parents('#agjCalendar').length > 0;
 
           var targetIsActiveInputOrChild =
@@ -700,7 +704,7 @@
    * The dateToString() function will format a given date with a given format
    * in a string.
    * @param {Date} date - The date to format into a string.
-   * @param {number} dateFormat - The format to use to format the date.
+   * @param {string} dateFormat - The date format to return the string in.
    * @param {string} language - The language to use.
    * @returns {string} - The date formatted as a string.
    */
@@ -742,7 +746,7 @@
           dateFormat.substring(
             processPosition,
             processPosition + dateFormatCheck.length
-          ) == dateFormatCheck
+          ) === dateFormatCheck
         ) {
           processedString += callbackFunction(date);
           processPosition += dateFormatCheck.length;
@@ -785,7 +789,7 @@
 
   /**
    * The generateRandomInteger() function will generate a random integer
-   * between two integers.
+   * between two passed integers.
    * @param {number} minimum - The bottom of the random range.
    * @param {number} maximum - The top of the random range.
    * @returns {number} - Returns a random integer between the passed integers.
@@ -797,22 +801,22 @@
   /**
    * The getActiveDate() function will get the active date of an integration.
    * @param {object} agjCalendar - The integration to get the active date of.
-   * @param {boolean} getEndDate - Whether or not to get the active end date.
+   * @param {boolean} getEnd - Whether or not to get the active end date.
    * @returns {void}
    */
-  var getActiveDate = function(agjCalendar, getEndDate) {
-    if (getEndDate !== true) {
-      getEndDate = false;
+  var getActiveDate = function(agjCalendar, getEnd) {
+    if (getEnd !== true) {
+      getEnd = false;
     }
 
     var activeDate = -1;
 
-    if (!getEndDate || agjCalendar['allowRange']) {
+    if (!getEnd || agjCalendar['allowRange']) {
       switch (agjCalendar['inputType']) {
         case 'text':
           activeDate = stringToDate(
             $(agjCalendar[
-              getEndDate ? 'endDateSelector' : 'dateSelector'
+              getEnd ? 'endDateSelector' : 'dateSelector'
             ]).val(),
             agjCalendar['dateFormat'],
             agjCalendar['language']
@@ -822,11 +826,11 @@
         case 'dropdown':
           var startDateString;
           startDateString = $(
-            agjCalendar[getEndDate ? 'endMonthSelector' : 'monthSelector']
+            agjCalendar[getEnd ? 'endMonthSelector' : 'monthSelector']
           ).val();
           startDateString += '-';
           startDateString += $(
-            agjCalendar[getEndDate ? 'endDaySelector' : 'daySelector']
+            agjCalendar[getEnd ? 'endDaySelector' : 'daySelector']
           ).val();
 
           activeDate = stringToDate(
@@ -870,7 +874,7 @@
    * @returns {number} - The pixel count for the CSS value.
    */
   var getCssValueInPixels = function(cssValue) {
-    if (cssValue.substring(cssValue.length - 2).toLowerCase() == 'px') {
+    if (cssValue.substring(cssValue.length - 2).toLowerCase() === 'px') {
       cssValue = cssValue.substring(0, cssValue.length - 2);
     }
     return isNaN(cssValue) ? 0 : parseInt(cssValue, 10);
@@ -879,35 +883,38 @@
   /**
    * The getDaysInMonth() function will return the number of days in a given
    * month.
-   * @param {number} year - The year to base the calculation on.
    * @param {number} month - The month  to base the calculation on.
+   * @param {number} year - The year to base the calculation on.
    * @returns {number} - The number of days in the given month or -1 if the
    * month is invalid.
    */
-  var getDaysInMonth = function(year, month) {
+  var getDaysInMonth = function(month, year) {
     if (!isNaN(month)) {
       month = parseInt(month, 10);
     }
 
     switch (month) {
-      case 1:
-      case 3:
-      case 5:
-      case 7:
-      case 8:
-      case 10:
-      case 12:
+      case 0: // January
+      case 2: // March
+      case 4: // May
+      case 6: // July
+      case 7: // August
+      case 9: // October
+      case 11: // December
         return 31;
 
-      case 4:
-      case 6:
-      case 9:
-      case 11:
+      case 3: // April
+      case 5: // June
+      case 8: // September
+      case 10: // November
         return 30;
 
-      case 2:
+      case 1: // February
         year = parseInt(year, 10);
-        return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0 ? 29 : 28;
+        var isLeapYear =
+          (year % 4 === 0 && year % 100 !== 0) ||
+          year % 400 === 0;
+        return isLeapYear ? 29 : 28;
     }
 
     return -1;
@@ -1007,7 +1014,7 @@
         function(translatedMonthName, monthNumber) {
           if (
             returnValue === -1 &&
-            translatedMonthName.toLowerCase() == monthName.toLowerCase()
+            translatedMonthName.toLowerCase() === monthName.toLowerCase()
           ) {
             returnValue = monthNumber;
             return false;
@@ -1015,7 +1022,7 @@
         }
       );
       if (returnValue !== -1) {
-        break;
+        return returnValue;
       }
     }
 
@@ -1109,7 +1116,7 @@
               agjCalendar[useEnd ? 'endExpanderSelector' : 'expanderSelector']
             );
 
-            if (calendarElement.length == 1 && dateElement.length == 1) {
+            if (calendarElement.length === 1 && dateElement.length === 1) {
               var expanderBottom = 0;
               if (expanderElement.length > 0) {
                 expanderBottom = expanderElement.offset().top;
@@ -1157,9 +1164,9 @@
             );
 
             if (
-              calendarElement.length == 1 &&
-              monthElement.length == 1 &&
-              dayElement.length == 1
+              calendarElement.length === 1 &&
+              monthElement.length === 1 &&
+              dayElement.length === 1
             ) {
               var expanderBottom = 0;
               if (expanderElement.length > 0) {
@@ -1203,12 +1210,14 @@
         break;
 
       case 'modal':
+        calendarElement.removeClass('agjCalendar-full');
+
         var fixedLeft = $(window).width() / 2;
         fixedLeft -= getTrueWidth(calendarElement) / 2;
         var fixedTop = $(window).height() / 2;
         fixedTop -= getTrueHeight(calendarElement) / 2;
 
-        calendarElement.removeClass('agjCalendar-full').css({
+        calendarElement.css({
           left:     fixedLeft,
           position: 'fixed',
           top:      fixedTop
@@ -1241,7 +1250,7 @@
    * @returns {void}
    */
   var redrawCalendars = function(drawMonth) {
-    if (drawMonth.getDate() != 1) {
+    if (drawMonth.getDate() !== 1) {
       drawMonth.setFullYear(drawMonth.getFullYear(), drawMonth.getMonth(), 1);
     }
     drawMonth.setHours(0, 0, 0, 0);
@@ -1374,7 +1383,7 @@
         maximumDate.setHours(23, 59, 59, 999);
 
         for (day = 1; day <= 42 - getDay; day++) {
-          if (currentDay % 7 == 0) {
+          if (currentDay % 7 === 0) {
             if (calendarMarkup.length > 0) {
               calendarMarkup += '</div>';
             }
@@ -1386,8 +1395,8 @@
           }
 
           var daysInMonth = getDaysInMonth(
-            drawMonth.getFullYear(),
-            drawMonth.getMonth() + 1
+            drawMonth.getMonth(),
+            drawMonth.getFullYear()
           );
           if (agjCalendar['startWeekOnMonday']) {
             daysInMonth++;
@@ -1426,18 +1435,18 @@
               classMarkup += ' agjCalendar-selectable';
             }
             if (
-              drawDate.getFullYear() == new Date().getFullYear() &&
-              drawDate.getMonth() == new Date().getMonth() &&
-              drawDate.getDate() == new Date().getDate()
+              drawDate.getFullYear() === new Date().getFullYear() &&
+              drawDate.getMonth() === new Date().getMonth() &&
+              drawDate.getDate() === new Date().getDate()
             ) {
               classMarkup += ' agjCalendar-today';
             }
             var matchesStartDate =
               currentStartDate !== -1 &&
               (
-                drawDate.getFullYear() == currentStartDate.getFullYear() &&
-                drawDate.getMonth() == currentStartDate.getMonth() &&
-                drawDate.getDate() == currentStartDate.getDate()
+                drawDate.getFullYear() === currentStartDate.getFullYear() &&
+                drawDate.getMonth() === currentStartDate.getMonth() &&
+                drawDate.getDate() === currentStartDate.getDate()
               );
             if (matchesStartDate) {
               if (!agjCalendarIsEnd) {
@@ -1449,9 +1458,9 @@
             var matchesEndDate =
               currentEndDate !== -1 &&
               (
-                drawDate.getFullYear() == currentEndDate.getFullYear() &&
-                drawDate.getMonth() == currentEndDate.getMonth() &&
-                drawDate.getDate() == currentEndDate.getDate()
+                drawDate.getFullYear() === currentEndDate.getFullYear() &&
+                drawDate.getMonth() === currentEndDate.getMonth() &&
+                drawDate.getDate() === currentEndDate.getDate()
               );
             if (matchesEndDate) {
               if (agjCalendarIsEnd) {
@@ -1463,7 +1472,7 @@
             if (
               currentStartDate !== -1 &&
               currentEndDate !== -1 &&
-              currentStartDate != currentEndDate
+              currentStartDate !== currentEndDate
             ) {
               if (
                 (
@@ -1534,9 +1543,12 @@
         $(calendarSelector + ' div.agjCalendar-week').remove();
         $(calendarSelector).append(calendarMarkup);
 
-        if ($(
-          calendarSelector + ' div.agjCalendar-week-five div.agjCalendar-blank'
-        ).length == 7) {
+        if (
+          $(
+            calendarSelector +
+            ' div.agjCalendar-week-five div.agjCalendar-blank'
+          ).length === 7
+        ) {
           $(calendarSelector)
             .removeClass('agjCalendar-five-weeks agjCalendar-six-weeks')
             .addClass('agjCalendar-four-weeks');
@@ -1544,7 +1556,7 @@
           $(
             calendarSelector +
             ' div.agjCalendar-week-six div.agjCalendar-blank'
-          ).length == 7
+          ).length === 7
         ) {
           $(calendarSelector)
             .removeClass('agjCalendar-four-weeks agjCalendar-six-weeks')
@@ -1589,7 +1601,7 @@
               'YYYY-MM',
               agjCalendar['language']
             ) + ']'
-          ).length == 0
+          ).length === 0
         ) {
           $('a.agjCalendar-next-month').fadeTo(1, 0.33);
         } else {
@@ -1608,7 +1620,7 @@
               'YYYY-MM',
               agjCalendar['language']
             ) + ']'
-          ).length == 0
+          ).length === 0
         ) {
           $('a.agjCalendar-previous-month').fadeTo(1, 0.33);
         } else {
@@ -1622,18 +1634,18 @@
    * The setDate() function will set a date on an integration’s inputs.
    * @param {object} agjCalendar - The integration to set the date on.
    * @param {Date} dateToSet - The date to set on the integration’s inputs.
-   * @param {boolean} updateEndDate - Whether or not to update the end date.
+   * @param {boolean} setEnd - Whether or not to set the end date.
    * @returns {void}
    */
-  var setDate = function(agjCalendar, dateToSet, updateEndDate) {
-    if (updateEndDate === undefined) {
-      updateEndDate = false;
+  var setDate = function(agjCalendar, dateToSet, setEnd) {
+    if (setEnd === undefined) {
+      setEnd = false;
     }
 
     switch (agjCalendar['inputType']) {
       case 'text':
         var dateElement = $(
-          agjCalendar[updateEndDate ? 'endDateSelector' : 'dateSelector']
+          agjCalendar[setEnd ? 'endDateSelector' : 'dateSelector']
         );
         var newValue = '';
         if (dateToSet === 'blank') {
@@ -1715,7 +1727,7 @@
         }
 
         var monthElement = $(
-          agjCalendar[updateEndDate ? 'endMonthSelector' : 'monthSelector']
+          agjCalendar[setEnd ? 'endMonthSelector' : 'monthSelector']
         );
         var monthValue;
         if (dateToSet === 'blank') {
@@ -1734,18 +1746,17 @@
           (
             dateToSet === 'blank' ||
             parseInt(dayValue, 10) <= getDaysInMonth(
-              dateToSet.getFullYear(),
-              dateToSet.getMonth() + 1
+              dateToSet.getMonth(),
+              dateToSet.getFullYear()
             )
           )
         ) {
           monthElement.val(monthValue).trigger('change');
-          updateDayElement(agjCalendar, updateEndDate);
+          updateDayElement(agjCalendar, setEnd);
 
-          var dayElement = $(
-            agjCalendar[updateEndDate ? 'endDaySelector' : 'daySelector']
-          );
-          dayElement.val(dayValue).trigger('change');
+          $(agjCalendar[setEnd ? 'endDaySelector' : 'daySelector'])
+            .val(dayValue)
+            .trigger('change');
         }
         break;
     }
@@ -1939,7 +1950,7 @@
         );
         while (
           drawDate < maximumDate &&
-          drawDate.getMonth() == monthElementMonth
+          drawDate.getMonth() === monthElementMonth
         ) {
           if (drawDate >= minimumDate) {
             var optionMarkup = '<option';
@@ -1950,7 +1961,7 @@
             ) + '"';
             if (
               selectedDate !== -1 &&
-              drawDate.getDate() == selectedDate.getDate()
+              drawDate.getDate() === selectedDate.getDate()
             ) {
               optionMarkup += ' selected="selected"';
             }
@@ -1977,16 +1988,11 @@
   /**
    * The updateDropdown() function will update the date picker dropdown.
    * @param {object} agjCalendar - The integration to use to update.
-   * @param {boolean} updateForEndDate - Whether or not to update the end date.
+   * @param {boolean} updateForEnd - Whether or not to update for the end date.
    */
-  var updateDropdown = function(agjCalendar, updateForEndDate) {
-    if (updateForEndDate === undefined) {
-      updateForEndDate = false;
-    }
-
-    var currentStartDate = -1;
-    if (updateForEndDate) {
-      currentStartDate = getActiveDate(agjCalendar);
+  var updateDropdown = function(agjCalendar, updateForEnd) {
+    if (updateForEnd === undefined) {
+      updateForEnd = false;
     }
 
     var minimumDate = new Date(
@@ -1994,13 +2000,6 @@
       agjCalendar['minimumDate'].getMonth(),
       agjCalendar['minimumDate'].getDate()
     );
-    if (updateForEndDate && currentStartDate !== -1) {
-      minimumDate.setFullYear(
-        currentStartDate.getFullYear(),
-        currentStartDate.getMonth(),
-        currentStartDate.getDate() + agjCalendar['minimumRange']
-      );
-    }
     minimumDate.setHours(0, 0, 0, 0);
 
     var maximumDate = new Date(
@@ -2008,21 +2007,31 @@
       agjCalendar['maximumDate'].getMonth(),
       agjCalendar['maximumDate'].getDate()
     );
-    if (updateForEndDate && currentStartDate !== -1) {
-      var endOfMaximumRange = new Date(
-        currentStartDate.getFullYear(),
-        currentStartDate.getMonth(),
-        currentStartDate.getDate() + agjCalendar['maximumRange']
-      );
-      if (endOfMaximumRange < agjCalendar['maximumRange']) {
-        maximumDate.setFullYear(
-          endOfMaximumRange.getFullYear(),
-          endOfMaximumRange.getMonth(),
-          endOfMaximumRange.getDate()
+    maximumDate.setHours(23, 59, 59, 999);
+
+    if (updateForEnd) {
+      var currentStartDate = getActiveDate(agjCalendar);
+      if (currentStartDate !== -1) {
+        minimumDate.setFullYear(
+          currentStartDate.getFullYear(),
+          currentStartDate.getMonth(),
+          currentStartDate.getDate() + agjCalendar['minimumRange']
         );
+
+        var endOfMaximumRange = new Date(
+          currentStartDate.getFullYear(),
+          currentStartDate.getMonth(),
+          currentStartDate.getDate() + agjCalendar['maximumRange']
+        );
+        if (endOfMaximumRange < agjCalendar['maximumDate']) {
+          maximumDate.setFullYear(
+            endOfMaximumRange.getFullYear(),
+            endOfMaximumRange.getMonth(),
+            endOfMaximumRange.getDate()
+          );
+        }
       }
     }
-    maximumDate.setHours(23, 59, 59, 999);
 
     var dropdownElement = $('#agjCalendar-dropdown');
     dropdownElement.find('option').remove();
@@ -2139,8 +2148,8 @@
         ) + '"';
         if (
           selectedDate !== -1 &&
-          drawDate.getFullYear() == selectedDate.getFullYear() &&
-          drawDate.getMonth() == selectedDate.getMonth()
+          drawDate.getFullYear() === selectedDate.getFullYear() &&
+          drawDate.getMonth() === selectedDate.getMonth()
         ) {
           optionMarkup += ' selected="selected"';
         }
@@ -2169,11 +2178,11 @@
    * @returns {jQuery} - Returns the element to allow for chaining.
    */
   $.fn.agjCalendar = function(options) {
-    if (typeof options != 'object') {
+    if (typeof options !== 'object') {
       options = {};
     }
 
-    if (this.prop('tagName').toLowerCase() == 'input') {
+    if (this.prop('tagName').toLowerCase() === 'input') {
       var className;
       do {
         className = 'agjCalendar-' + generateRandomInteger(100000, 999999);
@@ -2205,6 +2214,7 @@
       dayNameFormat:         'short',
       daySelector:           null,
       defaultDate:           new Date(),
+      defaultEndDate:        null,
       defaultRange:          -1,
       endDateSelector:       null,
       endDaySelector:        null,
@@ -2277,7 +2287,7 @@
 
 
     agjCalendar['inputType'] = 'text';
-    if (options['inputType'] == 'dropdown') {
+    if (options['inputType'] === 'dropdown') {
       agjCalendar['inputType'] = 'dropdown';
     }
 
@@ -2331,7 +2341,6 @@
         break;
 
       case 'blanks':
-      case 'dates':
       case 'always':
       case 'never':
         agjCalendar['autoSetEndDate'] = options['autoSetEndDate'];
@@ -2342,14 +2351,10 @@
     agjCalendar['minimumDate'] = new Date();
     agjCalendar['minimumDate'].setHours(0, 0, 0, 0);
     if (regexPatterns[4].test(options['minimumDate'])) {
-      var minimumYear = options['minimumDate'].substring(0, 4);
-      var minimumMonth = options['minimumDate'].substring(5, 7);
-      var minimumDay = options['minimumDate'].substring(8, 10);
-
       agjCalendar['minimumDate'].setFullYear(
-        minimumYear,
-        parseInt(minimumMonth, 10) - 1,
-        minimumDay
+        options['minimumDate'].substring(0, 4),
+        parseInt(options['minimumDate'].substring(5, 7), 10) - 1,
+        options['minimumDate'].substring(8, 10)
       );
     } else if (options['minimumDate'] instanceof Date) {
       agjCalendar['minimumDate'].setFullYear(
@@ -2393,12 +2398,26 @@
 
 
     agjCalendar['defaultDate'] = new Date();
-    if (regexPatterns[4].test(options['defaultDate'])) {
-      var defaultDate = new Date(
-        options['defaultDate'].substring(0, 4),
-        parseInt(options['defaultDate'].substring(5, 7), 10) - 1,
-        options['defaultDate'].substring(8, 10)
-      );
+    if (
+      regexPatterns[4].test(options['defaultDate']) ||
+      options['defaultDate'] instanceof Date
+    ) {
+      var defaultDate = new Date();
+
+      if (regexPatterns[4].test(options['defaultDate'])) {
+        defaultDate.setFullYear(
+          options['defaultDate'].substring(0, 4),
+          parseInt(options['defaultDate'].substring(5, 7), 10) - 1,
+          options['defaultDate'].substring(8, 10)
+        );
+      } else {
+        defaultDate.setFullYear(
+          options['defaultDate'].getFullYear(),
+          options['defaultDate'].getMonth(),
+          options['defaultDate'].getDate()
+        );
+      }
+
       if (
         defaultDate >= agjCalendar['minimumDate'] &&
         defaultDate <= agjCalendar['maximumDate']
@@ -2409,36 +2428,11 @@
           defaultDate.getDate()
         );
       }
-    } else if (options['defaultDate'] instanceof Date) {
-      agjCalendar['defaultDate'].setFullYear(
-        options['defaultDate'].getFullYear(),
-        options['defaultDate'].getMonth(),
-        options['defaultDate'].getDate()
-      );
     } else if (
       agjCalendar['allowBlankDates'] &&
       options['defaultDate'] === 'blank'
     ) {
       agjCalendar['defaultDate'] = 'blank';
-    }
-    if (
-      agjCalendar['defaultDate'] != 'blank' &&
-      agjCalendar['defaultDate'] < agjCalendar['minimumDate']
-    ) {
-      agjCalendar['defaultDate'].setFullYear(
-        agjCalendar['minimumDate'].getFullYear(),
-        agjCalendar['minimumDate'].getMonth(),
-        agjCalendar['minimumDate'].getDate()
-      );
-    } else if (
-      agjCalendar['defaultDate'] != 'blank' &&
-      agjCalendar['defaultDate'] > agjCalendar['maximumDate']
-    ) {
-      agjCalendar['defaultDate'].setFullYear(
-        agjCalendar['maximumDate'].getFullYear(),
-        agjCalendar['maximumDate'].getMonth(),
-        agjCalendar['maximumDate'].getDate()
-      );
     }
 
 
@@ -2510,7 +2504,8 @@
       if (
         !isNaN(options['maximumRange']) &&
         parseInt(options['maximumRange'], 10) >= 0 &&
-        parseInt(options['maximumRange'], 10) <= totalRange
+        parseInt(options['maximumRange'], 10) <= totalRange &&
+        parseInt(options['maximumRange'], 10) >= agjCalendar['minimumRange']
       ) {
         agjCalendar['maximumRange'] = options['maximumRange'];
       }
@@ -2524,6 +2519,49 @@
         ) {
           agjCalendar['defaultRange'] = defaultRange;
         }
+      }
+
+
+      agjCalendar['defaultEndDate'] = new Date(
+        agjCalendar['defaultDate'].getFullYear(),
+        agjCalendar['defaultDate'].getMonth(),
+        agjCalendar['defaultDate'].getDate() + agjCalendar['defaultRange']
+      );
+      if (
+        regexPatterns[4].test(options['defaultEndDate']) ||
+        options['defaultEndDate'] instanceof Date
+      ) {
+        var defaultEndDate = new Date();
+
+        if (regexPatterns[4].test(options['defaultEndDate'])) {
+          defaultEndDate.setFullYear(
+            options['defaultEndDate'].substring(0, 4),
+            parseInt(options['defaultEndDate'].substring(5, 7), 10) - 1,
+            options['defaultEndDate'].substring(8, 10)
+          );
+        } else {
+          defaultEndDate.setFullYear(
+            options['defaultEndDate'].getFullYear(),
+            options['defaultEndDate'].getMonth(),
+            options['defaultEndDate'].getDate()
+          );
+        }
+
+        if (
+          defaultEndDate >= agjCalendar['minimumDate'] &&
+          defaultEndDate <= agjCalendar['maximumDate']
+        ) {
+          agjCalendar['defaultEndDate'].setFullYear(
+            defaultEndDate.getFullYear(),
+            defaultEndDate.getMonth(),
+            defaultEndDate.getDate()
+          );
+        }
+      } else if (
+        agjCalendar['allowBlankDates'] &&
+        options['defaultEndDate'] === 'blank'
+      ) {
+        agjCalendar['defaultEndDate'] = 'blank';
       }
     }
 
@@ -2638,18 +2676,7 @@
                   isEnd: true
                 }, inputFocusEvent);
 
-              var endDefaultDate;
-              if (agjCalendar['defaultDate'] === 'blank') {
-                endDefaultDate = 'blank';
-              } else {
-                endDefaultDate = new Date(
-                  agjCalendar['defaultDate'].getFullYear(),
-                  agjCalendar['defaultDate'].getMonth(),
-                  agjCalendar['defaultDate'].getDate() +
-                  agjCalendar['defaultRange']
-                );
-              }
-              setDate(agjCalendar, endDefaultDate, true);
+              setDate(agjCalendar, agjCalendar['defaultEndDate'], true);
               if (originalValue.length > 0) {
                 endDateElement.val(originalValue);
               }
@@ -2795,6 +2822,7 @@
         break;
     }
 
+
     // the integration was successfully initialized, save the configuration in
     // the agjCalendars global
     agjCalendars.push(agjCalendar);
@@ -2832,7 +2860,7 @@
    * function acts solely as an alias to support backwards compatability.
    * @param {object} options - A JSON object of confiuguration options.
    * @returns {boolean} - Returns true on success or false on error.
-   * @deprecated The name changed for version 1.0.0.
+   * @deprecated The plugin’s name changed to agjCalendar for version 1.0.0.
    */
   $.ctcCalendar = function(options) {
     return $.agjCalendar(options);
