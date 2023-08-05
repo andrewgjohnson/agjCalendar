@@ -4,6 +4,9 @@ All notable changes to the [agjCalendar plugin](https://github.com/andrewgjohnso
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this plugin adheres to [Semantic Versioning](http://semver.org/).
 
+## v1.0.3 (August 5, 2023)
+ * Fixed a bug where the `defaultDate` or `defaultEndDate` option being set to `"blank"` would occasionally throw a Javascript error
+
 ## v1.0.2 (August 5, 2023)
  * Cleaned up [example 6](https://github.com/andrewgjohnson/agjCalendar/blob/master/examples/example6-existing-values.js) to better illustrate existing/original values
  * Enabled the `eqeqeq` rule in ESLint and ensured all comparisons are `===`/`!==` instead of `==`/`!=`
