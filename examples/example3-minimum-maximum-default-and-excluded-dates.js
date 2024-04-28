@@ -1,4 +1,4 @@
-// an integration to choose a date in 2000 with a blank date prefilled
+// An integration to choose a date in 2000 with a blank date prefilled
 $.agjCalendar({
   dateSelector:    '#example3-blank',
   minimumDate:     '2000-01-01',
@@ -7,7 +7,7 @@ $.agjCalendar({
   defaultDate:     'blank'
 });
 
-// an integration to choose a date in 2000 with Cinco de Mayo prefilled
+// An integration to choose a date in 2000 with Cinco de Mayo prefilled
 $.agjCalendar({
   dateSelector: '#example3-prefill',
   minimumDate:  '2000-01-01',
@@ -15,7 +15,7 @@ $.agjCalendar({
   defaultDate:  '2000-05-05'
 });
 
-// an integration using a string as well as a Date object
+// An integration using a string as well as a Date object
 $.agjCalendar({
   dateSelector:    '#example3-object',
   minimumDate:     new Date(2000, 0, 1), // you can pass a Date Object
@@ -24,7 +24,7 @@ $.agjCalendar({
   defaultDate:     'blank'
 });
 
-// an integration to choose a date in May 2000 with Tuesdays excluded
+// An integration to choose a date in May 2000 with Tuesdays excluded
 $.agjCalendar({
   dateSelector:    '#example3-exclusions',
   minimumDate:     '2000-05-01',

@@ -4,6 +4,27 @@ All notable changes to the [agjCalendar plugin](https://github.com/andrewgjohnso
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this plugin adheres to [Semantic Versioning](http://semver.org/).
 
+## v1.1.0 (April 28, 2024)
+ * The big new feature in v1.1.0 is *themes*
+   * Added the `theme` option
+   * Included eight built-in themes (`red`, `orange`, `yellow`, `green`, `cyan`, `blue`, `purple` & `pink`)
+   * Also included for support for custom themes
+   * Added the `jquery.agjCalendar.themes.css` file to house the theme stylings
+   * Added the `jquery.agjCalendar.min.no-themes.css` file to offer a smaller footprint to integrations without themes instead of `jquery.agjCalendar.min.css` which now includes theme styleings
+ * Refactored `gulpfile.js` to separate each minified file into its own function
+ * Updated `ESlint` to v19.1.1
+ * Replaced the `eslint-config-google` package with the `eslint-config-google-jsdocless` package to avoid the now deprecated `valid-jsdoc` and `require-jsdoc` rules
+ * Removed `.estlintrc.yml` and replaced with `eslint.config.js`
+ * Updated `Stylelint` to v16.4.0
+ * Removed `no-eol-whitespace` rule for `Stylelint` now that it is fully deprecated and replaced with the `stylus/no-eol-whitespace` rule from the `stylelint-stylus` package
+ * Added semi-transparent PNG’s as the default instead of GIF’s which are remaining for old IE support
+ * Added `border-radius` in CSS and an exception in `.stylelintrc.yml`
+ * Updated jQuery version from `3.7.0` to `3.7.1`
+ * Updated HTML examples to use `<!--` and `-->` XML style comments rather than `//` Javascript style comments
+ * Updated `highlight.js` on the documentation website to v11.9.0
+ * Added new one-off files to `exclude` list of `_config.yml`
+ * Various fixes for typos throughout comments and documentation
+
 ## v1.0.3 (August 5, 2023)
  * Fixed a bug where the `defaultDate` or `defaultEndDate` option being set to `"blank"` would occasionally throw a Javascript error
 

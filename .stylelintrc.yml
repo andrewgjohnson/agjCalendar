@@ -1,4 +1,9 @@
-extends: "stylelint-config-standard"
+extends: [
+  "stylelint-config-standard"
+]
+plugins: [
+  "stylelint-stylus"
+]
 rules: {
   "color-hex-length": "long",
   "declaration-block-no-redundant-longhand-properties": [
@@ -26,10 +31,11 @@ rules: {
   "media-feature-name-no-vendor-prefix": null,
   "media-feature-range-notation": "prefix",
   "no-descending-specificity": null,
-  "no-eol-whitespace": true,
+  "stylus/no-eol-whitespace": true,
   "property-no-vendor-prefix": [
     true,
     "ignoreProperties": [
+      "border-radius",
       "filter"
     ]
   ],

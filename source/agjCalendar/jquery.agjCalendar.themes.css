@@ -1,0 +1,152 @@
+/**
+ * CSS source code for the themes stylesheet of agjCalendar v1.1.0.
+ *
+ * Copyright (c) 2013-2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to
+ * deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+ * sell copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+ * @file The CSS source code for the agjCalendar jQuery plugin themes
+ * stylesheet.
+ * @copyright 2013-2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * @license MIT
+ * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
+ * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
+ * @see {@link https://agjCalendar.agjjQuery.org/themes/ Themes Documentation}
+ * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * @version 1.1.0
+ */
+
+
+/* start of agjCalendar `red` theme */
+
+#agjCalendar.agjCalendar-theme-red                                                                                                 { border-color:#cc8080 }
+div.agjCalendar-theme-red #agjCalendar-header                                                                                      { background-color:#ffe6e6;border-color:#cc8080 }
+div.agjCalendar-theme-red #agjCalendar-dropdown                                                                                    { border-color:#eebbbb }
+div.agjCalendar-theme-red #agjCalendar-body div.agjCalendar-days,div.agjCalendar-theme-red #agjCalendar-body div.agjCalendar-month { background-color:#ffe6e6;border-color:#eebbbb }
+div.agjCalendar-theme-red #agjCalendar-body div.agjCalendar-week                                                                   { border-color:#eebbbb;border-bottom-color:#ffe6e6 }
+div.agjCalendar-theme-red #agjCalendar-body div.agjCalendar-week-six                                                               { border-bottom-color:#eebbbb }
+div.agjCalendar-theme-red #agjCalendar-body div.agjCalendar-week div                                                               { border-color:#ffe6e6 }
+div.agjCalendar-theme-red #agjCalendar-body div.agjCalendar-week div.agjCalendar-blank                                             { background-color:#fff6f6 }
+div.agjCalendar-full.agjCalendar-theme-red #agjCalendar-body div.agjCalendar-month a span                                          { border-color:transparent #cc8080 }
+
+/* end of agjCalendar `red` theme */
+
+
+/* start of agjCalendar `orange` theme */
+
+#agjCalendar.agjCalendar-theme-orange                                                                                                    { border-color:#cca680 }
+div.agjCalendar-theme-orange #agjCalendar-header                                                                                         { background-color:#fff3e6;border-color:#cca680 }
+div.agjCalendar-theme-orange #agjCalendar-dropdown                                                                                       { border-color:#eed5bb }
+div.agjCalendar-theme-orange #agjCalendar-body div.agjCalendar-days,div.agjCalendar-theme-orange #agjCalendar-body div.agjCalendar-month { background-color:#fff3e6;border-color:#eed5bb }
+div.agjCalendar-theme-orange #agjCalendar-body div.agjCalendar-week                                                                      { border-color:#eed5bb;border-bottom-color:#fff3e6 }
+div.agjCalendar-theme-orange #agjCalendar-body div.agjCalendar-week-six                                                                  { border-bottom-color:#eed5bb }
+div.agjCalendar-theme-orange #agjCalendar-body div.agjCalendar-week div                                                                  { border-color:#fff3e6 }
+div.agjCalendar-theme-orange #agjCalendar-body div.agjCalendar-week div.agjCalendar-blank                                                { background-color:#fffaf6 }
+div.agjCalendar-full.agjCalendar-theme-orange #agjCalendar-body div.agjCalendar-month a span                                             { border-color:transparent #cca680 }
+
+/* end of agjCalendar `orange` theme */
+
+
+/* start of agjCalendar `yellow` theme */
+
+#agjCalendar.agjCalendar-theme-yellow                                                                                                    { border-color:#cccc80 }
+div.agjCalendar-theme-yellow #agjCalendar-header                                                                                         { background-color:#ffffe6;border-color:#cccc80 }
+div.agjCalendar-theme-yellow #agjCalendar-dropdown                                                                                       { border-color:#eeeebb }
+div.agjCalendar-theme-yellow #agjCalendar-body div.agjCalendar-days,div.agjCalendar-theme-yellow #agjCalendar-body div.agjCalendar-month { background-color:#ffffe6;border-color:#eeeebb }
+div.agjCalendar-theme-yellow #agjCalendar-body div.agjCalendar-week                                                                      { border-color:#eeeebb;border-bottom-color:#ffffe6 }
+div.agjCalendar-theme-yellow #agjCalendar-body div.agjCalendar-week-six                                                                  { border-bottom-color:#eeeebb }
+div.agjCalendar-theme-yellow #agjCalendar-body div.agjCalendar-week div                                                                  { border-color:#ffffe6 }
+div.agjCalendar-theme-yellow #agjCalendar-body div.agjCalendar-week div.agjCalendar-blank                                                { background-color:#fffff6 }
+div.agjCalendar-full.agjCalendar-theme-yellow #agjCalendar-body div.agjCalendar-month a span                                             { border-color:transparent #cccc80 }
+
+/* end of agjCalendar `yellow` theme */
+
+
+/* start of agjCalendar `green` theme */
+
+#agjCalendar.agjCalendar-theme-green                                                                                                   { border-color:#80cc80 }
+div.agjCalendar-theme-green #agjCalendar-header                                                                                        { background-color:#e6ffe6;border-color:#80cc80 }
+div.agjCalendar-theme-green #agjCalendar-dropdown                                                                                      { border-color:#bbeebb }
+div.agjCalendar-theme-green #agjCalendar-body div.agjCalendar-days,div.agjCalendar-theme-green #agjCalendar-body div.agjCalendar-month { background-color:#e6ffe6;border-color:#bbeebb }
+div.agjCalendar-theme-green #agjCalendar-body div.agjCalendar-week                                                                     { border-color:#bbeebb;border-bottom-color:#e6ffe6 }
+div.agjCalendar-theme-green #agjCalendar-body div.agjCalendar-week-six                                                                 { border-bottom-color:#bbeebb }
+div.agjCalendar-theme-green #agjCalendar-body div.agjCalendar-week div                                                                 { border-color:#e6ffe6 }
+div.agjCalendar-theme-green #agjCalendar-body div.agjCalendar-week div.agjCalendar-blank                                               { background-color:#f6fff6 }
+div.agjCalendar-full.agjCalendar-theme-green #agjCalendar-body div.agjCalendar-month a span                                            { border-color:transparent #80cc80 }
+
+/* end of agjCalendar `green` theme */
+
+
+/* start of agjCalendar `cyan` theme */
+
+#agjCalendar.agjCalendar-theme-cyan                                                                                                  { border-color:#80cccc }
+div.agjCalendar-theme-cyan #agjCalendar-header                                                                                       { background-color:#e6ffff;border-color:#80cccc }
+div.agjCalendar-theme-cyan #agjCalendar-dropdown                                                                                     { border-color:#bbeeee }
+div.agjCalendar-theme-cyan #agjCalendar-body div.agjCalendar-days,div.agjCalendar-theme-cyan #agjCalendar-body div.agjCalendar-month { background-color:#e6ffff;border-color:#bbeeee }
+div.agjCalendar-theme-cyan #agjCalendar-body div.agjCalendar-week                                                                    { border-color:#bbeeee;border-bottom-color:#e6ffff }
+div.agjCalendar-theme-cyan #agjCalendar-body div.agjCalendar-week-six                                                                { border-bottom-color:#bbeeee }
+div.agjCalendar-theme-cyan #agjCalendar-body div.agjCalendar-week div                                                                { border-color:#e6ffff }
+div.agjCalendar-theme-cyan #agjCalendar-body div.agjCalendar-week div.agjCalendar-blank                                              { background-color:#f6ffff }
+div.agjCalendar-full.agjCalendar-theme-cyan #agjCalendar-body div.agjCalendar-month a span                                           { border-color:transparent #80cccc }
+
+/* end of agjCalendar `cyan` theme */
+
+
+/* start of agjCalendar `blue` theme */
+
+#agjCalendar.agjCalendar-theme-blue                                                                                                                                                             { border-color:#8080cc }
+div.agjCalendar-theme-blue #agjCalendar-header                                                                                                                                                  { background-color:#e6e6ff;border-color:#8080cc }
+div.agjCalendar-theme-blue #agjCalendar-dropdown                                                                                                                                                { border-color:#bbbbee }
+div.agjCalendar-theme-blue #agjCalendar-body div.agjCalendar-days,div.agjCalendar-theme-blue #agjCalendar-body div.agjCalendar-month                                                            { background-color:#e6e6ff;border-color:#bbbbee }
+div.agjCalendar-theme-blue #agjCalendar-body div.agjCalendar-week                                                                                                                               { border-color:#bbbbee;border-bottom-color:#e6e6ff }
+div.agjCalendar-theme-blue #agjCalendar-body div.agjCalendar-week-six                                                                                                                           { border-bottom-color:#bbbbee }
+div.agjCalendar-theme-blue #agjCalendar-body div.agjCalendar-week div                                                                                                                           { border-color:#e6e6ff }
+div.agjCalendar-theme-blue #agjCalendar-body div.agjCalendar-week div.agjCalendar-blank                                                                                                         { background-color:#f6f6ff }
+div.agjCalendar-full.agjCalendar-theme-blue #agjCalendar-body div.agjCalendar-month a span                                                                                                      { border-color:transparent #8080cc }
+div.agjCalendar-theme-blue #agjCalendar-body div.agjCalendar-week div.agjCalendar-in-range,div.agjCalendar-theme-blue #agjCalendar-body div.agjCalendar-week div.agjCalendar-in-range a         { background-color:#ddffdd }
+div.agjCalendar-theme-blue #agjCalendar-body div.agjCalendar-week div.agjCalendar-other-active,div.agjCalendar-theme-blue #agjCalendar-body div.agjCalendar-week div.agjCalendar-other-active a { background-color:#bbffbb }
+div.agjCalendar-theme-blue #agjCalendar-body div.agjCalendar-week div.agjCalendar-active,div.agjCalendar-theme-blue #agjCalendar-body div.agjCalendar-week div.agjCalendar-active a             { background-color:#99ff99 }
+
+/* end of agjCalendar `blue` theme */
+
+
+/* start of agjCalendar `purple` theme */
+
+#agjCalendar.agjCalendar-theme-purple                                                                                                    { border-color:#cc99cc }
+div.agjCalendar-theme-purple #agjCalendar-header                                                                                         { background-color:#ffe6ff;border-color:#cc99cc }
+div.agjCalendar-theme-purple #agjCalendar-dropdown                                                                                       { border-color:#ffe6ff }
+div.agjCalendar-theme-purple #agjCalendar-body div.agjCalendar-days,div.agjCalendar-theme-purple #agjCalendar-body div.agjCalendar-month { background-color:#ffeeff;border-color:#eeccee }
+div.agjCalendar-theme-purple #agjCalendar-body div.agjCalendar-week                                                                      { border-color:#eeccee;border-bottom-color:#ffe6ff }
+div.agjCalendar-theme-purple #agjCalendar-body div.agjCalendar-week-six                                                                  { border-bottom-color:#eeccee }
+div.agjCalendar-theme-purple #agjCalendar-body div.agjCalendar-week div                                                                  { border-color:#ffe6ff }
+div.agjCalendar-theme-purple #agjCalendar-body div.agjCalendar-week div.agjCalendar-blank                                                { background-color:#fff9ff }
+div.agjCalendar-full.agjCalendar-theme-purple #agjCalendar-body div.agjCalendar-month a span                                             { border-color:transparent #cc99cc }
+
+/* end of agjCalendar `purple` theme */
+
+
+/* start of agjCalendar `pink` theme */
+
+#agjCalendar.agjCalendar-theme-pink                                                                                                  { border-color:#cc99b3 }
+div.agjCalendar-theme-pink #agjCalendar-header                                                                                       { background-color:#ffeef7;border-color:#cc99b3 }
+div.agjCalendar-theme-pink #agjCalendar-dropdown                                                                                     { border-color:#eeccdd }
+div.agjCalendar-theme-pink #agjCalendar-body div.agjCalendar-days,div.agjCalendar-theme-pink #agjCalendar-body div.agjCalendar-month { background-color:#ffeef7;border-color:#eeccdd }
+div.agjCalendar-theme-pink #agjCalendar-body div.agjCalendar-week                                                                    { border-color:#eeccdd;border-bottom-color:#ffeef7 }
+div.agjCalendar-theme-pink #agjCalendar-body div.agjCalendar-week-six                                                                { border-bottom-color:#eeccdd }
+div.agjCalendar-theme-pink #agjCalendar-body div.agjCalendar-week div                                                                { border-color:#ffeef7 }
+div.agjCalendar-theme-pink #agjCalendar-body div.agjCalendar-week div.agjCalendar-blank                                              { background-color:#fff9fc }
+div.agjCalendar-full.agjCalendar-theme-pink #agjCalendar-body div.agjCalendar-month a span                                           { border-color:transparent #cc99b3 }
+
+/* end of agjCalendar `orange` theme */

@@ -1,4 +1,4 @@
-// integrations with various languages
+// Integrations with various languages
 $.agjCalendar({
   dateSelector: '#example4-english',
   dateFormat:   2,
@@ -10,7 +10,7 @@ $.agjCalendar({
   language:     'fr' // Français (French)
 });
 
-// integrations with a single, double and triple calendars
+// Integrations with a single, double and triple calendars
 $.agjCalendar({
   dateSelector:  '#example4-single',
   calendarCount: 1
@@ -24,7 +24,7 @@ $.agjCalendar({
   calendarCount: 3
 });
 
-// integrations with weeks starting on Sunday and Monday
+// Integrations with weeks starting on Sunday and Monday
 $.agjCalendar({
   dateSelector:      '#example4-start-on-sunday',
   startWeekOnMonday: false
@@ -34,7 +34,7 @@ $.agjCalendar({
   startWeekOnMonday: true
 });
 
-// integrations with the four date formats
+// Integrations with the five date formats
 $.agjCalendar({
   dateSelector: '#example4-date-format-1',
   dateFormat:   1
@@ -56,7 +56,7 @@ $.agjCalendar({
   dateFormat:   5
 });
 
-// integrations with short and medium day names
+// Integrations with short and medium day names
 $.agjCalendar({
   dateSelector:  '#example4-short-day-names',
   dayNameFormat: 'short'
@@ -66,19 +66,21 @@ $.agjCalendar({
   dayNameFormat: 'medium'
 });
 
-// integrations with the three calendar displays
+// Integrations with the three calendar displays
 $.agjCalendar({
-  dateSelector:     '#example4-inline',
-  expanderSelector: '#example4-inline-icon',
-  calendarDisplay:  'inline'
+  dateSelector:    '#example4-inline',
+  calendarDisplay: 'inline'
 });
 $.agjCalendar({
-  dateSelector:     '#example4-modal',
-  expanderSelector: '#example4-modal-icon',
-  calendarDisplay:  'modal'
+  dateSelector:    '#example4-modal',
+  calendarDisplay: 'modal'
 });
 $.agjCalendar({
-  dateSelector:     '#example4-full',
-  expanderSelector: '#example4-full-icon',
-  calendarDisplay:  'full'
+  dateSelector:    '#example4-full',
+  calendarDisplay: 'full'
+});
+$.agjCalendar({
+  dateSelector:    '#example4-dynamic',
+  // Set calendarDisplay as 'full' on mobile phones and tablets but 'inline' on all other devices
+  calendarDisplay: /android|blackberry|fennec|ie|ipad|iphone|ipod|mobile/.test(navigator.userAgent.toLowerCase()) ? 'full' : 'inline'
 });
