@@ -18,6 +18,7 @@ exclude:      [
                CHANGELOG.md,
                CNAME,
                documentation/README.md,
+               eslint.config.js,
                gulpfile.js,
                LICENSE,
                node_modules,
