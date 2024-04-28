@@ -12,15 +12,20 @@ exclude:      [
                .github/*.md,
                .github/*.yml,
                .github/CODEOWNERS,
+               bower.json,
+               bower_components,
+               bower_components/*.md,
                CHANGELOG.md,
                CNAME,
                documentation/README.md,
+               eslint.config.js,
+               gulpfile.js,
                LICENSE,
-               bower_components,
-               bower_components/*.md,
                node_modules,
                node_modules/*.md,
                package-lock.json,
                package.json,
-               README.md
+               README.md,
+               yarn-error.log,
+               yarn.lock               
               ]

@@ -1,7 +1,7 @@
 /**
- * Javascript source code of agjCalendar v1.0.3.
+ * Javascript source code of agjCalendar v1.1.0.
  *
- * Copyright (c) 2013-2023 Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * Copyright (c) 2013-2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
  * deal in the Software without restriction, including without limitation the
@@ -18,46 +18,49 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  * @file The Javascript source code for the agjCalendar jQuery plugin.
- * @copyright 2013-2023 Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * @copyright 2013-2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * @license MIT
  * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
  * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
  * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
- * @version 1.0.3
+ * @version 1.1.0
  */
 
 /* global jQuery */
 
 (function($) {
   var agjCalendars = [];
+
   var lastClickWasOnAgjCalendar = false;
   var lastBodyMarginRight = '';
   var lastBodyOverflow = '';
   var lastScrollLeft = 0;
   var lastScrollTop = 0;
+
   var regexPatterns = {
-    // dateFormat 1 = MM/DD/YYYY, e.g. 01/02/2003
+    // date format 1 = MM/DD/YYYY, e.g. 01/02/2003
     '1': new RegExp(/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/),
 
-    // dateFormat 2 = MMM D, YYYY, e.g. Jan 2, 2003
+    // date format 2 = MMM D, YYYY, e.g. Jan 2, 2003
     '2': new RegExp(/^([A-Za-zÀ-ÖØ-öø-ÿ]+) ([0-9]{1,2}), ([0-9]{4})$/),
 
-    // dateFormat 3 = DD/MM/YYYY, e.g. 02/01/2003
+    // date format 3 = DD/MM/YYYY, e.g. 02/01/2003
     '3': new RegExp(/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/),
 
-    // dateFormat 4 = YYYY-MM-DD, e.g. 2003-01-02
+    // date format 4 = YYYY-MM-DD, e.g. 2003-01-02
     '4': new RegExp(/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/),
 
-    // dateFormat 5 = D MMMM YYYY, e.g. 2 January 2003
+    // date format 5 = D MMMM YYYY, e.g. 2 January 2003
     '5': new RegExp(/^([0-9]{1,2}) ([A-Za-zÀ-ÖØ-öø-ÿ]+) ([0-9]{4})$/),
 
     // YYYY-MM, e.g. 2003-01
-    'month': new RegExp(/([0-9]{4})-([0-9]{2})$/)
+    'month': new RegExp(/^([0-9]{4})-([0-9]{2})$/)
   };
+
   var translations = {
     // English
     en: {
-      daysOfWeek: {
+      days: {
         full: {
           0: 'Sunday',
           1: 'Monday',
@@ -125,7 +128,7 @@
 
     // Français (French)
     fr: {
-      daysOfWeek: {
+      days: {
         full: {
           0: 'dimanche',
           1: 'lundi',
@@ -229,10 +232,34 @@
     if (calendarElement.length === 0) {
       calendarElement = createDomElements();
     }
+    var modalBackgroundElement = $('#agjCalendar-modal-background');
+
     calendarElement.attr({
+      'class':              '', // remove all classes
       'data-active':        agjCalendar['position'],
       'data-active-is-end': activateEnd
     });
+
+    if (agjCalendar['theme'].length > 0) {
+      // remove any active themes from the modal background element
+      var modalBackgroundClasses = modalBackgroundElement.attr('class');
+      if (
+        typeof modalBackgroundClasses === 'string' &&
+        modalBackgroundClasses.length > 0
+      ) {
+        modalBackgroundClasses = modalBackgroundClasses.split(' ');
+        for (var i = 0; i < modalBackgroundClasses.length; i++) {
+          if (modalBackgroundClasses[i].indexOf('agjCalendar-theme-') === 0) {
+            modalBackgroundElement.removeClass(modalBackgroundClasses[i]);
+          }
+        }
+      }
+
+      modalBackgroundElement
+        .addClass('agjCalendar-theme-' + agjCalendar['theme']);
+
+      calendarElement.addClass('agjCalendar-theme-' + agjCalendar['theme']);
+    }
 
     calendarElement.find('#agjCalendar-hide').attr(
       'title',
@@ -259,21 +286,15 @@
 
     switch (agjCalendar['calendarCount']) {
       case 2:
-        calendarElement
-          .removeClass('agjCalendar-single agjCalendar-triple')
-          .addClass('agjCalendar-double');
+        calendarElement.addClass('agjCalendar-double');
         break;
 
       case 3:
-        calendarElement
-          .removeClass('agjCalendar-single agjCalendar-double')
-          .addClass('agjCalendar-triple');
+        calendarElement.addClass('agjCalendar-triple');
         break;
 
       default:
-        calendarElement
-          .removeClass('agjCalendar-double agjCalendar-triple')
-          .addClass('agjCalendar-single');
+        calendarElement.addClass('agjCalendar-single');
         break;
     }
 
@@ -290,31 +311,31 @@
       days = [0, 1, 2, 3, 4, 5, 6];
     }
 
-    var daysOfWeekMarkup = '';
+    var daysMarkup = '';
     for (var i = 0; i < days.length; i++) {
-      daysOfWeekMarkup += '<div';
-      daysOfWeekMarkup += ' class="agjCalendar-' + dayNumberToName(
+      var className = 'agjCalendar-' + dayNumberToName(
         days[i],
         'full',
         'en'
-      ).toLowerCase() + '"';
-      daysOfWeekMarkup += ' title="' + dayNumberToName(
+      ).toLowerCase();
+      var fullDayName = dayNumberToName(
         days[i],
         'full',
         agjCalendar['language']
-      ) + '"';
-      daysOfWeekMarkup += '>';
-      daysOfWeekMarkup += dayNumberToName(
+      );
+      var customDayName = dayNumberToName(
         days[i],
         agjCalendar['dayNameFormat'],
         agjCalendar['language']
       );
-      daysOfWeekMarkup += '</div>';
+      daysMarkup += '<div';
+      daysMarkup += ' class="' + className + '"';
+      daysMarkup += ' title="' + fullDayName + '"';
+      daysMarkup += '>';
+      daysMarkup +=   customDayName;
+      daysMarkup +='</div>';
     }
-    calendarElement
-      .find('div.agjCalendar-days')
-      .empty()
-      .append(daysOfWeekMarkup);
+    calendarElement.find('div.agjCalendar-days').empty().append(daysMarkup);
 
     // prevent scrolling while modal/full display is active using CSS
     switch (agjCalendar['calendarDisplay']) {
@@ -488,10 +509,10 @@
     if ($.agjCalendar.isActive()) {
       var calendarElement = $('#agjCalendar');
       if (parseInt(calendarElement.attr('data-active'), 10) === position) {
-        var activeAgjCalendarIsEnd =
+        var activeIsEnd =
           calendarElement.attr('data-active-is-end') === true ||
           calendarElement.attr('data-active-is-end') === 'true';
-        return activeAgjCalendarIsEnd === isEnd;
+        return activeIsEnd === isEnd;
       }
     }
     return false;
@@ -781,7 +802,7 @@
         case 'full':
         case 'medium':
         case 'short':
-          return translations[language]['daysOfWeek'][variation][dayNumber];
+          return translations[language]['days'][variation][dayNumber];
       }
     }
     return -1;
@@ -1312,18 +1333,19 @@
             break;
         }
 
-        var calendarMarkup = '';
         var currentDay = 0;
+        var calendarMarkup = '';
         if (getDay > 0) {
           calendarMarkup += '<div';
           calendarMarkup += ' class="agjCalendar-week agjCalendar-week-one"';
           calendarMarkup += '>';
           for (var day = 1; day <= getDay; day++) {
             currentDay++;
-            calendarMarkup += '<div';
-            calendarMarkup += ' class="agjCalendar-blank';
-            calendarMarkup += ' agjCalendar-' + dayNumberToName(
-              (currentDay - (agjCalendar['startWeekOnMonday'] ? 0 : 1)) % 7,
+            calendarMarkup += '<div class="agjCalendar-blank agjCalendar-';
+            calendarMarkup +=   dayNumberToName(
+              (currentDay - (
+                agjCalendar['startWeekOnMonday'] ? 0 : 1
+              )) % 7,
               'full',
               'en'
             ).toLowerCase();
@@ -2043,11 +2065,7 @@
     );
     do {
       dropdownElement.append(
-        '<option' +
-          ' value="' +
-            dateToString(drawDate, 'YYYY-MM', agjCalendar['language']) +
-          '"' +
-        '>' +
+        '<option value="' + dateToString(drawDate, 'YYYY-MM') + '">' +
           dateToString(drawDate, 'MMM YYYY', agjCalendar['language']) +
         '</option>'
       );
@@ -2172,9 +2190,9 @@
   };
 
   /**
-   * The $.fn.agjCalendar() function will intialize a new agjCalendar
+   * The $.fn.agjCalendar() function will initialize a new agjCalendar
    * integration.
-   * @param {object} options - A JSON object of confiuguration options.
+   * @param {object} options - A JSON object of configuration options.
    * @returns {jQuery} - Returns the element to allow for chaining.
    */
   $.fn.agjCalendar = function(options) {
@@ -2192,14 +2210,19 @@
       options['dateSelector'] = 'input.' + className;
 
       $.agjCalendar(options);
+    } else {
+      throwError(
+        'Invalid tag "' + this.prop('tagName').toLowerCase() +
+        '" ("input" expected)'
+      );
     }
 
     return this;
   };
 
   /**
-   * The $.agjCalendar() function will intialize a new agjCalendar integration.
-   * @param {object} options - A JSON object of confiuguration options.
+   * The $.agjCalendar() function will initialize a new agjCalendar integration.
+   * @param {object} options - A JSON object of configuration options.
    * @returns {boolean} - Returns true on success or false on error.
    */
   $.agjCalendar = function(options) {
@@ -2241,7 +2264,8 @@
       monthSelector:         null,
       overwriteDayOptions:   true,
       overwriteMonthOptions: true,
-      startWeekOnMonday:     false
+      startWeekOnMonday:     false,
+      theme:                 null
     }, options);
 
 
@@ -2326,6 +2350,31 @@
       case 4:
       case 5:
         agjCalendar['dateFormat'] = options['dateFormat'];
+        break;
+    }
+
+
+    agjCalendar['theme'] = '';
+    switch (options['theme']) {
+      case 'red':
+      case 'orange':
+      case 'yellow':
+      case 'green':
+      case 'cyan':
+      case 'blue':
+      case 'purple':
+      case 'pink':
+        agjCalendar['theme'] = options['theme'];
+        break;
+
+      default:
+        // custom themes must begin with 'custom-'
+        if (
+          typeof options['theme'] === 'string' &&
+          options['theme'].toLowerCase().indexOf('custom-') === 0
+        ) {
+          agjCalendar['theme'] = options['theme'];
+        }
         break;
     }
 
@@ -2573,7 +2622,7 @@
      * The inputFocusEvent() function will handle events when an integration’s
      * input gains focus.
      * @param {object} event - The event object.
-     * @returns {boolean} - Returns true to allow chaining.
+     * @returns {boolean} - Returns false.
      */
     var inputFocusEvent = function(event) {
       if (checkIfActive(agjCalendar['position'], event.data.isEnd)) {
@@ -2710,13 +2759,6 @@
             agjCalendar['daySelector'] = options['daySelector'];
 
             /**
-             * The inputBlurEvent() function will handle events when an
-             * integration’s input loses focus.
-             * @param {object} event - The event object.
-             * @returns {boolean} - Returns true to allow chaining.
-             */
-
-            /**
              * The monthChangeEvent() function will handle events when an
              * integration’s month input changes.
              * @param {object} event - The event object.
@@ -2833,7 +2875,8 @@
   };
 
   /**
-   * The $.agjCalendar.deactivate will deactivate/hide all date pickers.
+   * The $.agjCalendar.deactivate() function will deactivate/hide all date
+   * pickers.
    * @returns {void}
    */
   $.agjCalendar.deactivate = function() {
@@ -2850,7 +2893,8 @@
   };
 
   /**
-   * The $.agjCalendar.isActive will let you know if a date picker is active.
+   * The $.agjCalendar.isActive() function will let you know if a date picker
+   * is active.
    * @returns {boolean} - Returns true if the date picker is active or false if
    * it’s not.
    */
@@ -2861,7 +2905,7 @@
   /**
    * The previous name of the agjCalendar plugin was ctcCalendar so this
    * function acts solely as an alias to support backwards compatability.
-   * @param {object} options - A JSON object of confiuguration options.
+   * @param {object} options - A JSON object of configuration options.
    * @returns {boolean} - Returns true on success or false on error.
    * @deprecated The plugin’s name changed to agjCalendar for version 1.0.0.
    */

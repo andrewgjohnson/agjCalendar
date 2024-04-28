@@ -8,7 +8,7 @@ We promise to extend courtesy and respect to everyone involved in this plugin re
 
 If any member of the community violates this code of conduct, the maintainers of the agjCalendar plugin may take action, removing issues, comments, and PRs or blocking accounts as deemed appropriate.
 
-If you are subject to or witness unacceptable behavior, or have any other concerns, please contact [Andrew G. Johnson](https://github.com/andrewgjohnson).
+If you are subject to or witness unacceptable behaviour, or have any other concerns, please contact [Andrew G. Johnson](https://github.com/andrewgjohnson).
 
 ## Credits
 

@@ -1,11 +1,11 @@
-// an integration with a basic date range
+// An integration with a basic date range
 $.agjCalendar({
   dateSelector:    '#example5-basic-start',
   allowRange:      true,
   endDateSelector: '#example5-basic-end'
 });
 
-// an integration with an advanced date range
+// An integration with an advanced date range
 $.agjCalendar({
   dateSelector:    '#example5-advanced-start',
   allowRange:      true,
@@ -20,7 +20,7 @@ $.agjCalendar({
   defaultDate:     'blank'
 });
 
-// an integration with a date range using dropdowns
+// An integration with a date range using dropdowns
 $.agjCalendar({
   inputType:           'dropdown',
   monthSelector:       '#example5-month-start',
