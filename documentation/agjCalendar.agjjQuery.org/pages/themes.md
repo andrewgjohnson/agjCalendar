@@ -7,7 +7,7 @@ nav:       4
 
 # Themes
 
-Because all visual stylings of agjCalendar are controlled by CSS, it can be straightforward to add your own styles thought your own CSS stylesheet. Alternatively, the plugin has eight included themes and support for custom themes. The included themes can be used to quickly add your website’s colours into your agjCalendar integration. If you have multiple agjCalendar integrations on your website and want to use different colours for each you will need to use multiple themes. To add a theme to your integration use the `theme` option.
+Because all visual stylings of agjCalendar are controlled by CSS, it can be straightforward to add your own agjCalendar stylings into your website’s CSS. Alternatively, the plugin has eight included themes and support for custom themes. The included themes can be used to quickly add your website’s colours into your integration. If you have multiple integrations on your website and want to use different colours for each you will need to use multiple themes. To add a theme to your integration use the `theme` option.
 
     // A basic agjCalendar integration
     $.agjCalendar({
