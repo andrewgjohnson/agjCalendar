@@ -3,7 +3,8 @@
   "description": "agjCalendar is a plugin for the jQuery Javascript library to deal with calendars, dates and date ranges",
   "main": [
     "source/agjCalendar/jquery.agjCalendar.js",
-    "source/agjCalendar/jquery.agjCalendar.css"
+    "source/agjCalendar/jquery.agjCalendar.css",
+    "source/agjCalendar/jquery.agjCalendar.themes.css"
   ],
   "dependencies": {},
   "devDependencies": {},
