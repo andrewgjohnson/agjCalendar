@@ -221,17 +221,23 @@ The plugin also supports custom themes beyond the eight included themes. A custo
             <a onclick="return false;" href="#" title="January 9, 2000" id="agjCalendar-2000-01-09">9</a>
           </div>
           <div class="agjCalendar-monday agjCalendar-selectable">
-             <a onclick="return false;" href="#" title="January 10, 2000" id="agjCalendar-2000-01-10">10</a></div>
+             <a onclick="return false;" href="#" title="January 10, 2000" id="agjCalendar-2000-01-10">10</a>
+          </div>
           <div class="agjCalendar-tuesday agjCalendar-selectable">
-             <a onclick="return false;" href="#" title="January 11, 2000" id="agjCalendar-2000-01-11">11</a></div>
+             <a onclick="return false;" href="#" title="January 11, 2000" id="agjCalendar-2000-01-11">11</a>
+          </div>
           <div class="agjCalendar-wednesday agjCalendar-selectable">
-             <a onclick="return false;" href="#" title="January 12, 2000" id="agjCalendar-2000-01-12">12</a></div>
+             <a onclick="return false;" href="#" title="January 12, 2000" id="agjCalendar-2000-01-12">12</a>
+          </div>
           <div class="agjCalendar-thursday agjCalendar-selectable">
-            <a onclick="return false;" href="#" title="January 13, 2000" id="agjCalendar-2000-01-13">13</a></div>
+            <a onclick="return false;" href="#" title="January 13, 2000" id="agjCalendar-2000-01-13">13</a>
+          </div>
           <div class="agjCalendar-friday agjCalendar-selectable">
-            <a onclick="return false;" href="#" title="January 14, 2000" id="agjCalendar-2000-01-14">14</a></div>
+            <a onclick="return false;" href="#" title="January 14, 2000" id="agjCalendar-2000-01-14">14</a>
+          </div>
           <div class="agjCalendar-saturday agjCalendar-selectable">
-             <a onclick="return false;" href="#" title="January 15, 2000" id="agjCalendar-2000-01-15">15</a></div>
+             <a onclick="return false;" href="#" title="January 15, 2000" id="agjCalendar-2000-01-15">15</a>
+          </div>
         </div>
         <div class="agjCalendar-week agjCalendar-week-four">
           <div class="agjCalendar-sunday agjCalendar-selectable">
