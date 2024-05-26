@@ -163,6 +163,7 @@ export default [
       'eslint.config.js',
       'examples/*.js',
       'gulpfile.js',
+      'nyc.config.js',
       'source/agjCalendar/jquery.agjCalendar.js',
       'stylelint.config.js',
       'tests/*.js'
@@ -192,6 +193,7 @@ export default [
   {
     files: [
       'eslint.config.js',
+      'nyc.config.js',
       'stylelint.config.js'
     ],
     rules: rulesForConfigurationFiles

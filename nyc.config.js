@@ -27,11 +27,11 @@
 
 export default {
   checkCoverage: true,
-  branches: 80,
-  lines: 80,
-  functions: 80,
-  statements: 80,
-  reporter: [
+  branches:      80,
+  lines:         80,
+  functions:     80,
+  statements:    80,
+  reporter:      [
     'lcov',
     'text'
   ]
