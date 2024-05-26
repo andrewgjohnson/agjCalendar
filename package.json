@@ -9,7 +9,8 @@
   "main": "source/agjCalendar/jquery.agjCalendar.min.js",
   "type": "module",
   "devDependencies": {
-    "eslint": "^9.1.1",
+    "coveralls": "^3.1.1",
+    "eslint": "^9.3.0",
     "eslint-config-google-jsdocless": "^0.14.1",
     "eslint-plugin-jsdoc": "^48.2.3",
     "gulp": "^5.0.0",
@@ -18,7 +19,9 @@
     "gulp-replace": "^1.1.4",
     "gulp-uglify": "^3.0.2",
     "jquery": "^3.7.1",
-    "stylelint": "^16.4.0",
+    "nyc": "^15.1.0",
+    "qunit": "^2.20.1",
+    "stylelint": "^16.6.0",
     "stylelint-config-standard": "^36.0.0",
     "stylelint-stylus": "^1.0.0",
     "through2": "^4.0.2"
@@ -34,7 +37,9 @@
     "date",
     "dates"
   ],
-  "dependencies": {
-    "qunit": "^2.20.1"
+  "scripts": {
+    "test": "qunit",
+    "coverage": "nyc npm test",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   }
 }

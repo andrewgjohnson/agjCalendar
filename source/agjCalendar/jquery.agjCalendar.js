@@ -6147,7 +6147,7 @@
       return -1;
     }
 
-    // if translations aren't an object pull in the included translations for
+    // if translations aren’t an object pull in the included translations for
     // English
     if (typeof translations !== 'object') {
       translations = duplicateObject(includedTranslations['en']);
