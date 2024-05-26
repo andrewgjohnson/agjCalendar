@@ -7,12 +7,12 @@ permalink: /menu/
 # Menu
 
 <ul>
-  {% assign site_title_with_semicolon = site.title | append: '&#58; ' %}
-  {% assign pages_sorted = site.pages | sort: 'nav' %}
-  {% for page in pages_sorted %}
+  {% assign siteTitleWithSemicolon = site.title | append: '&#58; ' %}
+  {% assign pagesSorted = site.pages | sort: 'nav' %}
+  {% for page in pagesSorted %}
     {% if page.nav %}
       <li>
-        <a href="{{ page.url | prepend: site.baseurl }}" title="{{ page.title | replace: site_title_with_semicolon, '' }}">{{ page.title | replace: site_title_with_semicolon, '' }}</a>
+        <a href="{{ page.url | prepend: site.baseurl }}" title="{{ page.title | replace: siteTitleWithSemicolon, '' }}">{{ page.title | replace: siteTitleWithSemicolon, '' }}</a>
       </li>
     {% endif %}
   {% endfor %}
