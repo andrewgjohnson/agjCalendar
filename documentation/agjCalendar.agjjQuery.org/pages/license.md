@@ -2,7 +2,7 @@
 layout:    layout
 title:     agjCalendar&#58; License
 permalink: /license/
-nav:       5
+nav:       8
 ---
 
 # License
@@ -12,4 +12,4 @@ nav:       5
 
 ---
 
-You can read more about [**the MIT License**](https://opensource.org/licenses/mit/) at [https://opensource.org/licenses/mit/](https://opensource.org/licenses/mit/).
+You can read more about the [**MIT License**](https://opensource.org/license/mit) at [opensource.org/license/mit](https://opensource.org/license/mit).

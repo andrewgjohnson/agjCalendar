@@ -1,5 +1,5 @@
 /**
- * CSS source code of agjCalendar v1.1.0.
+ * CSS source code of agjCalendar v1.2.0.
  *
  * Copyright (c) 2013-2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,7 +23,7 @@
  * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
  * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
  * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
- * @version 1.1.0
+ * @version 1.2.0
  */
 
 #agjCalendar-modal-background
@@ -65,7 +65,11 @@ div.agjCalendar-modal-background-full
   text-align:left;
   z-index:2147483647
 }
-body.agjCalendar-active #agjCalendar { display:block }
+
+body.agjCalendar-active #agjCalendar
+{
+  display:block
+}
 
 div.agjCalendar-single
 {
@@ -80,6 +84,46 @@ div.agjCalendar-double
 div.agjCalendar-triple
 {
   width:527px
+}
+
+#agjCalendar.agjCalendar-medium
+{
+  height:327px
+}
+
+#agjCalendar.agjCalendar-medium.agjCalendar-single
+{
+  width:263px
+}
+
+#agjCalendar.agjCalendar-medium.agjCalendar-double
+{
+  width:521px
+}
+
+#agjCalendar.agjCalendar-medium.agjCalendar-triple
+{
+  width:779px
+}
+
+#agjCalendar.agjCalendar-large
+{
+  height:415px
+}
+
+#agjCalendar.agjCalendar-large.agjCalendar-single
+{
+  width:340px
+}
+
+#agjCalendar.agjCalendar-large.agjCalendar-double
+{
+  width:675px
+}
+
+#agjCalendar.agjCalendar-large.agjCalendar-triple
+{
+  width:1010px
 }
 
 div.agjCalendar-full
@@ -218,6 +262,18 @@ div.agjCalendar-full #agjCalendar-header
   position:relative
 }
 
+#agjCalendar.agjCalendar-medium #agjCalendar-body
+{
+  font-size:13px;
+  height:293px
+}
+
+#agjCalendar.agjCalendar-large #agjCalendar-body
+{
+  font-size:15px;
+  height:381px
+}
+
 div.agjCalendar-full #agjCalendar-body
 {
   border:0;
@@ -240,6 +296,18 @@ div.agjCalendar-full #agjCalendar-body
 {
   display:none;
   margin:0 0 0 5px
+}
+
+#agjCalendar.agjCalendar-medium #agjCalendar-first,#agjCalendar.agjCalendar-medium #agjCalendar-second,#agjCalendar.agjCalendar-medium #agjCalendar-third
+{
+  height:293px;
+  width:253px
+}
+
+#agjCalendar.agjCalendar-large #agjCalendar-first,#agjCalendar.agjCalendar-large #agjCalendar-second,#agjCalendar.agjCalendar-large #agjCalendar-third
+{
+  height:381px;
+  width:330px
 }
 
 div.agjCalendar-double #agjCalendar-second,div.agjCalendar-triple #agjCalendar-second,div.agjCalendar-triple #agjCalendar-third
@@ -287,6 +355,28 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
     width:156px
   }
 
+  #agjCalendar.agjCalendar-medium div.agjCalendar-month,#agjCalendar.agjCalendar-medium div.agjCalendar-days
+  {
+    height:35px;
+    width:251px
+  }
+
+  #agjCalendar.agjCalendar-medium div.agjCalendar-month
+  {
+    width:240px
+  }
+
+  #agjCalendar.agjCalendar-large div.agjCalendar-month,#agjCalendar.agjCalendar-large div.agjCalendar-days
+  {
+    height:46px;
+    width:328px
+  }
+
+  #agjCalendar.agjCalendar-large div.agjCalendar-month
+  {
+    width:317px
+  }
+
   div.agjCalendar-full #agjCalendar-body div.agjCalendar-month
   {
     border:0;
@@ -327,6 +417,20 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
       width:100px
     }
 
+    #agjCalendar.agjCalendar-medium #agjCalendar-dropdown
+    {
+      font-size:15px;
+      height:30px;
+      width:150px
+    }
+
+    #agjCalendar.agjCalendar-large #agjCalendar-dropdown
+    {
+      font-size:18px;
+      height:41px;
+      width:200px
+    }
+
     div.agjCalendar-full #agjCalendar-dropdown
     {
       border:0;
@@ -349,6 +453,20 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
       text-transform:uppercase
     }
 
+    #agjCalendar.agjCalendar-medium div.agjCalendar-month strong
+    {
+      font-size:15px;
+      height:30px;
+      line-height:29px
+    }
+
+    #agjCalendar.agjCalendar-large div.agjCalendar-month strong
+    {
+      font-size:18px;
+      height:41px;
+      line-height:40px
+    }
+
     #agjCalendar-body div.agjCalendar-month a
     {
       background-position:0 50%;
@@ -362,6 +480,16 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
       outline:0;
       text-indent:-5000px;
       width:13px
+    }
+
+    #agjCalendar.agjCalendar-medium #agjCalendar-body div.agjCalendar-month a
+    {
+      margin-top:6px
+    }
+
+    #agjCalendar.agjCalendar-large #agjCalendar-body div.agjCalendar-month a
+    {
+      margin-top:11px
     }
 
     #agjCalendar-body div.agjCalendar-month a.agjCalendar-next-month
@@ -466,12 +594,29 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
       padding:0 0 0 1px;
       text-align:center;
       text-transform:lowercase;
+      white-space:nowrap;
       width:23px
     }
+
+    #agjCalendar.agjCalendar-day-name-ellipsis div.agjCalendar-days div { overflow:hidden;text-overflow:ellipsis }
 
     #agjCalendar-body div.agjCalendar-days div.agjCalendar-sunday
     {
       padding-left:0
+    }
+
+    #agjCalendar.agjCalendar-medium div.agjCalendar-days div
+    {
+      height:35px;
+      line-height:34px;
+      width:35px
+    }
+
+    #agjCalendar.agjCalendar-large div.agjCalendar-days div
+    {
+      height:46px;
+      line-height:45px;
+      width:46px
     }
 
     div.agjCalendar-full #agjCalendar-body div.agjCalendar-days div
@@ -504,6 +649,18 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
   #agjCalendar-body div.agjCalendar-week-six
   {
     border-bottom-color:#cccccc
+  }
+
+  #agjCalendar.agjCalendar-medium div.agjCalendar-week
+  {
+    height:35px;
+    width:251px
+  }
+
+  #agjCalendar.agjCalendar-large div.agjCalendar-week
+  {
+    height:46px;
+    width:328px
   }
 
   div.agjCalendar-full #agjCalendar-body div.agjCalendar-week
@@ -554,11 +711,35 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
       left:143px
     }
 
+    #agjCalendar.agjCalendar-medium div.agjCalendar-week div.agjCalendar-saturday,
+    #agjCalendar.agjCalendar-medium.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-sunday
+    {
+      left:215px
+    }
+
+    #agjCalendar.agjCalendar-large div.agjCalendar-week div.agjCalendar-saturday,
+    #agjCalendar.agjCalendar-large.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-sunday
+    {
+      left:281px
+    }
+
     #agjCalendar-body div.agjCalendar-week div.agjCalendar-friday,
     #agjCalendar.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-saturday
     {
       border-left-width:1px;
       left:119px
+    }
+
+    #agjCalendar.agjCalendar-medium div.agjCalendar-week div.agjCalendar-friday,
+    #agjCalendar.agjCalendar-medium.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-saturday
+    {
+      left:179px
+    }
+
+    #agjCalendar.agjCalendar-large div.agjCalendar-week div.agjCalendar-friday,
+    #agjCalendar.agjCalendar-large.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-saturday
+    {
+      left:234px
     }
 
     #agjCalendar-body div.agjCalendar-week div.agjCalendar-thursday,
@@ -568,11 +749,36 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
       left:95px
     }
 
+    #agjCalendar.agjCalendar-medium div.agjCalendar-week div.agjCalendar-thursday,
+    #agjCalendar.agjCalendar-medium.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-friday
+    {
+      left:143px
+    }
+
+
+    #agjCalendar.agjCalendar-large div.agjCalendar-week div.agjCalendar-thursday,
+    #agjCalendar.agjCalendar-large.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-friday
+    {
+      left:187px
+    }
+
     #agjCalendar-body div.agjCalendar-week div.agjCalendar-wednesday,
     #agjCalendar.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-thursday
     {
       border-left-width:1px;
       left:71px
+    }
+
+    #agjCalendar.agjCalendar-medium div.agjCalendar-week div.agjCalendar-wednesday,
+    #agjCalendar.agjCalendar-medium.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-thursday
+    {
+      left:107px
+    }
+
+    #agjCalendar.agjCalendar-large div.agjCalendar-week div.agjCalendar-wednesday,
+    #agjCalendar.agjCalendar-large.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-thursday
+    {
+      left:140px
     }
 
     #agjCalendar-body div.agjCalendar-week div.agjCalendar-tuesday,
@@ -582,6 +788,18 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
       left:47px
     }
 
+    #agjCalendar.agjCalendar-medium div.agjCalendar-week div.agjCalendar-tuesday,
+    #agjCalendar.agjCalendar-medium.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-wednesday
+    {
+      left:71px
+    }
+
+    #agjCalendar.agjCalendar-large div.agjCalendar-week div.agjCalendar-tuesday,
+    #agjCalendar.agjCalendar-large.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-wednesday
+    {
+      left:93px
+    }
+
     #agjCalendar-body div.agjCalendar-week div.agjCalendar-monday,
     #agjCalendar.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-tuesday
     {
@@ -589,11 +807,37 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
       left:23px
     }
 
+    #agjCalendar.agjCalendar-medium div.agjCalendar-week div.agjCalendar-monday,
+    #agjCalendar.agjCalendar-medium.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-tuesday
+    {
+      left:35px
+    }
+
+    #agjCalendar.agjCalendar-large div.agjCalendar-week div.agjCalendar-monday,
+    #agjCalendar.agjCalendar-large.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-tuesday
+    {
+      left:46px
+    }
+
     #agjCalendar-body div.agjCalendar-week div.agjCalendar-sunday,
     #agjCalendar.agjCalendar-start-week-on-monday div.agjCalendar-week div.agjCalendar-monday
     {
       border-left-width:0;
       left:0
+    }
+
+    #agjCalendar.agjCalendar-medium div.agjCalendar-week div
+    {
+      height:35px;
+      line-height:34px;
+      width:35px
+    }
+
+    #agjCalendar.agjCalendar-large div.agjCalendar-week div
+    {
+      height:46px;
+      line-height:45px;
+      width:46px
     }
 
     div.agjCalendar-full #agjCalendar-body div.agjCalendar-week div
@@ -656,6 +900,16 @@ div.agjCalendar-full #agjCalendar-second,div.agjCalendar-full #agjCalendar-third
     #agjCalendar-body div.agjCalendar-week div.agjCalendar-today a.agjCalendar-active
     {
       *font-size:10px
+    }
+
+    #agjCalendar.agjCalendar-medium div.agjCalendar-week a {
+      height:35px;
+      width:35px
+    }
+
+    #agjCalendar.agjCalendar-large div.agjCalendar-week a {
+      height:46px;
+      width:46px
     }
 
     div.agjCalendar-full #agjCalendar-body div.agjCalendar-week a

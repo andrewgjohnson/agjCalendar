@@ -17,8 +17,12 @@ exclude:      [
                bower_components/*.md,
                CHANGELOG.md,
                CNAME,
+               documentation/agjCalendar.agjjQuery.org/layouts/*.html,
                documentation/README.md,
                eslint.config.js,
+               examples/*.html,
+               examples/*.js,
+               examples/README.md,
                gulpfile.js,
                LICENSE,
                node_modules,
@@ -26,6 +30,7 @@ exclude:      [
                package-lock.json,
                package.json,
                README.md,
+               stylelint.config.js,
                yarn-error.log,
                yarn.lock               
               ]

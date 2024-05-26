@@ -1,50 +1,67 @@
 # Contributing Guidelines
 
-## Code of Conduct
+## Contribute Code
 
-In order to participate your behaviour must conform to our [code of conduct](https://github.com/andrewgjohnson/agjCalendar/blob/master/.github/CODE_OF_CONDUCT.md).
+### Coding Conventions
 
-## Minified Javascript and CSS
+Please be consistent with what already exists.
 
-Prior to committing any changes, you should be generating updated minified Javascript and CSS files. The minifier scripts are defined in the [gulp.js configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/gulpfile.js). Run this command to generate new minified files:
+New code should not produce any new errors/warnings when the commands below are run. New code that produces new errors/warnings may be rejected.
 
-    gulp
+#### Javascript
 
-## Coding Conventions
-
-New code should not produce any new errors when the commands below are run. New code that produces new errors will be rejected. Please be consistent with what already exists.
-
-### Javascript
-
-We use the [ESLint](https://eslint.org/) static analysis tool to enforce coding standards in the [Javascript source](https://agjcalendar.agjjquery.org/source/javascript/). The plugin uses ESLint’s recommended ruleset in conjunction with [Google’s Javascript style config](https://www.npmjs.com/package/eslint-config-google) as well as some custom rules defined in the [ESLint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/.eslintrc.yml). Run this command to test any changes to the [Javascript source](https://agjcalendar.agjjquery.org/source/javascript/):
+The plugin uses the [ESLint](https://eslint.org/) static analysis tool to enforce coding standards in the [Javascript source](https://agjcalendar.agjjquery.org/source/javascript/). The plugin uses ESLint’s recommended ruleset in conjunction with [Google’s Javascript style config (only without jsdoc)](https://www.npmjs.com/package/eslint-config-google-jsdocless) as well as some custom rules defined in the [ESLint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/eslint.config.js). There are exceptions for configuration files and examples set up to allow longer comments and undefined variables. Run these commands to test any changes to the [Javascript source](https://agjcalendar.agjjquery.org/source/javascript/), [unit tests](/contribute/#unit-tests), [examples](https://agjcalendar.agjjquery.org/examples/), [ESLint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/eslint.config.js), [Stylelint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/stylelint.config.js) and [gulp.js configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/gulpfile.js):
 
     npx eslint source/agjCalendar/jquery.agjCalendar.js
-
-The [eslint.config.js configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/eslint.config.js) should also follow the same Javascript coding standards. Run this command to test any changes to `eslint.config.js`:
-
+    npx eslint tests/*.js
+    npx eslint examples/*.js
     npx eslint eslint.config.js
-
-The [gulp.js configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/gulpfile.js) should also follow the same Javascript coding standards. Run this command to test any changes to `gulpfile.js`:
-
+    npx eslint stylelint.config.js
     npx eslint gulpfile.js
 
-The [examples](https://github.com/andrewgjohnson/agjCalendar/blob/master/examples) should also follow the same Javascript coding standards. Because these examples do not initialize a jQuery object there will be one `no-undef` error thrown per jQuery call; this type of error is acceptable as we want our examples to be as concise as possible. There will also be one `jsdoc/require-file-overview` error thrown per file due to a lack of JSDoc block up top including a `@file` value. Run this command to test any changes to the example Javascript files:
+#### CSS
 
-    npx eslint examples/*.js
-
-### CSS
-
-We use the [Stylelint](https://stylelint.io/) static analysis tool to enforce coding standards in the [CSS source](https://agjcalendar.agjjquery.org/source/css/). The plugin uses [Stylelint’s standard config](https://www.npmjs.com/package/stylelint-config-standard) as well as some custom rules defined in the [Stylelint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/.stylelintrc.yml). Run these commands to test any changes to the [CSS source](https://agjcalendar.agjjquery.org/source/css/):
+The plugin uses the [Stylelint](https://stylelint.io/) static analysis tool to enforce coding standards in the [CSS source](https://agjcalendar.agjjquery.org/source/css/). The plugin uses [Stylelint’s standard config](https://www.npmjs.com/package/stylelint-config-standard) as well as some custom rules defined in the [Stylelint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/stylelint.config.js). Run these commands to test any changes to the [CSS source](https://agjcalendar.agjjquery.org/source/css/):
 
     npx stylelint source/agjCalendar/jquery.agjCalendar.css
     npx stylelint source/agjCalendar/jquery.agjCalendar.themes.css
 
-## Submitting Changes
+### Minified Javascript and CSS
 
-Please send a [GitHub Pull Request](https://github.com/andrewgjohnson/agjCalendar/pull/new/master) with a clear list of what you’ve done (read more about [pull requests](https://help.github.com/articles/about-pull-requests/)). We can always use more test coverage. Please follow our coding conventions (above) and make sure all of your commits are atomic (one feature per commit). Please use our [pull request template](https://github.com/andrewgjohnson/agjCalendar/blob/master/PULL_REQUEST_TEMPLATE.md) when submitting pull requests.
+Prior to committing any changes, you should be generating updated minified Javascript and CSS files using [gulp.js](https://gulpjs.com/). The minifier scripts are defined in the [gulp.js configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/gulpfile.js). Run this command to generate new minified files:
+
+    gulp
+
+### Online Documentation
+
+The plugin’s online documentation is available at [agjCalendar.agjjQuery.org](https://agjCalendar.agjjQuery.org/). Please ensure the documentation is updated along with any code changes. All of the files used to generate the documentation are in the [/documentation/agjCalendar.agjjQuery.org/ folder](https://github.com/andrewgjohnson/agjCalendar/blob/master/documentation/agjCalendar.agjjQuery.org/). [The website](https://agjCalendar.agjjQuery.org/) is powered by [GitHub Pages](https://pages.github.com/) which uses [Jekyll](https://jekyllrb.com/). Run this command to test the online documentation website locally if you have Jekyll installed:
+
+    jekyll serve
+
+### Unit Tests
+
+The plugin uses jQuery’s [QUnit](https://qunitjs.com/) framework  to run unit tests. The tests are all located in [qunit.js](https://github.com/andrewgjohnson/agjCalendar/blob/master/tests/qunit.js) and can be run online in-browser at [agjCalendar.agjjQuery.org/tests/qunit.html](https://agjCalendar.agjjQuery.org/tests/qunit.html). All tests should continue to pass and all new features should ideally include unit tests.
+
+### Submitting Changes
+
+Please send a [GitHub Pull Request](https://github.com/andrewgjohnson/agjCalendar/pull/new/master) with a clear list of what you’ve done (read more about [pull requests](https://help.github.com/articles/about-pull-requests/)). Please follow our coding conventions (above) and make sure all of your commits are atomic (one feature per commit). Please use our [pull request template](https://github.com/andrewgjohnson/agjCalendar/blob/master/.github/PULL_REQUEST_TEMPLATE.md) when submitting pull requests.
 
 Always write a clear log message for your commits. One-line messages are fine for small changes, but bigger changes should look like this:
 
     $ git commit -m "A brief summary of the commit
     >
     > A paragraph describing what changed and its impact."
+
+## Contribute Translations
+
+Although the plugin has built-in support for 20 languages we do not have team members that speak all of these languages. If you spot a translation error within our existing code or have knowledge about a language you would like to add support for please submit a pull request with your changes. Because we want to take advantage of any multilingual volunteers if you know about a language but not how to submit a pull request you can submit details of what should change in [an issue](https://github.com/andrewgjohnson/agjCalendar/issues/new) or [discussion post](https://github.com/andrewgjohnson/agjCalendar/discussions/new) and a team member will help get your changes submitted.
+
+## Contribute Financially
+
+You can contribute financially by becoming a [patron](https://patreon.com/agjopensource) at [patreon.com/agjopensource](https://patreon.com/agjopensource) to support agjCalendar and [other agjjQuery.org plugins](https://agjjquery.org/plugins/).
+
+[![Patreon - Become a Patron](https://raster.shields.io/badge/Patreon%20-become%20a%20Patron-FD334A.png?style=for-the-badge&logo=patreon&logoColor=FD334A)](https://patreon.com/agjopensource)
+
+## Code of Conduct
+
+In order to participate your behaviour must conform to our [code of conduct](https://github.com/andrewgjohnson/agjCalendar/blob/master/.github/CODE_OF_CONDUCT.md).

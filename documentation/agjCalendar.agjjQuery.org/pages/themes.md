@@ -2,7 +2,7 @@
 layout:    layout
 title:     agjCalendar&#58; Themes
 permalink: /themes/
-nav:       4
+nav:       5
 ---
 
 # Themes
@@ -18,6 +18,11 @@ Because all visual stylings of agjCalendar are controlled by CSS, it can be stra
     $.agjCalendar({
       dateSelector: '#text-input',
       theme:        'red'
+    });
+
+    // Alternatively you can use the $.fn.agjCalendar() function for the same result
+    $('#text-input').agjCalendar({
+      theme: 'red'
     });
 
     // A more complex agjCalendar integration with the 'custom-xxx' theme enabled
@@ -39,7 +44,7 @@ Because all visual stylings of agjCalendar are controlled by CSS, it can be stra
 
 The plugin comes with built-in support for eight themes as well as the default gray theme. Here are preview images for the nine themes that are included with the plugin…
 
-Theme|Preview
+theme|preview
 -----|-------
 *default*|![Default Theme](/documentation/agjCalendar.agjjQuery.org/images/theme-default.png)
 red|![Red Theme](/documentation/agjCalendar.agjjQuery.org/images/theme-red.png)
@@ -60,12 +65,14 @@ The plugin also supports custom themes beyond the eight included themes. A custo
 <noscript><p>You must enable Javascript to use our custom theme generator.</p></noscript>
 
 <div id="ctg" style="display:none">
-  <p>You can use the custom theme generator below to style agjCalendar to match your branding. The custom theme generator supports long hex codes (with or without the <code>#</code>), short hex codes (with or without the <code>#</code>), RGB colours, RGBA colours, HSL colours, HSLA colours and all colour keywords as defined by the <a href="https://www.w3.org/wiki/CSS/Properties/color/keywords" title="World Wide Web Consortium (W3C)">World Wide Web Consortium (W3C)</a>. We recommend using hex codes.</p>
-  <form method="post" action="/themes/#custom-theme-generator" onsubmit="return false;" class="interactive">
+  <p>You can use the custom theme generator below to style agjCalendar to match your branding.</p>
+  <p>The custom theme generator supports long hex codes (with or without the <code>#</code>), short hex codes (with or without the <code>#</code>), RGB colours, RGBA colours, HSL colours, HSLA colours and all colour keywords as defined by the <a href="https://www.w3.org/wiki/CSS/Properties/color/keywords" title="World Wide Web Consortium (W3C)">World Wide Web Consortium (W3C)</a>. We recommend using hex codes.</p>
+  <p>Copy and paste the generated CSS into your own stylesheet for the stylings to appear on your website.</p>
+  <form method="post" action="/themes/#custom-theme-generator" onsubmit="return false;" class="interactive interactive-tool">
     <p>
       <label for="ctg-theme-name">Custom theme name</label>
       <br />
-      <input type="text" id="ctg-theme-name" value="" placeholder="hotdog" />
+      <input type="text" id="ctg-theme-name" value="" placeholder="hotdog-stand" />
       <br />
       <br />
       <label for="ctg-border">Border</label>
@@ -162,10 +169,13 @@ The plugin also supports custom themes beyond the eight included themes. A custo
     </p>
     <pre><code id="ctg-code"></code></pre>
   </form>
-  <div id="agjCalendar" class="agjCalendar-single" style="bottom:-233px;display:block;left:10px;position:fixed">
+  <div id="agjCalendar" class="agjCalendar-single agjCalendar-small" style="bottom:-233px;display:block;left:10px;position:fixed">
     <div id="agjCalendar-header">
       <div id="agjCalendar-header-inner">
-        <a onclick="return false;" href="#" id="agjCalendar-hide" title="Hide Calendar">Hide Calendar</a><span>Powered by</span> <a onclick="return false;" href="https://agjcalendar.agjjquery.org/" target="_blank" title="agjCalendar" id="agjCalendar-powered-by">agjCalendar</a>
+        <a onclick="return false;" href="#" id="agjCalendar-hide" title="Hide Calendar">Hide Calendar</a>
+        <span id="agjCalendar-powered-by-before">Powered by </span>
+        <a onclick="return false;" href="https://agjcalendar.agjjquery.org/" target="_blank" title="agjCalendar" id="agjCalendar-powered-by">agjCalendar</a>
+        <span id="agjCalendar-powered-by-before"></span>
       </div>
     </div>
     <div id="agjCalendar-body">
@@ -210,146 +220,118 @@ The plugin also supports custom themes beyond the eight included themes. A custo
           <div class="agjCalendar-wednesday agjCalendar-selectable">5</div>
           <div class="agjCalendar-thursday agjCalendar-selectable">6</div>
           <div class="agjCalendar-friday agjCalendar-selectable">
-            <a onclick="return false;" href="#" title="January 7, 2000" id="agjCalendar-2000-01-07">7</a>
+            <a onclick="return false;" href="#" title="January 7, 2000">7</a>
           </div>
           <div class="agjCalendar-saturday agjCalendar-selectable">
-            <a onclick="return false;" href="#" title="January 8, 2000" id="agjCalendar-2000-01-08">8</a>
+            <a onclick="return false;" href="#" title="January 8, 2000">8</a>
           </div>
         </div>
         <div class="agjCalendar-week agjCalendar-week-three">
           <div class="agjCalendar-sunday agjCalendar-selectable">
-            <a onclick="return false;" href="#" title="January 9, 2000" id="agjCalendar-2000-01-09">9</a>
+            <a onclick="return false;" href="#" title="January 9, 2000">9</a>
           </div>
           <div class="agjCalendar-monday agjCalendar-selectable">
-             <a onclick="return false;" href="#" title="January 10, 2000" id="agjCalendar-2000-01-10">10</a>
+            <a onclick="return false;" href="#" title="January 10, 2000">10</a>
           </div>
           <div class="agjCalendar-tuesday agjCalendar-selectable">
-             <a onclick="return false;" href="#" title="January 11, 2000" id="agjCalendar-2000-01-11">11</a>
+            <a onclick="return false;" href="#" title="January 11, 2000">11</a>
           </div>
           <div class="agjCalendar-wednesday agjCalendar-selectable">
-             <a onclick="return false;" href="#" title="January 12, 2000" id="agjCalendar-2000-01-12">12</a>
+            <a onclick="return false;" href="#" title="January 12, 2000">12</a>
           </div>
           <div class="agjCalendar-thursday agjCalendar-selectable">
-            <a onclick="return false;" href="#" title="January 13, 2000" id="agjCalendar-2000-01-13">13</a>
+            <a onclick="return false;" href="#" title="January 13, 2000">13</a>
           </div>
           <div class="agjCalendar-friday agjCalendar-selectable">
-            <a onclick="return false;" href="#" title="January 14, 2000" id="agjCalendar-2000-01-14">14</a>
+            <a onclick="return false;" href="#" title="January 14, 2000">14</a>
           </div>
           <div class="agjCalendar-saturday agjCalendar-selectable">
-             <a onclick="return false;" href="#" title="January 15, 2000" id="agjCalendar-2000-01-15">15</a>
+            <a onclick="return false;" href="#" title="January 15, 2000">15</a>
           </div>
         </div>
         <div class="agjCalendar-week agjCalendar-week-four">
           <div class="agjCalendar-sunday agjCalendar-selectable">
-            <a onclick="return false;" href="#" title="January 16, 2000" id="agjCalendar-2000-01-16">16</a>
+            <a onclick="return false;" href="#" title="January 16, 2000">16</a>
           </div>
           <div class="agjCalendar-monday agjCalendar-selectable agjCalendar-active">
-            <a onclick="return false;" href="#" title="January 17, 2000" id="agjCalendar-2000-01-17">17</a>
+            <a onclick="return false;" href="#" title="January 17, 2000">17</a>
           </div>
           <div class="agjCalendar-tuesday agjCalendar-selectable agjCalendar-in-range">
-            <a onclick="return false;" href="#" title="January 18, 2000" id="agjCalendar-2000-01-18">18</a>
+            <a onclick="return false;" href="#" title="January 18, 2000">18</a>
           </div>
           <div class="agjCalendar-wednesday agjCalendar-selectable agjCalendar-in-range">
-            <a onclick="return false;" href="#" title="January 19, 2000" id="agjCalendar-2000-01-19">19</a>
+            <a onclick="return false;" href="#" title="January 19, 2000">19</a>
           </div>
           <div class="agjCalendar-thursday agjCalendar-selectable agjCalendar-in-range">
-            <a onclick="return false;" href="#" title="January 20, 2000" id="agjCalendar-2000-01-20">20</a>
+            <a onclick="return false;" href="#" title="January 20, 2000">20</a>
           </div>
           <div class="agjCalendar-friday agjCalendar-selectable agjCalendar-other-active">
-            <a onclick="return false;" href="#" title="January 21, 2000" id="agjCalendar-2000-01-21">21</a>
+            <a onclick="return false;" href="#" title="January 21, 2000">21</a>
           </div>
           <div class="agjCalendar-saturday agjCalendar-selectable">
-            <a onclick="return false;" href="#" title="January 22, 2000" id="agjCalendar-2000-01-22">22</a>
+            <a onclick="return false;" href="#" title="January 22, 2000">22</a>
           </div>
-       </div>
-      <div class="agjCalendar-week agjCalendar-week-five">
-        <div class="agjCalendar-sunday agjCalendar-selectable">
-          <a onclick="return false;" href="#" title="January 23, 2000" id="agjCalendar-2000-01-23">23</a>
         </div>
-        <div class="agjCalendar-monday agjCalendar-selectable">
-          <a onclick="return false;" href="#" title="January 24, 2000" id="agjCalendar-2000-01-24">24</a>
+        <div class="agjCalendar-week agjCalendar-week-five">
+          <div class="agjCalendar-sunday agjCalendar-selectable">
+            <a onclick="return false;" href="#" title="January 23, 2000">23</a>
+          </div>
+          <div class="agjCalendar-monday agjCalendar-selectable">
+            <a onclick="return false;" href="#" title="January 24, 2000">24</a>
+          </div>
+          <div class="agjCalendar-tuesday agjCalendar-selectable">
+            <a onclick="return false;" href="#" title="January 25, 2000">25</a>
+          </div>
+          <div class="agjCalendar-wednesday agjCalendar-selectable">
+            <a onclick="return false;" href="#" title="January 26, 2000">26</a>
+          </div>
+          <div class="agjCalendar-thursday agjCalendar-selectable">
+            <a onclick="return false;" href="#" title="January 27, 2000">27</a>
+          </div>
+          <div class="agjCalendar-friday agjCalendar-selectable">
+            <a onclick="return false;" href="#" title="January 28, 2000">28</a>
+          </div>
+          <div class="agjCalendar-saturday agjCalendar-selectable">
+            <a onclick="return false;" href="#" title="January 29, 2000">29</a>
+          </div>
         </div>
-        <div class="agjCalendar-tuesday agjCalendar-selectable">
-          <a onclick="return false;" href="#" title="January 25, 2000" id="agjCalendar-2000-01-25">25</a>
+        <div class="agjCalendar-week agjCalendar-week-six">
+          <div class="agjCalendar-sunday agjCalendar-selectable">
+            <a onclick="return false;" href="#" title="January 30, 2000">30</a>
+          </div>
+          <div class="agjCalendar-monday agjCalendar-selectable">
+            <a onclick="return false;" href="#" title="January 31, 2000">31</a>
+          </div>
+          <div class="agjCalendar-blank agjCalendar-tuesday"></div>
+          <div class="agjCalendar-blank agjCalendar-wednesday"></div>
+          <div class="agjCalendar-blank agjCalendar-thursday"></div>
+          <div class="agjCalendar-blank agjCalendar-friday"></div>
+          <div class="agjCalendar-blank agjCalendar-saturday"></div>
         </div>
-        <div class="agjCalendar-wednesday agjCalendar-selectable">
-          <a onclick="return false;" href="#" title="January 26, 2000" id="agjCalendar-2000-01-26">26</a>
-        </div>
-        <div class="agjCalendar-thursday agjCalendar-selectable">
-          <a onclick="return false;" href="#" title="January 27, 2000" id="agjCalendar-2000-01-27">27</a>
-        </div>
-        <div class="agjCalendar-friday agjCalendar-selectable">
-          <a onclick="return false;" href="#" title="January 28, 2000" id="agjCalendar-2000-01-28">28</a>
-        </div>
-        <div class="agjCalendar-saturday agjCalendar-selectable">
-          <a onclick="return false;" href="#" title="January 29, 2000" id="agjCalendar-2000-01-29">29</a>
-        </div>
-      </div>
-      <div class="agjCalendar-week agjCalendar-week-six">
-        <div class="agjCalendar-sunday agjCalendar-selectable">
-          <a onclick="return false;" href="#" title="January 30, 2000" id="agjCalendar-2000-01-30">30</a>
-        </div>
-        <div class="agjCalendar-monday agjCalendar-selectable">
-          <a onclick="return false;" href="#" title="January 31, 2000" id="agjCalendar-2000-01-31">31</a>
-        </div>
-        <div class="agjCalendar-blank agjCalendar-tuesday"></div>
-        <div class="agjCalendar-blank agjCalendar-wednesday"></div>
-        <div class="agjCalendar-blank agjCalendar-thursday"></div>
-        <div class="agjCalendar-blank agjCalendar-friday"></div>
-        <div class="agjCalendar-blank agjCalendar-saturday"></div>
       </div>
     </div>
   </div>
 </div>
 
 <script type="text/javascript">
-  (function() {
+  (function($) {
     var ctgElement = document.getElementById('ctg');
-    var ctgThemeNameElement = document.getElementById('ctg-theme-name');
-    var ctgBorderElement = document.getElementById('ctg-border');
-    var ctgTitleBarElement = document.getElementById('ctg-title-bar');
-    var ctgInnerColourElement = document.getElementById('ctg-inner-colour');
-    var ctgHeaderBorderElement = document.getElementById('ctg-header-border');
-    var ctgHeaderBackgroundElement = document.getElementById('ctg-header-background');
-    var ctgHeaderTextElement = document.getElementById('ctg-header-text');
-    var ctgCalendarBorderElement = document.getElementById('ctg-calendar-border');
-    var ctgCalendarBackgroundElement = document.getElementById('ctg-calendar-background');
-    var ctgUnselectableBackgroundElement = document.getElementById('ctg-unselectable-background');
-    var ctgUnselectableColourElement = document.getElementById('ctg-unselectable-colour');
-    var ctgDateBackgroundElement = document.getElementById('ctg-date-background');
-    var ctgDateBackgroundActiveElement = document.getElementById('ctg-date-background-active');
-    var ctgDateBackgroundOtherActiveElement = document.getElementById('ctg-date-background-other-active');
-    var ctgDateBackgroundInRangeElement = document.getElementById('ctg-date-background-in-range');
-    var ctgDateColourElement = document.getElementById('ctg-date-colour');
-    var ctgDateColourActiveElement = document.getElementById('ctg-date-colour-active');
-    var ctgDateColourOtherActiveElement = document.getElementById('ctg-date-colour-other-active');
-    var ctgDateColourInRangeElement = document.getElementById('ctg-date-colour-in-range');
-    var ctgCodeElement = document.getElementById('ctg-code');
-    if (
-      ctgElement !== null &&
-      ctgThemeNameElement !== null &&
-      ctgBorderElement !== null &&
-      ctgTitleBarElement !== null &&
-      ctgInnerColourElement !== null &&
-      ctgHeaderBorderElement !== null &&
-      ctgHeaderBackgroundElement !== null &&
-      ctgHeaderTextElement !== null &&
-      ctgCalendarBorderElement !== null &&
-      ctgCalendarBackgroundElement !== null &&
-      ctgUnselectableBackgroundElement !== null &&
-      ctgUnselectableColourElement !== null &&
-      ctgDateBackgroundElement !== null &&
-      ctgDateBackgroundActiveElement !== null &&
-      ctgDateBackgroundOtherActiveElement !== null &&
-      ctgDateBackgroundInRangeElement !== null &&
-      ctgDateColourElement !== null &&
-      ctgDateColourActiveElement !== null &&
-      ctgDateColourOtherActiveElement !== null &&
-      ctgDateColourInRangeElement !== null &&
-      ctgCodeElement !== null
-    ) {
+    if (ctgElement !== null) {
       var fillCtg = function() {
-        var determineThemeName = function(element) {
+        // determine theme name and colours
+        var determineThemeName = function(jQueryElement) {
+          var themeName;
+          if (new RegExp(/^([a-zA-Z0-9-]+)$/).test(jQueryElement.val())) {
+            themeName = jQueryElement.val();
+          } else {
+            themeName = jQueryElement.attr('placeholder');
+          }              
+          // all custom themes must begin with 'custom-'
+          if (themeName.indexOf('custom-') !== 0) {
+            themeName = 'custom-' + themeName;
+          }
+          return themeName;
+
           var themeNameRegex = new RegExp(/^([a-zA-Z0-9-]+)$/);
           if (themeNameRegex.test(element.value)) {
             // all custom themes must begin with 'custom-'
@@ -360,41 +342,40 @@ The plugin also supports custom themes beyond the eight included themes. A custo
           return element.placeholder.indexOf('custom-') === 0 ? element.placeholder : 'custom-' + element.placeholder;
         };
 
-        var determineColour = function(element) {
+        var determineColour = function(jQueryElement) {
           var hexRegex = new RegExp(/^#?(?:[0-9a-fA-F]{3}){1,2}$/);
-          if (hexRegex.test(element.value)) {
+          if (hexRegex.test(jQueryElement.val())) {
             // the # is optional in our form fields but mandatory for CSS
-            return element.value.indexOf('#') === 0 ? element.value : '#' + element.value; 
+            return jQueryElement.val().indexOf('#') === 0 ? jQueryElement.val() : '#' + jQueryElement.val(); 
           }
 
           var nonHexRegex = new RegExp(/^((rgba?|hsla?)\((\d{1,3}%?,\s*){2}\d{1,3}%?(,\s*(0|1|0?\.\d+))?\)|(aliceblue|antiquewhite|aqua|aquamarine|azure|beige|bisque|black|blanchedalmond|blue|blueviolet|brown|burlywood|cadetblue|chartreuse|chocolate|coral|cornflowerblue|cornsilk|crimson|cyan|darkblue|darkcyan|darkgoldenrod|darkgray|darkgreen|darkgrey|darkkhaki|darkmagenta|darkolivegreen|darkorange|darkorchid|darkred|darksalmon|darkseagreen|darkslateblue|darkslategray|darkslategrey|darkturquoise|darkviolet|deeppink|deepskyblue|dimgray|dimgrey|dodgerblue|firebrick|floralwhite|forestgreen|fuchsia|gainsboro|ghostwhite|gold|goldenrod|gray|green|greenyellow|grey|honeydew|hotpink|indianred|indigo|ivory|khaki|lavender|lavenderblush|lawngreen|lemonchiffon|lightblue|lightcoral|lightcyan|lightgoldenrodyellow|lightgray|lightgreen|lightgrey|lightpink|lightsalmon|lightseagreen|lightskyblue|lightslategray|lightslategrey|lightsteelblue|lightyellow|lime|limegreen|linen|magenta|maroon|mediumaquamarine|mediumblue|mediumorchid|mediumpurple|mediumseagreen|mediumslateblue|mediumspringgreen|mediumturquoise|mediumvioletred|midnightblue|mintcream|mistyrose|moccasin|navajowhite|navy|oldlace|olive|olivedrab|orange|orangered|orchid|palegoldenrod|palegreen|paleturquoise|palevioletred|papayawhip|peachpuff|peru|pink|plum|powderblue|purple|red|rosybrown|royalblue|saddlebrown|salmon|sandybrown|seagreen|seashell|sienna|silver|skyblue|slateblue|slategray|slategrey|snow|springgreen|steelblue|tan|teal|thistle|tomato|turquoise|violet|wheat|white|whitesmoke|yellow|yellowgreen))$/);
-          if (nonHexRegex.test(element.value)) {
-            return element.value;
+          if (nonHexRegex.test(jQueryElement.val())) {
+            return jQueryElement.val();
           }
 
-          return element.placeholder;
+          return jQueryElement.attr('placeholder');
         };
 
-        // determine theme name and colours
-        var themeName = determineThemeName(ctgThemeNameElement);
-        var border = determineColour(ctgBorderElement);
-        var titleBar = determineColour(ctgTitleBarElement);
-        var innerColour = determineColour(ctgInnerColourElement);
-        var headerBorder = determineColour(ctgHeaderBorderElement);
-        var headerBackground = determineColour(ctgHeaderBackgroundElement);
-        var headerText = determineColour(ctgHeaderTextElement);
-        var calendarBorder = determineColour(ctgCalendarBorderElement);
-        var calendarBackground = determineColour(ctgCalendarBackgroundElement);
-        var unselectableBackground = determineColour(ctgUnselectableBackgroundElement);
-        var unselectableColour = determineColour(ctgUnselectableColourElement);
-        var dateBackground = determineColour(ctgDateBackgroundElement);
-        var dateBackgroundActive = determineColour(ctgDateBackgroundActiveElement);
-        var dateBackgroundOtherActive = determineColour(ctgDateBackgroundOtherActiveElement);
-        var dateBackgroundInRange = determineColour(ctgDateBackgroundInRangeElement);
-        var dateColour = determineColour(ctgDateColourElement);
-        var dateColourActive = determineColour(ctgDateColourActiveElement);
-        var dateColourOtherActive = determineColour(ctgDateColourOtherActiveElement);
-        var dateColourInRange = determineColour(ctgDateColourInRangeElement);
+        var themeName = determineThemeName($('#ctg-theme-name'));
+        var border = determineColour($('#ctg-border'));
+        var titleBar = determineColour($('#ctg-title-bar'));
+        var innerColour = determineColour($('#ctg-inner-colour'));
+        var headerBorder = determineColour($('#ctg-header-border'));
+        var headerBackground = determineColour($('#ctg-header-background'));
+        var headerText = determineColour($('#ctg-header-text'));
+        var calendarBorder = determineColour($('#ctg-calendar-border'));
+        var calendarBackground = determineColour($('#ctg-calendar-background'));
+        var unselectableBackground = determineColour($('#ctg-unselectable-background'));
+        var unselectableColour = determineColour($('#ctg-unselectable-colour'));
+        var dateBackground = determineColour($('#ctg-date-background'));
+        var dateBackgroundActive = determineColour($('#ctg-date-background-active'));
+        var dateBackgroundOtherActive = determineColour($('#ctg-date-background-other-active'));
+        var dateBackgroundInRange = determineColour($('#ctg-date-background-in-range'));
+        var dateColour = determineColour($('#ctg-date-colour'));
+        var dateColourActive = determineColour($('#ctg-date-colour-active'));
+        var dateColourOtherActive = determineColour($('#ctg-date-colour-other-active'));
+        var dateColourInRange = determineColour($('#ctg-date-colour-in-range'));
 
         // update CSS code
         var strRepeat = function(inputString, numberOfTimes) { // based on https://www.php.net/manual/function.str-repeat.php
@@ -442,118 +423,109 @@ The plugin also supports custom themes beyond the eight included themes. A custo
         ctgMarkup += '\r\n';
         ctgMarkup += ' ';
 
-        ctgCodeElement.innerHTML = ctgMarkup;
+        $('#ctg-code')[0].innerHTML = ctgMarkup;
 
         // refresh highlight.js syntax highlighting
-        ctgCodeElement.removeAttribute('data-highlighted');
-        ctgCodeElement.removeAttribute('class');
+        $('#ctg-code').attr({
+          'class':            '',
+          'data-highlighted': ''
+        });
         hljs.highlightAll();
 
         // update live preview
-        jQuery('#agjCalendar').css('borderColor', border);
+        $('#agjCalendar').css('borderColor', border);
 
-        jQuery('#agjCalendar-header').css({
+        $('#agjCalendar-header').css({
           'borderBottomColor': border,
           'backgroundColor': titleBar
         });
 
-        jQuery('#agjCalendar-body').css({
+        $('#agjCalendar-body').css({
           'backgroundColor': innerColour,
           'borderColor': innerColour
         });
 
-        jQuery('#agjCalendar-dropdown').css('borderColor', headerBorder);
+        $('#agjCalendar-dropdown').css('borderColor', headerBorder);
 
-        jQuery('div.agjCalendar-days').css({
+        $('div.agjCalendar-days').css({
           'backgroundColor': headerBackground,
           'borderColor': headerBorder,
           'color': headerText
         });
 
-        jQuery('div.agjCalendar-month').css({
+        $('div.agjCalendar-month').css({
           'backgroundColor': headerBackground,
           'borderColor': headerBorder
         });
 
-        jQuery('div.agjCalendar-week').css({
+        $('div.agjCalendar-week').css({
           'backgroundColor': calendarBackground,
           'borderColor': calendarBorder
         });
 
-        jQuery('div.agjCalendar-week div').css({
+        $('div.agjCalendar-week div').css({
           'borderLeftColor': calendarBorder,
           'backgroundColor': unselectableBackground,
           'color': unselectableColour
         });
 
-        jQuery('div.agjCalendar-week div.agjCalendar-blank').css('backgroundColor', calendarBackground);
+        $('div.agjCalendar-week div.agjCalendar-blank').css('backgroundColor', calendarBackground);
 
-        jQuery('div.agjCalendar-week a').css({
+        $('div.agjCalendar-week a').css({
           'backgroundColor': dateBackground,
           'color': dateColour
         });
 
-        jQuery('div.agjCalendar-active a').css({
+        $('div.agjCalendar-active a').css({
           'backgroundColor': dateBackgroundActive,
           'color': dateColourActive
         });
 
-        jQuery('div.agjCalendar-other-active a').css({
+        $('div.agjCalendar-other-active a').css({
           'backgroundColor': dateBackgroundOtherActive,
           'color': dateColourOtherActive
         });
 
-        jQuery('div.agjCalendar-in-range a').css({
+        $('div.agjCalendar-in-range a').css({
           'backgroundColor': dateBackgroundInRange,
           'color': dateColourInRange
         });
       };
       fillCtg();
 
-      ctgThemeNameElement.addEventListener('blur', fillCtg);
-      ctgBorderElement.addEventListener('blur', fillCtg);
-      ctgTitleBarElement.addEventListener('blur', fillCtg);
-      ctgInnerColourElement.addEventListener('blur', fillCtg);
-      ctgHeaderBorderElement.addEventListener('blur', fillCtg);
-      ctgHeaderBackgroundElement.addEventListener('blur', fillCtg);
-      ctgHeaderTextElement.addEventListener('blur', fillCtg);
-      ctgCalendarBorderElement.addEventListener('blur', fillCtg);
-      ctgCalendarBackgroundElement.addEventListener('blur', fillCtg);
-      ctgUnselectableBackgroundElement.addEventListener('blur', fillCtg);
-      ctgUnselectableColourElement.addEventListener('blur', fillCtg);
-      ctgDateBackgroundElement.addEventListener('blur', fillCtg);
-      ctgDateBackgroundActiveElement.addEventListener('blur', fillCtg);
-      ctgDateBackgroundOtherActiveElement.addEventListener('blur', fillCtg);
-      ctgDateBackgroundInRangeElement.addEventListener('blur', fillCtg);
-      ctgDateColourElement.addEventListener('blur', fillCtg);
-      ctgDateColourActiveElement.addEventListener('blur', fillCtg);
-      ctgDateColourOtherActiveElement.addEventListener('blur', fillCtg);
-      ctgDateColourInRangeElement.addEventListener('blur', fillCtg);
-
-      var ctgGenerateElement = document.getElementById('ctg-generate');
-      if (ctgGenerateElement !== null) {
-        ctgGenerateElement.addEventListener('click', fillCtg);
-      }
-
-      jQuery(window).on('scroll', function() {
-        var ctgTop = jQuery('#custom-theme-generator').offset().top;
-        var animationSpeed = 250;
-        if (ctgTop <= jQuery(window).scrollTop() + jQuery(window).height()) {
-          // slide up
-          jQuery('#agjCalendar').stop().animate({
-            'bottom': '10px'
-          }, animationSpeed);
-        } else {
-          // slide down
-          jQuery('#agjCalendar').stop().animate({
-            'bottom': '-233px'
-          }, animationSpeed);
+      // show/hide the live preview
+      $(window).on('scroll', function() {
+        if ($('#agjCalendar').is(':visible') && !$('#agjCalendar').hasClass('in-motion')) {
+          var ctgTop = $('#custom-theme-generator').offset().top;
+          var animationSpeed = 250;
+          if (ctgTop <= $(window).scrollTop() + $(window).height()) {
+            // slide up
+            $('#agjCalendar').stop().animate({
+              'bottom': '10px'
+            }, animationSpeed, function() {
+              $('#agjCalendar').removeClass('in-motion');
+            }).addClass('in-motion');
+          } else {
+            // slide down
+            $('#agjCalendar').stop().animate({
+              'bottom': '-233px'
+            }, animationSpeed, function() {
+              $('#agjCalendar').removeClass('in-motion');
+            }).addClass('in-motion');
+          }
         }
       });
 
+      // bind the tool's fields
+      $('#ctg form.interactive > p input[type=text]').on('blur', fillCtg).on('change', fillCtg);
+      $('#ctg form.interactive > p input[type=checkbox]').on('change', fillCtg);
+      $('#ctg form.interactive > p select').on('blur', fillCtg).on('change', fillCtg);
+      $('#ctg form.interactive > p input[type=submit]').on('click', fillCtg);
+
+      // unhide the Custom Theme Generator
       ctgElement.style.display = 'block';
     }
-  })();
+  })(jQuery);
 </script>
 
-<style>@media (max-width: 1200px) { #agjCalendar{ display:none!important } }</style>
+<style>@media (max-width: 1200px) { #agjCalendar { display:none!important } }</style>
