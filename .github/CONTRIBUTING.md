@@ -10,12 +10,13 @@ New code should not produce any new errors/warnings when the commands below are 
 
 #### Javascript
 
-The plugin uses the [ESLint](https://eslint.org/) static analysis tool to enforce coding standards in the [Javascript source](https://agjcalendar.agjjquery.org/source/javascript/). The plugin uses ESLint’s recommended ruleset in conjunction with [Google’s Javascript style config (only without jsdoc)](https://www.npmjs.com/package/eslint-config-google-jsdocless) as well as some custom rules defined in the [ESLint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/eslint.config.js). There are exceptions for configuration files and examples set up to allow longer comments and undefined variables. Run these commands to test any changes to the [Javascript source](https://agjcalendar.agjjquery.org/source/javascript/), [unit tests](/contribute/#unit-tests), [examples](https://agjcalendar.agjjquery.org/examples/), [ESLint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/eslint.config.js), [Stylelint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/stylelint.config.js) and [gulp.js configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/gulpfile.js):
+The plugin uses the [ESLint](https://eslint.org/) static analysis tool to enforce coding standards in the [Javascript source](https://agjcalendar.agjjquery.org/source/javascript/). The plugin uses ESLint’s recommended ruleset in conjunction with [Google’s Javascript style config (only without jsdoc)](https://www.npmjs.com/package/eslint-config-google-jsdocless) as well as some custom rules defined in the [ESLint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/eslint.config.js). There are exceptions for configuration files and examples set up to allow longer comments and undefined variables. Run these commands to test any changes to the [Javascript source](https://agjcalendar.agjjquery.org/source/javascript/), [unit tests](/contribute/#unit-tests), [examples](https://agjcalendar.agjjquery.org/examples/), [ESLint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/eslint.config.js), [Instanbul (nyc) configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/nyc.config.js), [Stylelint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/stylelint.config.js) and [gulp.js configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/gulpfile.js):
 
     npx eslint source/agjCalendar/jquery.agjCalendar.js
     npx eslint tests/*.js
     npx eslint examples/*.js
     npx eslint eslint.config.js
+    npx eslint nyc.config.js
     npx eslint stylelint.config.js
     npx eslint gulpfile.js
 
