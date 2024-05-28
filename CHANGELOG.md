@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
  * Added [*gulp.js Configuration File Source*](https://agjCalendar.agjjQuery.org/source/gulp.js-configuration-file/) page to online documentation
  * Added [*Contribute*](https://agjCalendar.agjjQuery.org/contribute/) page to online documentation
  * Updated the plugin’s [contributing guidelines](https://github.com/andrewgjohnson/agjCalendar/blob/master/.github/CONTRIBUTING.md)
- * Integrated `QUnit` framework to add unit tests to plugin (available online at [agjCalendar.agjjQuery.org/tests/qunit.html](https://agjCalendar.agjjQuery.org/tests/qunit.html))
+ * Integrated `QUnit` framework to add unit tests to plugin (available online at [agjCalendar.agjjQuery.org/tests/index.html](https://agjCalendar.agjjQuery.org/tests/index.html))
  * Added `'use strict';` to Javascript source
  * Added `autoBlur`, `calendarSize`, `dateFormatDate`, `dateFormatDateTooltip`, `dateFormatDayInput`, `dateFormatDayOfWeekTooltip`, `dateFormatMonthDropdown`, `dateFormatMonthInput`, `dateFormatMonthLabel`, `dateNameEllipsis`, `forceMaxZIndex` and `translations` options
  * Added second optional `callback` parameter to `$.fn.agjCalendar`

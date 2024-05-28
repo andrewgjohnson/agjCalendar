@@ -1,24 +1,24 @@
 /**
  * QUnit test suite of agjCalendar v1.2.0.
  *
- * Copyright (c) 2013-2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * Copyright (c) 2013–2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to
- * deal in the Software without restriction, including without limitation the
- * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
- * sell copies of the Software, and to permit persons to whom the Software is
+ * of this software and associated documentation files (the “Software”), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
- * IN THE SOFTWARE.
- * @file The Javascript source code for the agjCalendar jQuery plugin.
- * @copyright 2013-2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ * @file The QUnit test suite for the agjCalendar jQuery plugin.
+ * @copyright 2013–2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * @license MIT
  * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
  * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
@@ -107,25 +107,7 @@
     'QUnit Global Object':           QUnit,
     'Date Object':                   Date,
     'Math Object':                   Math,
-    'Navigator Object':              navigator,
-    'Screen Object':                 screen,
-    'History Object':                history,
-    'Location Object':               location,
-    'Frames Object':                 frames,
-    'Self Object':                   self,
-    'Parent Object':                 parent,
-    'Top Object':                    top,
-    'Window Object':                 window,
-    'Document Object':               document,
-    'DOM Element':                   document.createElement('div'),
-    'Element Object':                Element,
-    'HTMLElement Object':            HTMLElement,
-    'Node Object':                   Node,
-    'NodeList Object':               NodeList,
-    'HTMLCollection Object':         HTMLCollection,
     'Event Object':                  Event,
-    'MouseEvent Object':             MouseEvent,
-    'KeyboardEvent Object':          KeyboardEvent,
     'CustomEvent Object':            CustomEvent,
     'Array':                         [],
     'Array Object':                  Array,
@@ -159,10 +141,6 @@
     'Regular Expression':            /^[a-z]+$/,
     'Regular Expression RegExp':     new RegExp('^[a-z]+$'),
     'RegExp Object':                 RegExp,
-    'XMLHttpRequest Object':         XMLHttpRequest,
-    'WebSocket Object':              WebSocket,
-    'Worker Object':                 Worker,
-    'ServiceWorker Object':          ServiceWorker,
     'Map Object':                    Map,
     'Set Object':                    Set,
     'WeakMap Object':                WeakMap,
@@ -170,6 +148,31 @@
     'Undefined':                     undefined,
     'Global This':                   globalThis
   };
+  // only add these if the code is running in browser
+  if (typeof screen !== 'undefined') {
+    sampleVariables['Navigator Object'] = navigator;
+    sampleVariables['Screen Object'] = screen;
+    sampleVariables['History Object'] = history;
+    sampleVariables['Location Object'] = location;
+    sampleVariables['Frames Object'] = frames;
+    sampleVariables['Self Object'] = self;
+    sampleVariables['Parent Object'] = parent;
+    sampleVariables['Top Object'] = top;
+    sampleVariables['Window Object'] = window;
+    sampleVariables['Document Object'] = document;
+    sampleVariables['DOM Element'] = document.createElement('div');
+    sampleVariables['Element Object'] = Element;
+    sampleVariables['HTMLElement Object'] = HTMLElement;
+    sampleVariables['Node Object'] = Node;
+    sampleVariables['NodeList Object'] = NodeList;
+    sampleVariables['HTMLCollection Object'] = HTMLCollection;
+    sampleVariables['MouseEvent Object'] = MouseEvent;
+    sampleVariables['KeyboardEvent Object'] = KeyboardEvent;
+    sampleVariables['XMLHttpRequest Object'] = XMLHttpRequest;
+    sampleVariables['WebSocket Object'] = WebSocket;
+    sampleVariables['Worker Object'] = Worker;
+    sampleVariables['ServiceWorker Object'] = ServiceWorker;
+  }
 
   // sample dates and a variety of expected output for each to test
   var sampleDates = [
@@ -439,7 +442,7 @@
    * The getUrlParameter() function will return a URL parameter value.
    * @param {string} name - The name of the URL parmater whose value should be
    * returned.
-   * @returns {number} - Returns the value of the URL parameter.
+   * @returns {string} - Returns the value of the URL parameter.
    */
   var getUrlParameter = function(name) {
     name = name.replace(/[\\[]/, '\\[').replace(/[\\]]/, '\\]');
@@ -497,6 +500,55 @@
   /**
    * QUnit global events.
    */
+  QUnit.on('runEnd', function(details) {
+    var assertionsTotal = 0;
+    var assertionsPassed = 0;
+    if (details.childSuites) {
+      for (var i = 0; i < details.childSuites.length; i++) {
+        if (details.childSuites[i].tests) {
+          for (var j = 0; j < details.childSuites[i].tests.length; j++) {
+            if (details.childSuites[i].tests[j].assertions) {
+              for (
+                var k = 0;
+                k < details.childSuites[i].tests[j].assertions.length;
+                k++
+              ) {
+                assertionsTotal++;
+                if (
+                  details.childSuites[i].tests[j].assertions[k].passed === true
+                ) {
+                  assertionsPassed++;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    var consoleColors = {
+      reset:  '\x1b[0m',
+      white:  '\x1b[37m',
+      red:    '\x1b[31m',
+      teal:   '\x1b[36m',
+      yellow: '\x1b[33m'
+    };
+
+    if (console && console.log) {
+      console.log('');
+      console.log(consoleColors.white + 'ASSERTIONS' + consoleColors.reset);
+      console.log(
+        consoleColors.white + '# pass ' + assertionsPassed.toString() +
+        consoleColors.reset
+      );
+      console.log(
+        consoleColors.red + '# fail ' +
+        (assertionsTotal - assertionsPassed).toString() +
+        consoleColors.reset
+      );
+    }
+  });
+
   QUnit.begin(addIntegrationElements);
   QUnit.done(removeIntegrationElements);
 
