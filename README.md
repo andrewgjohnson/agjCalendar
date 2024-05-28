@@ -2,7 +2,7 @@
 
 [![MIT License](https://img.shields.io/badge/license-MIT-0366d6.png?colorB=0366d6&style=flat-square)](https://github.com/andrewgjohnson/agjCalendar/blob/master/LICENSE)
 [![Current Release](https://img.shields.io/github/release/andrewgjohnson/agjCalendar.png?colorB=0366d6&style=flat-square&logoColor=white&logo=github)](https://github.com/andrewgjohnson/agjCalendar/releases)
-[![Tested by QUnit](https://img.shields.io/badge/qunit-passing-65d602.png?colorB=65d602&style=flat-square)](https://agjCalendar.agjjQuery.org/tests/qunit.html)
+[![Tested by QUnit](https://img.shields.io/badge/qunit-passing-65d602.png?colorB=65d602&style=flat-square)](https://agjCalendar.agjjQuery.org/tests/index.html)
 [![Issues](https://img.shields.io/github/issues/andrewgjohnson/agjCalendar.png?colorB=0366d6&style=flat-square&logoColor=white&logo=github)](https://github.com/andrewgjohnson/agjCalendar/issues)
 [![npm Downloads](https://img.shields.io/npm/dt/agjcalendar.png?colorB=0366d6&style=flat-square&logoColor=white&logo=npm)](https://www.npmjs.com/package/agjcalendar)
 [![Patreon](https://img.shields.io/endpoint.png?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dagjopensource%26type%3Dpatrons&colorB=0366d6&style=flat-square&logoColor=white&logo=patreon)](https://patreon.com/agjopensource)
@@ -356,7 +356,7 @@ The plugin is designed to work with the newest version of jQuery (3.7.1) but wil
 
 ## Unit Testing
 
-The plugin uses jQuery’s [QUnit](https://qunitjs.com/) framework for unit testing. All units tests are located in the [qunit.js](https://github.com/andrewgjohnson/agjCalendar/blob/master/tests/qunit.js) file. The unit tests can be run online in-browser at [agjCalendar.agjjQuery.org/tests/qunit.html](https://agjCalendar.agjjQuery.org/tests/qunit.html). We strive to cover all public facing functions and API’s to ensure all permutations of parameters, options, fail scenarios, success scenarios, etc. are covered.
+The plugin uses jQuery’s [QUnit](https://qunitjs.com/) framework for unit testing. All units tests are located in the [qunit.js](https://github.com/andrewgjohnson/agjCalendar/blob/master/tests/qunit.js) file. The unit tests can be run online in-browser at [agjCalendar.agjjQuery.org/tests/index.html](https://agjCalendar.agjjQuery.org/tests/index.html). We strive to cover all public facing functions and API’s to ensure all permutations of parameters, options, fail scenarios, success scenarios, etc. are covered.
 
 ## Help Requests
 

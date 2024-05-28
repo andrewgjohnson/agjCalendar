@@ -4,6 +4,9 @@
 .Trashes
 ._*
 .buildpath
+.coveralls.yml
+.nyc_output/
+.nyc_output/*
 .project
 .svn/
 .svn/*
@@ -15,6 +18,8 @@ _site/
 _site/*
 bower_components/
 bower_components/*
+coverage/
+coverage/*
 ehthumbs.db
 node_modules/
 node_modules/*

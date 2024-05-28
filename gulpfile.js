@@ -1,22 +1,22 @@
 /**
- * Copyright (c) 2013-2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * Copyright (c) 2013–2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to
- * deal in the Software without restriction, including without limitation the
- * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
- * sell copies of the Software, and to permit persons to whom the Software is
+ * of this software and associated documentation files (the “Software”), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
- * IN THE SOFTWARE.
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  * @file The gulp.js configuration file for the agjCalendar jQuery plugin.
- * @copyright 2013-2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * @copyright 2013–2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * @license MIT
  * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
  * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
@@ -134,6 +134,144 @@ var formatMultilineComments = function(javascriptCode) {
 };
 
 /**
+ * The enableCliUsage() function will enable CLI usage of the Javascript code.
+ * @param {string} javascriptCode - The Javascript code to enable CLI use of.
+ * @returns {string} - Returns the Javascript code ready for CLI use.
+ */
+var enableCliUsage = function(javascriptCode) {
+  var cliFriendlyJavascriptCode = '';
+
+  cliFriendlyJavascriptCode += '/**';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * THIS IS A GENERATED FILE, ANY CHANGES SHOU' +
+    'LD HAPPEN IN gulpfile.js NOT';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * DIRECTLY TO THIS FILE';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' *';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * Copyright (c) 2013–2024 Andrew G. Johnson ' +
+    '<andrew@andrewgjohnson.com>';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * Permission is hereby granted, free of char' +
+    'ge, to any person obtaining a copy';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * of this software and associated documentat' +
+    'ion files (the “Software”), to deal';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * in the Software without restriction, inclu' +
+    'ding without limitation the rights';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * to use, copy, modify, merge, publish, dist' +
+    'ribute, sublicense, and/or sell';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * copies of the Software, and to permit pers' +
+    'ons to whom the Software is';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * furnished to do so, subject to the followi' +
+    'ng conditions:';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * The above copyright notice and this permis' +
+    'sion notice shall be included in';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * all copies or substantial portions of the ' +
+    'Software.';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT ' +
+    'WARRANTY OF ANY KIND, EXPRESS OR';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * IMPLIED, INCLUDING BUT NOT LIMITED TO THE ' +
+    'WARRANTIES OF MERCHANTABILITY,';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * FITNESS FOR A PARTICULAR PURPOSE AND NONIN' +
+    'FRINGEMENT. IN NO EVENT SHALL THE';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR' +
+    ' ANY CLAIM, DAMAGES OR OTHER';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * LIABILITY, WHETHER IN AN ACTION OF CONTRAC' +
+    'T, TORT OR OTHERWISE, ARISING FROM,';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * OUT OF OR IN CONNECTION WITH THE SOFTWARE ' +
+    'OR THE USE OR OTHER DEALINGS IN THE';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * SOFTWARE.';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * @file The QUnit test suite CLI script for ' +
+    'the agjCalendar jQuery plugin.';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * @copyright 2013–2024 Andrew G. Johnson <an' +
+    'drew@andrewgjohnson.com>';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * @license MIT';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * @see {@link https://github.com/andrewgjohn' +
+    'son/agjCalendar GitHub Repository}';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * @see {@link https://agjCalendar.agjjQuery.' +
+    'org/ Online Documentation}';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * @author Andrew G. Johnson <andrew@andrewgj' +
+    'ohnson.com>';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' * @version 1.2.0';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += ' */';
+  cliFriendlyJavascriptCode += '\n\n';
+  cliFriendlyJavascriptCode += '/* THIS IS A GENERATED FILE, ANY CHANGES SHOU' +
+    'LD HAPPEN IN gulpfile.js NOT';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += 'DIRECTLY TO THIS FILE */';
+  cliFriendlyJavascriptCode += '\n\n';
+  cliFriendlyJavascriptCode += 'import { readFileSync } from \'fs\';';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += 'import { JSDOM } from \'jsdom\';';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += 'import jQuery from \'jquery\';';
+  cliFriendlyJavascriptCode += '\n\n';
+  cliFriendlyJavascriptCode += 'console.error = function() {}; // suppress co' +
+    'nsole.error calls in the test suite';
+  cliFriendlyJavascriptCode += '\n\n';
+  cliFriendlyJavascriptCode += 'const { window } = new JSDOM(readFileSync(\'t' +
+    'ests/index.html\', \'utf-8\'));';
+  cliFriendlyJavascriptCode += '\n\n';
+  cliFriendlyJavascriptCode += 'const { document, navigator } = window;';
+  cliFriendlyJavascriptCode += '\n\n';
+  cliFriendlyJavascriptCode += 'global.window = window;';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += 'global.document = document;';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += 'global.navigator = navigator;';
+  cliFriendlyJavascriptCode += '\n\n';
+  cliFriendlyJavascriptCode += 'const jQueryModule = await import(\'jquery\');';
+  cliFriendlyJavascriptCode += '\n';
+  cliFriendlyJavascriptCode += 'global.jQuery = jQueryModule.default(window);';
+  cliFriendlyJavascriptCode += '\n\n';
+  cliFriendlyJavascriptCode += javascriptCode;
+  cliFriendlyJavascriptCode += '\n\n';
+  cliFriendlyJavascriptCode += 'export default QUnit;';
+  cliFriendlyJavascriptCode += '\n';
+
+  while (
+    cliFriendlyJavascriptCode !==
+      cliFriendlyJavascriptCode.replace('})(jQuery);', '})(global.jQuery);')
+  ) {
+    cliFriendlyJavascriptCode =
+      cliFriendlyJavascriptCode.replace('})(jQuery);', '})(global.jQuery);');
+  }
+
+  while (
+    cliFriendlyJavascriptCode !==
+      cliFriendlyJavascriptCode.replace('}(jQuery);', '}(global.jQuery);')
+  ) {
+    cliFriendlyJavascriptCode =
+      cliFriendlyJavascriptCode.replace('}(jQuery);', '}(global.jQuery);');
+  }
+
+  return cliFriendlyJavascriptCode;
+};
+
+/**
  * The removeNonEnglishLanguages() function will remove the non-English
  * languages from the Javascript code.
  * @param {string} javascriptCode - The Javascript code from which to remove
@@ -172,6 +310,42 @@ var removeNonEnglishLanguages = function(javascriptCode) {
 
   return javascriptCode;
 };
+
+/**
+ * The generateQUnitCli() function will generate cli.js.
+ * @returns {object} - Returns a stream to allow for piping.
+ */
+export async function generateQUnitCli() {
+  return gulp
+    .src([
+      'source/agjCalendar/jquery.agjCalendar.js',
+      'tests/qunit.js'
+    ])
+    .pipe(uglify({
+      output: {
+        comments: 'some'
+      }
+    }))
+    .pipe(through2.obj(function(file, encoding, callback) {
+      if (file.isBuffer()) {
+        var contents = file.contents.toString(encoding);
+        var processedContents = formatMultilineComments(contents);
+        file.contents = Buffer.from(processedContents, encoding);
+      }
+      callback(null, file);
+    }))
+    .pipe(concat('cli.js'))
+    // run the Javascript code through the enableCliUsage function
+    .pipe(through2.obj(function(file, encoding, callback) {
+      if (file.isBuffer()) {
+        var contents = file.contents.toString(encoding);
+        var processedContents = enableCliUsage(contents);
+        file.contents = Buffer.from(processedContents, encoding);
+      }
+      callback(null, file);
+    }))
+    .pipe(gulp.dest('tests'));
+}
 
 /**
  * The minifyCss() function will generate jquery.agjCalendar.min.css.
@@ -237,6 +411,9 @@ export async function minifyEnglishOnlyJavascript() {
  * Default task that runs all other tasks.
  */
 export default gulp.series(
+
+  // Generate cli.js
+  generateQUnitCli,
 
   // Generate jquery.agjCalendar.min.css
   minifyCss,
