@@ -1,5 +1,5 @@
 /**
- * QUnit test suite of agjCalendar v1.2.0.
+ * QUnit test suite of agjCalendar v1.2.1.
  *
  * Copyright (c) 2013–2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,7 +23,7 @@
  * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
  * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
  * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
- * @version 1.2.0
+ * @version 1.2.1
  */
 
 /**
@@ -190,12 +190,11 @@
         'j F Y':  '2 January 2000',
         'c':      '2000-01-02T01:10:11',
         'r':      'Sun, 02 Jan 2000 01:10:11 +0000',
-        'U':      '946797011'
+        'U':      '946775511'
       },
       dateFormatCharacters: {
         a: 'am',
         A: 'AM',
-        // B: '298',
         c: '2000-01-02T01:10:11',
         d: '02',
         D: 'Sun',
@@ -218,7 +217,7 @@
         S: 'nd',
         t: '31',
         u: '111000',
-        // U: '946797011',
+        U: '946775511',
         v: '111',
         w: '0',
         W: '52',
@@ -241,12 +240,11 @@
         'j F Y':  '2 January 1999',
         'c':      '1999-01-02T01:10:11',
         'r':      'Sun, 02 Jan 1999 01:10:11 +0000',
-        'U':      '915261011'
+        'U':      '915239511'
       },
       dateFormatCharacters: {
         a: 'am',
         A: 'AM',
-        // B: '298',
         c: '1999-01-02T01:10:11',
         d: '02',
         D: 'Sat',
@@ -269,7 +267,7 @@
         S: 'nd',
         t: '31',
         u: '111000',
-        // U: '915261011',
+        U: '915239511',
         v: '111',
         w: '6',
         W: '53',
@@ -291,12 +289,11 @@
         'j F Y':  '16 February 0900',
         'c':      '0900-02-16T05:20:22',
         'r':      'Tue, 16 Feb 0900 05:20:22 +0000',
-        'U':      '-33761880662'
+        'U':      '-33761903778'
       },
       dateFormatCharacters: {
         a: 'am',
         A: 'AM',
-        // B: '492',
         c: '0900-02-16T05:20:22',
         d: '16',
         D: 'Tue',
@@ -319,7 +316,7 @@
         S: 'th',
         t: '28',
         u: '222000',
-        // U: '-33761880662',
+        U: '-33761903778',
         v: '222',
         w: '2',
         W: '7',
@@ -341,12 +338,11 @@
         'j F Y':  '22 March -0100',
         'c':      '-0100-03-22T10:30:33',
         'r':      'Thu, 22 Mar -0100 10:30:33 +0000',
-        'U':      '-65315919651'
+        'U':      '-65315942667'
       },
       dateFormatCharacters: {
         a: 'am',
         A: 'AM',
-        // B: '707',
         c: '-0100-03-22T10:30:33',
         d: '22',
         D: 'Thu',
@@ -369,7 +365,7 @@
         S: 'nd',
         t: '31',
         u: '333000',
-        // U: '-65315919651',
+        U: '-65315942667',
         v: '333',
         w: '4',
         W: '12',
@@ -391,12 +387,11 @@
         'j F Y':  '30 December 20000',
         'c':      '20000-12-30T15:40:44',
         'r':      'Sat, 30 Dec 20000 15:40:44 +0000',
-        'U':      '569003348444'
+        'U':      '569003327244'
       },
       dateFormatCharacters: {
         a: 'pm',
         A: 'PM',
-        // B: '903',
         c: '20000-12-30T15:40:44',
         d: '30',
         D: 'Sat',
@@ -419,7 +414,7 @@
         S: 'th',
         t: '31',
         u: '444000',
-        // U: '569003348444',
+        U: '569003327244',
         v: '444',
         w: '6',
         W: '52',
