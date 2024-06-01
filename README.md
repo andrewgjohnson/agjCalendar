@@ -2,7 +2,8 @@
 
 [![MIT License](https://img.shields.io/badge/license-MIT-0366d6.png?colorB=0366d6&style=flat-square)](https://github.com/andrewgjohnson/agjCalendar/blob/master/LICENSE)
 [![Current Release](https://img.shields.io/github/release/andrewgjohnson/agjCalendar.png?colorB=0366d6&style=flat-square&logoColor=white&logo=github)](https://github.com/andrewgjohnson/agjCalendar/releases)
-[![Tested by QUnit](https://img.shields.io/badge/qunit-passing-65d602.png?colorB=65d602&style=flat-square)](https://agjCalendar.agjjQuery.org/tests/index.html)
+[![Tested by QUnit](https://img.shields.io/badge/qunit-passing-0366d6.png?colorB=0366d6&style=flat-square)](https://agjCalendar.agjjQuery.org/tests/index.html)
+[![Coveralls Coverage](https://img.shields.io/coverallsCoverage/github/andrewgjohnson/agjCalendar.png?colorB=0366d6&style=flat-square&logoColor=white&logo=coveralls)](https://coveralls.io/github/andrewgjohnson/agjCalendar)
 [![Issues](https://img.shields.io/github/issues/andrewgjohnson/agjCalendar.png?colorB=0366d6&style=flat-square&logoColor=white&logo=github)](https://github.com/andrewgjohnson/agjCalendar/issues)
 [![npm Downloads](https://img.shields.io/npm/dt/agjcalendar.png?colorB=0366d6&style=flat-square&logoColor=white&logo=npm)](https://www.npmjs.com/package/agjcalendar)
 [![Patreon](https://img.shields.io/endpoint.png?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dagjopensource%26type%3Dpatrons&colorB=0366d6&style=flat-square&logoColor=white&logo=patreon)](https://patreon.com/agjopensource)
@@ -349,6 +350,7 @@ v1.2.0|`dayNameFormat` option `'medium'`|`dayNameFormat` deprecated `'medium'` i
 v1.2.0|`dateFormat` options `1`, `2`, `3`, `4` and `5`|`dateFormat` was refactored to allow for custom formats<br /><br />`1` is now an alias of `'m/d/Y'`, `2` is now an alias of `'M j, Y'`, `3` is now an alias of `'d/m/Y'`, `4` is now an alias of `'Y-m-d'` and `5` is now an alias of `'j F Y'` for the `dateFormat` and `dateFormatDateTooltip` options
 v1.2.0|`$.agjCalendar` returns `-1` instead of `false` on failure|Successful integrations function in the same manner but failures will now return `-1` instead of `false`
 v1.2.0|The `z-index` CSS values of the calendar and modal background elements now change dynamically based upon the integration elements when `calendarDisplay` is set to `'inline'`|Previously the `z-index` CSS value was always set to the maximum for the calendar element and maximum minus one for the modal background element when `calendarDisplay` was set to `'inline'` which will still happen if the integration sets the `forceMaxZIndex` option to `true` (which is set to `false` by default)
+v1.2.0|The `autoBlur` option will be automatically set to `true` when the `calendarDisplay` option is set to `'modal'` or `'full'`|Previously all integrations of agjCalendar had the `false` behaviour which is still the case for integrations with the `calendarDisplay` set to `'inline'` and can still happen if the `autoBlur` option is set to `false`
 
 ### Older Versions of jQuery
 
@@ -356,7 +358,7 @@ The plugin is designed to work with the newest version of jQuery (3.7.1) but wil
 
 ## Unit Testing
 
-The plugin uses jQuery’s [QUnit](https://qunitjs.com/) framework for unit testing. All units tests are located in the [qunit.js](https://github.com/andrewgjohnson/agjCalendar/blob/master/tests/qunit.js) file. The unit tests can be run online in-browser at [agjCalendar.agjjQuery.org/tests/index.html](https://agjCalendar.agjjQuery.org/tests/index.html). We strive to cover all public facing functions and API’s to ensure all permutations of parameters, options, fail scenarios, success scenarios, etc. are covered.
+The plugin uses jQuery’s [QUnit](https://qunitjs.com/) framework for unit testing. All units tests are located in the [qunit.js](https://github.com/andrewgjohnson/agjCalendar/blob/master/tests/qunit.js) file. The unit tests can be run online in-browser at [agjCalendar.agjjQuery.org/tests/index.html](https://agjCalendar.agjjQuery.org/tests/index.html). We strive to cover all public facing functions and API’s to ensure all permutations of parameters, options, fail scenarios, success scenarios, etc. are covered. Many novel scenarios are included in the unit tests to achieve high code coverage.
 
 ## Help Requests
 

@@ -4,16 +4,22 @@
 
 ### Coding Conventions
 
-Please be consistent with what already exists.
+Please be consistent with what already exists. New code should not produce any new errors/warnings when the commands below are run. New code that produces new errors/warnings may be rejected.
 
-New code should not produce any new errors/warnings when the commands below are run. New code that produces new errors/warnings may be rejected.
+Run the following command to check your changes against our linters and unit tests:
+
+    npm run test
 
 #### Javascript
 
-The plugin uses the [ESLint](https://eslint.org/) static analysis tool to enforce coding standards in the [Javascript source](https://agjcalendar.agjjquery.org/source/javascript/). The plugin uses ESLint’s recommended ruleset in conjunction with [Google’s Javascript style config (only without jsdoc)](https://www.npmjs.com/package/eslint-config-google-jsdocless) as well as some custom rules defined in the [ESLint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/eslint.config.js). There are exceptions for configuration files and examples set up to allow longer comments and undefined variables. Run these commands to test any changes to the [Javascript source](https://agjcalendar.agjjquery.org/source/javascript/), [unit tests](/contribute/#unit-tests), [examples](https://agjcalendar.agjjquery.org/examples/), [ESLint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/eslint.config.js), [Instanbul (nyc) configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/nyc.config.js), [Stylelint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/stylelint.config.js) and [gulp.js configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/gulpfile.js):
+The plugin uses the [ESLint](https://eslint.org/) static analysis tool to enforce coding standards in the [Javascript source](https://agjcalendar.agjjquery.org/source/javascript/). The plugin uses ESLint’s recommended ruleset in conjunction with [Google’s Javascript style config (only without jsdoc)](https://www.npmjs.com/package/eslint-config-google-jsdocless) as well as some custom rules defined in the [ESLint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/eslint.config.js). There are exceptions for configuration files and examples set up to allow longer comments and undefined variables. Run this command to test all code changes:
+
+    npm run lint
+
+Alternatively, run these commands to test any individual changes to the [Javascript source](https://agjcalendar.agjjquery.org/source/javascript/), [unit tests](/contribute/#unit-tests), [examples](https://agjcalendar.agjjquery.org/examples/), [ESLint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/eslint.config.js), [Instanbul (nyc) configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/nyc.config.js), [Stylelint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/stylelint.config.js) and [gulp.js configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/gulpfile.js):
 
     npx eslint source/agjCalendar/jquery.agjCalendar.js
-    npx eslint tests/qunit.js
+    npx eslint tests/*.js
     npx eslint examples/*.js
     npx eslint eslint.config.js
     npx eslint nyc.config.js
@@ -22,7 +28,11 @@ The plugin uses the [ESLint](https://eslint.org/) static analysis tool to enforc
 
 #### CSS
 
-The plugin uses the [Stylelint](https://stylelint.io/) static analysis tool to enforce coding standards in the [CSS source](https://agjcalendar.agjjquery.org/source/css/). The plugin uses [Stylelint’s standard config](https://www.npmjs.com/package/stylelint-config-standard) as well as some custom rules defined in the [Stylelint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/stylelint.config.js). Run these commands to test any changes to the [CSS source](https://agjcalendar.agjjquery.org/source/css/):
+The plugin uses the [Stylelint](https://stylelint.io/) static analysis tool to enforce coding standards in the [CSS source](https://agjcalendar.agjjquery.org/source/css/). The plugin uses [Stylelint’s standard config](https://www.npmjs.com/package/stylelint-config-standard) as well as some custom rules defined in the [Stylelint configuration file](https://github.com/andrewgjohnson/agjCalendar/blob/master/stylelint.config.js). Run this command to test all code changes:
+
+    npm run lint
+
+Alternatively, run these commands to test any individual changes to the [CSS source](https://agjcalendar.agjjquery.org/source/css/):
 
     npx stylelint source/agjCalendar/jquery.agjCalendar.css
     npx stylelint source/agjCalendar/jquery.agjCalendar.themes.css
@@ -33,23 +43,21 @@ Prior to committing any changes, you should be generating updated minified Javas
 
     gulp
 
+### Unit Tests
+
+The plugin uses jQuery’s [QUnit](https://qunitjs.com/) framework  to run unit tests. The tests are all located in [qunit.js](https://github.com/andrewgjohnson/agjCalendar/blob/master/tests/qunit.js) and can be run online in-browser at [agjCalendar.agjjQuery.org/tests/index.html](https://agjCalendar.agjjQuery.org/tests/index.html). All tests should continue to pass and all new features should ideally include unit tests. Run this command to execute all unit tests:
+
+    npm run qunit
+
+Run this command to view code coverage:
+
+    npm run coverage
+
 ### Online Documentation
 
 The plugin’s online documentation is available at [agjCalendar.agjjQuery.org](https://agjCalendar.agjjQuery.org/). Please ensure the documentation is updated along with any code changes. All of the files used to generate the documentation are in the [/documentation/agjCalendar.agjjQuery.org/ folder](https://github.com/andrewgjohnson/agjCalendar/blob/master/documentation/agjCalendar.agjjQuery.org/). [The website](https://agjCalendar.agjjQuery.org/) is powered by [GitHub Pages](https://pages.github.com/) which uses [Jekyll](https://jekyllrb.com/). Run this command to test the online documentation website locally if you have Jekyll installed:
 
     jekyll serve
-
-### Unit Tests
-
-The plugin uses jQuery’s [QUnit](https://qunitjs.com/) framework  to run unit tests. The tests are all located in [qunit.js](https://github.com/andrewgjohnson/agjCalendar/blob/master/tests/qunit.js) and can be run online in-browser at [agjCalendar.agjjQuery.org/tests/index.html](https://agjCalendar.agjjQuery.org/tests/index.html). All tests should continue to pass and all new features should ideally include unit tests.
-
-We use [gulp.js](https://gulpjs.com/) to generate [cli.js](https://github.com/andrewgjohnson/agjCalendar/blob/master/tests/cli.js) which will allow the unit tests to be run via the command line. Run this command to generate a new cli.js file:
-
-    gulp
-
-Run this command to run the unit tests:
-
-    npx qunit tests/cli.js --reporter tap
 
 ### Submitting Changes
 

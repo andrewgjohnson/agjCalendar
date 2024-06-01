@@ -1,24 +1,100 @@
 <!DOCTYPE html>
+<!--/**
+ * Copyright (c) 2013–2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the “Software”), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ * @file The in-browser runner for the agjCalendar plugin test suite.
+ * @copyright 2013–2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * @license MIT
+ * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
+ * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
+ * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
+ * @version 1.2.0
+ */-->
 <html>
   <head>
     <meta charset="utf-8" />
     <title>agjCalendar QUnit Test Suite</title>
-    <!-- QUnit CSS stylesheet -->
-    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.20.1.css" />
-    <!-- Favicon -->
     <link rel="shortcut icon" href="https://github.githubassets.com/favicon.ico" />
     <link rel="icon" href="https://github.githubassets.com/favicon.ico" />
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.20.1.css" />
+    <script src="https://code.jquery.com/qunit/qunit-2.20.1.js"></script>
   </head>
   <body>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <!-- QUnit framework -->
-    <script type="text/javascript" src="https://code.jquery.com/qunit/qunit-2.20.1.js"></script>
-    <!-- jQuery Javascript library -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- agjCalendar jQuery plugin -->
-    <script type="text/javascript" src="../source/agjCalendar/jquery.agjCalendar.js"></script>
-    <!-- agjCalendar QUnit test suite -->
-    <script type="text/javascript" src="qunit.js"></script>
+    <script>
+      QUnit.config.autostart = false;
+
+      (function() {
+        var jQueryURLs = {
+          'default':    'https://code.jquery.com/jquery-3.7.1.min.js',
+          '1.12.4':     'https://code.jquery.com/jquery-1.12.4.min.js',
+          '2.2.4':      'https://code.jquery.com/jquery-2.2.4.min.js',
+          '3.7.1':      'https://code.jquery.com/jquery-3.7.1.min.js',
+          '4.0.0 beta': 'https://code.jquery.com/jquery-4.0.0-beta.min.js'
+        };
+
+        QUnit.config.urlConfig.push({
+          id: 'minified',
+          label: 'Minified Javascript',
+          tooltip: 'Whether or not to use the plugin’s minified Javascript'
+        });
+
+        QUnit.config.urlConfig.push({
+          id: 'jquery',
+          label: 'jQuery Version',
+          value: (function() {
+            var versions = [];
+            for (var version in jQueryURLs) {
+              if (Object.prototype.hasOwnProperty.call(jQueryURLs, version) && version !== 'default') {
+                versions.push(version);
+              }
+            }
+            return versions;
+          })(),
+          tooltip: 'Which version of jQuery to test with'
+        });
+
+        QUnit.config.urlConfig.push({
+          id: 'pairwise',
+          label: 'Test pairwise-generated integration options (SLOW)',
+          tooltip: 'Whether or not to use test pairwise-generated integration options (WARNING: SLOW!)'
+        });
+
+        var loadScript = function(src, callback) {
+          var script = document.createElement('script');
+          script.src = src;
+          script.onload = callback;
+          document.head.appendChild(script);
+        };
+
+        // Load the selected jQuery version
+        loadScript(jQueryURLs[QUnit.urlParams.jquery || 'default'], function() {
+          // Load agjCalendar after jQuery
+          var pluginUrl = QUnit.urlParams.minified === true ? '../source/agjCalendar/jquery.agjCalendar.min.js' : '../source/agjCalendar/jquery.agjCalendar.js';
+          loadScript(pluginUrl, function() {
+            // Load QUnit test suite after agjCalendar
+            loadScript('qunit.js', function() {
+              // Start QUnit test suite
+              QUnit.start();
+            });
+          });
+        });
+      })();
+    </script>
   </body>
 </html>

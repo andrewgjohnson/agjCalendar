@@ -30,8 +30,9 @@
  * The agjCalendar plugin test suite is built entirely in an IIFE (immediately
  * invoked function expression) to avoid polluting the global namespace.
  * @param {Function} $ - A reference to the global jQuery object.
+ * @param {object} QUnit - A reference to the global QUnit object.
  */
-(function($) {
+(function($, QUnit) {
   // all included language ISO 639-1 codes
   var includedLanguages = [
     'en',
@@ -92,6 +93,7 @@
     'BigInt Object':                 BigInt,
     'Date':                          new Date(),
     'Recent Date':                   new Date(2000, 0, 2, 1, 10, 11, 111),
+    'Semirecent Date':               new Date(1999, 0, 2, 1, 10, 11, 111),
     'Medieval Date':                 new Date(900, 1, 16, 5, 20, 22, 222),
     'Ancient Date':                  new Date(-100, 2, 22, 10, 30, 33, 333),
     'Future Date':                   new Date(20000, 11, 30, 15, 40, 44, 444),
@@ -129,6 +131,9 @@
     'GeneratorFunction Object':      GeneratorFunction,
     'AsyncFunction Object':          AsyncFunction,
     */
+    'Navigator Object':              navigator,
+    'Document Object':               document,
+    'DOM Element':                   document.createElement('div'),
     'Atomics Object':                Atomics,
     'DataView Object':               DataView,
     'JSON Object':                   JSON,
@@ -150,7 +155,6 @@
   };
   // only add these if the code is running in browser
   if (typeof screen !== 'undefined') {
-    sampleVariables['Navigator Object'] = navigator;
     sampleVariables['Screen Object'] = screen;
     sampleVariables['History Object'] = history;
     sampleVariables['Location Object'] = location;
@@ -159,8 +163,6 @@
     sampleVariables['Parent Object'] = parent;
     sampleVariables['Top Object'] = top;
     sampleVariables['Window Object'] = window;
-    sampleVariables['Document Object'] = document;
-    sampleVariables['DOM Element'] = document.createElement('div');
     sampleVariables['Element Object'] = Element;
     sampleVariables['HTMLElement Object'] = HTMLElement;
     sampleVariables['Node Object'] = Node;
@@ -184,9 +186,11 @@
         'M j, Y': 'Jan 2, 2000',
         'd/m/Y':  '02/01/2000',
         'Y-m-d':  '2000-01-02',
+        'y-m-d':  '00-01-02',
         'j F Y':  '2 January 2000',
         'c':      '2000-01-02T01:10:11',
-        'r':      'Sun, 02 Jan 2000 01:10:11 +0000'
+        'r':      'Sun, 02 Jan 2000 01:10:11 +0000',
+        'U':      '946797011'
       },
       dateFormatCharacters: {
         a: 'am',
@@ -226,6 +230,57 @@
       }
     },
     {
+      label:       'A semirecent date',
+      date:        sampleVariables['Semirecent Date'],
+      dateFormats: {
+        'm/d/Y':  '01/02/1999',
+        'M j, Y': 'Jan 2, 1999',
+        'd/m/Y':  '02/01/1999',
+        'Y-m-d':  '1999-01-02',
+        'y-m-d':  '99-01-02',
+        'j F Y':  '2 January 1999',
+        'c':      '1999-01-02T01:10:11',
+        'r':      'Sun, 02 Jan 1999 01:10:11 +0000',
+        'U':      '915261011'
+      },
+      dateFormatCharacters: {
+        a: 'am',
+        A: 'AM',
+        B: '298',
+        c: '1999-01-02T01:10:11',
+        d: '02',
+        D: 'Sat',
+        F: 'January',
+        g: '1',
+        G: '1',
+        h: '01',
+        H: '01',
+        i: '10',
+        j: '2',
+        l: 'Saturday',
+        L: '0',
+        m: '01',
+        M: 'Jan',
+        n: '1',
+        N: '6',
+        o: '1998',
+        r: 'Sat, 02 Jan 1999 01:10:11 +0000',
+        s: '11',
+        S: 'nd',
+        t: '31',
+        u: '111000',
+        U: '915261011',
+        v: '111',
+        w: '6',
+        W: '53',
+        x: '1999',
+        X: '+1999',
+        y: '99',
+        Y: '1999',
+        z: '1'
+      }
+    },
+    {
       label:       'A medieval date',
       date:        sampleVariables['Medieval Date'],
       dateFormats: {
@@ -235,7 +290,8 @@
         'Y-m-d':  '0900-02-16',
         'j F Y':  '16 February 0900',
         'c':      '0900-02-16T05:20:22',
-        'r':      'Tue, 16 Feb 0900 05:20:22 +0000'
+        'r':      'Tue, 16 Feb 0900 05:20:22 +0000',
+        'U':      '-33761880662'
       },
       dateFormatCharacters: {
         a: 'am',
@@ -284,7 +340,8 @@
         'Y-m-d':  '-0100-03-22',
         'j F Y':  '22 March -0100',
         'c':      '-0100-03-22T10:30:33',
-        'r':      'Thu, 22 Mar -0100 10:30:33 +0000'
+        'r':      'Thu, 22 Mar -0100 10:30:33 +0000',
+        'U':      '-65315919651'
       },
       dateFormatCharacters: {
         a: 'am',
@@ -333,7 +390,8 @@
         'Y-m-d':  '20000-12-30',
         'j F Y':  '30 December 20000',
         'c':      '20000-12-30T15:40:44',
-        'r':      'Sat, 30 Dec 20000 15:40:44 +0000'
+        'r':      'Sat, 30 Dec 20000 15:40:44 +0000',
+        'U':      '569003348444'
       },
       dateFormatCharacters: {
         a: 'pm',
@@ -378,12 +436,16 @@
   var integrationElements = {
     'agjCalendar-start-date':  'text',
     'agjCalendar-end-date':    'text',
+    'agjCalendar-extra-date':  'text',
     'agjCalendar-start-month': 'dropdown',
-    'agjCalendar-end-month':   'dropdown',
     'agjCalendar-start-day':   'dropdown',
+    'agjCalendar-end-month':   'dropdown',
     'agjCalendar-end-day':     'dropdown',
+    'agjCalendar-extra-month': 'dropdown',
+    'agjCalendar-extra-day':   'dropdown',
     'agjCalendar-start-icon':  'expander',
-    'agjCalendar-end-icon':    'expander'
+    'agjCalendar-end-icon':    'expander',
+    'agjCalendar-extra-icon':  'expander'
   };
 
   /**
@@ -439,51 +501,119 @@
   };
 
   /**
-   * The getUrlParameter() function will return a URL parameter value.
-   * @param {string} name - The name of the URL parmater whose value should be
-   * returned.
-   * @returns {string} - Returns the value of the URL parameter.
-   */
-  var getUrlParameter = function(name) {
-    name = name.replace(/[\\[]/, '\\[').replace(/[\\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(window.location.search);
-    return results === null ?
-      null :
-      decodeURIComponent(results[1].replace(/\+/g, ' '));
-  };
-
-  /**
-   * The assertAgjCalendarIntegration() function will run a series of assertions
-   * on an agjCalendar integration using the integration options passed via
-   * parameter.
+   * The assertInitializeIntegration() function will intialize then disable an
+   * integration using the integration options passed via parameter with a
+   * series of assertions along the way.
    * @param {object} assert - The assert object to run the assertions on.
    * @param {object} integrationOptions - A JSON object of configuration
    * options.
    * @returns {number} - Returns the agjCalendar position if the integration
    * succeeds or -1 if the integration fails.
    */
-  var assertAgjCalendarIntegration = function(assert, integrationOptions) {
+  var assertInitializeIntegration = function(assert, integrationOptions) {
     var integration = $.agjCalendar(integrationOptions);
 
+    assertInitializedIntegration(assert, integration, integrationOptions);
+
+    assert.strictEqual(
+      $.agjCalendar(integrationOptions),
+      -1,
+      'Fail to reintialize an identical integration'
+    );
+
+    return integration;
+  };
+
+  /**
+   * The assertInitializedIntegration() function will run a series of assertions
+   * on an agjCalendar integration using the integration options passed via
+   * parameter.
+   * @param {object} assert - The assert object to run the assertions on.
+   * @param {number} integration - The integration that has been initialized.
+   * @param {object} integrationOptions - (optional) A JSON object of
+   * configuration options.
+   * @returns {void}
+   */
+  var assertInitializedIntegration = function(
+    assert,
+    integration,
+    integrationOptions
+  ) {
     assert.notStrictEqual(
       integration,
       -1,
-      'Successfully initialize an integration (return value !== -1) — ' +
-      JSON.stringify(integrationOptions)
+      'Successfully initialize an integration (return value !== -1)' + (
+        typeof integrationOptions === 'object' ?
+        ' — ' + JSON.stringify(integrationOptions) :
+        ''
+      )
     );
 
     assert.strictEqual(
       typeof integration,
       'number',
-      'Successfully initialize an integration (return value is a number)'
+      'Successfully initialize an integration (return value is a number)' + (
+        typeof integrationOptions === 'object' ?
+        ' — ' + JSON.stringify(integrationOptions) :
+        ''
+      )
     );
 
     assert.ok(
       integration >= 0,
-      'Successfully initialize an integration (return value is >= 0)'
+      'Successfully initialize an integration (return value is >= 0)' + (
+        typeof integrationOptions === 'object' ?
+        ' — ' + JSON.stringify(integrationOptions) :
+        ''
+      )
     );
+  };
 
+  /**
+   * The assertInitializeDoomedIntegration() function will attempt and fail to
+   * initialize an integration using the integration options passed via
+   * parameter.
+   * @param {object} assert - The assert object to run the assertions on.
+   * @param {object} integrationOptions - A JSON object of configuration
+   * options.
+   * @param {string} assertionMessage - (optional) The message for the
+   * assertion.
+   * @returns {void}
+   */
+  var assertInitializeDoomedIntegration = function(
+    assert,
+    integrationOptions,
+    assertionMessage
+  ) {
+    if (typeof assertionMessage !== 'string' || assertionMessage.length === 0) {
+      assertionMessage = 'Fail to initialize a doomed integration';
+    }
+
+    var jsonString;
+    try {
+      jsonString = JSON.stringify(integrationOptions);
+      if (jsonString.indexOf('{') === -1) {
+        jsonString = '';
+      }
+    } catch {
+      jsonString = '';
+    }
+
+    assert.strictEqual(
+      $.agjCalendar(integrationOptions),
+      -1,
+      assertionMessage + (jsonString.length > 0 ? ' — ' + jsonString : '')
+    );
+  };
+
+  /**
+   * The assertDisableIntegration() function will disable an integration with a
+   * series of assertions along the way.
+   * @param {object} assert - The assert object to run the assertions on.
+   * @param {number} integration - The integation to disable.
+   * @returns {void}
+   */
+  var assertDisableIntegration = function(assert, integration) {
     assert.ok(
       $.agjCalendar.disable(integration),
       'Successfully disable an integration'
@@ -493,13 +623,15 @@
       $.agjCalendar.disable(integration),
       'Fail to disable an integration a second time'
     );
-
-    return integration;
   };
 
   /**
    * QUnit global events.
    */
+  QUnit.begin(addIntegrationElements);
+
+  QUnit.done(removeIntegrationElements);
+
   QUnit.on('runEnd', function(details) {
     var assertionsTotal = 0;
     var assertionsPassed = 0;
@@ -549,12 +681,6 @@
     }
   });
 
-  QUnit.begin(addIntegrationElements);
-  QUnit.done(removeIntegrationElements);
-
-  /**
-   * $.agjCalendar() module.
-   */
   QUnit.module(
     '$.agjCalendar() module',
     function(hooks) {
@@ -568,9 +694,9 @@
                 variableType
               )
             ) {
-              assert.strictEqual(
-                $.agjCalendar(sampleVariables[variableType]),
-                -1,
+              assertInitializeDoomedIntegration(
+                assert,
+                sampleVariables[variableType],
                 variableType + ' sample variable'
               );
             }
@@ -614,6 +740,8 @@
             {autoSetEndDate: 'dates', allowRange: true, dateSelector: '#agjCalendar-start-date', endDateSelector: '#agjCalendar-end-date'},
             {autoSetEndDate: 'always', allowRange: true, dateSelector: '#agjCalendar-start-date', endDateSelector: '#agjCalendar-end-date'},
             {autoSetEndDate: 'never', allowRange: true, dateSelector: '#agjCalendar-start-date', endDateSelector: '#agjCalendar-end-date'},
+            {autoSetEndDate: true, allowRange: true, dateSelector: '#agjCalendar-start-date', endDateSelector: '#agjCalendar-end-date'},
+            {autoSetEndDate: false, allowRange: true, dateSelector: '#agjCalendar-start-date', endDateSelector: '#agjCalendar-end-date'},
             // `calendarCount` option
             {calendarCount: 1, dateSelector: '#agjCalendar-start-date'},
             {calendarCount: 2, dateSelector: '#agjCalendar-start-date'},
@@ -632,36 +760,53 @@
             {dateFormat: 'd/m/Y', dateSelector: '#agjCalendar-start-date'},
             {dateFormat: 'Y-m-d', dateSelector: '#agjCalendar-start-date'},
             {dateFormat: 'j F Y', dateSelector: '#agjCalendar-start-date'},
+            {dateFormat: '', dateSelector: '#agjCalendar-start-date'},
+            {dateFormat: 1, dateSelector: '#agjCalendar-start-date'},
+            {dateFormat: 2, dateSelector: '#agjCalendar-start-date'},
+            {dateFormat: 3, dateSelector: '#agjCalendar-start-date'},
+            {dateFormat: 4, dateSelector: '#agjCalendar-start-date'},
+            {dateFormat: 5, dateSelector: '#agjCalendar-start-date'},
             // `dateFormatDate` option
             {dateFormatDate: 'j', dateSelector: '#agjCalendar-start-date'},
             {dateFormatDate: 'd', dateSelector: '#agjCalendar-start-date'},
             {dateFormatDate: 'z', dateSelector: '#agjCalendar-start-date'},
+            {dateFormatDate: '', dateSelector: '#agjCalendar-start-date'},
             // `dateFormatDateTooltip` option
             {dateFormatDateTooltip: 'm/d/Y', dateSelector: '#agjCalendar-start-date'},
             {dateFormatDateTooltip: 'M j, Y', dateSelector: '#agjCalendar-start-date'},
             {dateFormatDateTooltip: 'd/m/Y', dateSelector: '#agjCalendar-start-date'},
             {dateFormatDateTooltip: 'Y-m-d', dateSelector: '#agjCalendar-start-date'},
             {dateFormatDateTooltip: 'j F Y', dateSelector: '#agjCalendar-start-date'},
+            {dateFormatDateTooltip: 1, dateSelector: '#agjCalendar-start-date'},
+            {dateFormatDateTooltip: 2, dateSelector: '#agjCalendar-start-date'},
+            {dateFormatDateTooltip: 3, dateSelector: '#agjCalendar-start-date'},
+            {dateFormatDateTooltip: 4, dateSelector: '#agjCalendar-start-date'},
+            {dateFormatDateTooltip: 5, dateSelector: '#agjCalendar-start-date'},
             // `dateFormatDayInput` option
             {dateFormatDayInput: 'j', inputType: 'dropdown', monthSelector: '#agjCalendar-start-month', daySelector: '#agjCalendar-start-day'},
             {dateFormatDayInput: 'd', inputType: 'dropdown', monthSelector: '#agjCalendar-start-month', daySelector: '#agjCalendar-start-day'},
+            {dateFormatDayInput: '', inputType: 'dropdown', monthSelector: '#agjCalendar-start-month', daySelector: '#agjCalendar-start-day'},
             // `dateFormatDayOfWeekTooltip` option
             {dateFormatDayOfWeekTooltip: 'l', dateSelector: '#agjCalendar-start-date'},
             {dateFormatDayOfWeekTooltip: 'D', dateSelector: '#agjCalendar-start-date'},
             {dateFormatDayOfWeekTooltip: 'N', dateSelector: '#agjCalendar-start-date'},
             {dateFormatDayOfWeekTooltip: 'w', dateSelector: '#agjCalendar-start-date'},
+            {dateFormatDayOfWeekTooltip: '', dateSelector: '#agjCalendar-start-date'},
             // `dateFormatMonthDropdown` option
             {dateFormatMonthDropdown: 'M Y', dateSelector: '#agjCalendar-start-date'},
             {dateFormatMonthDropdown: 'm Y', dateSelector: '#agjCalendar-start-date'},
             {dateFormatMonthDropdown: 'F Y', dateSelector: '#agjCalendar-start-date'},
+            {dateFormatMonthDropdown: '', dateSelector: '#agjCalendar-start-date'},
             // `dateFormatMonthInput` option
             {dateFormatMonthInput: 'M Y', inputType: 'dropdown', monthSelector: '#agjCalendar-start-month', daySelector: '#agjCalendar-start-day'},
             {dateFormatMonthInput: 'm Y', inputType: 'dropdown', monthSelector: '#agjCalendar-start-month', daySelector: '#agjCalendar-start-day'},
             {dateFormatMonthInput: 'F Y', inputType: 'dropdown', monthSelector: '#agjCalendar-start-month', daySelector: '#agjCalendar-start-day'},
+            {dateFormatMonthInput: '', inputType: 'dropdown', monthSelector: '#agjCalendar-start-month', daySelector: '#agjCalendar-start-day'},
             // `dateFormatMonthLabel` option
             {dateFormatMonthLabel: 'M Y', dateSelector: '#agjCalendar-start-date'},
             {dateFormatMonthLabel: 'm Y', dateSelector: '#agjCalendar-start-date'},
             {dateFormatMonthLabel: 'F Y', dateSelector: '#agjCalendar-start-date'},
+            {dateFormatMonthLabel: '', dateSelector: '#agjCalendar-start-date'},
             // `dateSelector` option
             {dateSelector: '#agjCalendar-start-date'},
             // `dayNameEllipsis` option
@@ -671,14 +816,17 @@
             {dayNameFormat: 'short', dateSelector: '#agjCalendar-start-date'},
             {dayNameFormat: 'abbreviated', dateSelector: '#agjCalendar-start-date'},
             {dayNameFormat: 'full', dateSelector: '#agjCalendar-start-date'},
+            {dayNameFormat: 'medium', dateSelector: '#agjCalendar-start-date'},
             // `daySelector` option
             {daySelector: '#agjCalendar-start-day', inputType: 'dropdown', monthSelector: '#agjCalendar-start-month'},
             // `defaultDate` option
             {defaultDate: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1), dateSelector: '#agjCalendar-start-date'},
             {defaultDate: $.agjCalendar.dateToString(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1), 'Y-m-d'), dateSelector: '#agjCalendar-start-date'},
+            {defaultDate: 'blank', allowBlankDates: true, dateSelector: '#agjCalendar-start-date'},
             // `defaultEndDate` option
             {defaultEndDate: new Date(), allowRange: true, dateSelector: '#agjCalendar-start-date', endDateSelector: '#agjCalendar-end-date'},
             {defaultEndDate: $.agjCalendar.dateToString(new Date(), 'Y-m-d'), allowRange: true, dateSelector: '#agjCalendar-start-date', endDateSelector: '#agjCalendar-end-date'},
+            {defaultEndDate: 'blank', allowRange: true, allowBlankDates: true, dateSelector: '#agjCalendar-start-date', endDateSelector: '#agjCalendar-end-date'},
             // `defaultRange` option
             {defaultRange: 0, allowRange: true, dateSelector: '#agjCalendar-start-date', endDateSelector: '#agjCalendar-end-date'},
             {defaultRange: 1, allowRange: true, dateSelector: '#agjCalendar-start-date', endDateSelector: '#agjCalendar-end-date'},
@@ -688,14 +836,18 @@
             // `endDaySelector` option
             {endDaySelector: '#agjCalendar-end-day', allowRange: true, inputType: 'dropdown', monthSelector: '#agjCalendar-start-month', daySelector: '#agjCalendar-start-day', endMonthSelector: '#agjCalendar-end-month'},
             // `endExpanderSelector` option'
-            {endExpanderSelector: '#agjCalendar-end-icon', allowRange: true, dateSelector: '#agjCalendar-start-date', endDateSelector: '#agjCalendar-end-date'},
+            {endExpanderSelector: '#agjCalendar-end-icon', allowRange: true, dateSelector: '#agjCalendar-start-date', endDateSelector: '#agjCalendar-end-date', expanderSelector: '#agjCalendar-start-icon'},
             // `endMonthSelector` option
             {endMonthSelector: '#agjCalendar-end-month', allowRange: true, inputType: 'dropdown', monthSelector: '#agjCalendar-start-month', daySelector: '#agjCalendar-start-day', endDaySelector: '#agjCalendar-end-day'},
             // `excludeDates` option
             {excludeDates: [], inputType: 'text', dateSelector: '#agjCalendar-start-date'},
             {excludeDates: [new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1)], inputType: 'text', dateSelector: '#agjCalendar-start-date'},
+            {excludeDates: [$.agjCalendar.dateToString(new Date(), 'Y-m-d')], inputType: 'text', dateSelector: '#agjCalendar-start-date'},
             // `expanderSelector` option
             {expanderSelector: '#agjCalendar-start-icon', dateSelector: '#agjCalendar-start-date'},
+            // `forceMaxZIndex` option
+            {forceMaxZIndex: true, dateSelector: '#agjCalendar-start-date'},
+            {forceMaxZIndex: false, dateSelector: '#agjCalendar-start-date'},
             // `inputType` option
             {inputType: 'text', dateSelector: '#agjCalendar-start-date'},
             {inputType: 'dropdown', monthSelector: '#agjCalendar-start-month', daySelector: '#agjCalendar-start-day'},
@@ -767,23 +919,29 @@
 
           if (integrationOptions.length > 0) {
             // remove integration elements then fail to intialize agjCalendar
-            // without the elements then readd them
+            // without the elements before readding them
             removeIntegrationElements();
-            assert.strictEqual(
-              $.agjCalendar(integrationOptions[0]),
-              -1,
+            assertInitializeDoomedIntegration(
+              assert,
+              integrationOptions[0],
               'Fail to initialize an integration without integration elements'
             );
             addIntegrationElements();
 
             for (var i = 0; i < integrationOptions.length; i++) {
-              assertAgjCalendarIntegration(assert, integrationOptions[i]);
+              assertDisableIntegration(
+                assert,
+                assertInitializeIntegration(assert, integrationOptions[i])
+              );
             }
           }
         }
       );
 
-      if (getUrlParameter('pairwise') === 'enabled') {
+      if (
+        typeof QUnit.urlParams !== 'undefined' &&
+        QUnit.urlParams.pairwise === true
+      ) {
         QUnit.test(
           'Test many possible integrations (pairwise)',
           function(assert) {
@@ -1227,17 +1385,205 @@
                 }
               }
 
-              assertAgjCalendarIntegration(assert, integrationOptions[i]);
+              assertDisableIntegration(
+                assert,
+                assertInitializeIntegration(assert, integrationOptions[i])
+              );
             }
           }
         );
       }
+
+      QUnit.test(
+        'Test novel scenarios in $.agjCalendar()',
+        function(assert) {
+          assertInitializeDoomedIntegration(assert, {
+            dateSelector:     '#agjCalendar-start-day',
+            expanderSelector: '#invalid'
+          });
+          assertInitializeDoomedIntegration(assert, {
+            dateSelector:        '#agjCalendar-start-day',
+            expanderSelector:    '#agjCalendar-start-icon',
+            allowRange:          true,
+            endDateSelector:     '#agjCalendar-end-day',
+            endExpanderSelector: '#invalid'
+          });
+          assertInitializeDoomedIntegration(assert, {
+            dateSelector:    '#agjCalendar-start-day',
+            allowRange:      true,
+            endDateSelector: '#invalid'
+          });
+          assertInitializeDoomedIntegration(assert, {
+            inputType:     'dropdown',
+            monthSelector: '#agjCalendar-start-month',
+            daySelector:   '#invalid'
+          });
+          assertInitializeDoomedIntegration(assert, {
+            inputType:     'dropdown',
+            monthSelector: '#invalid',
+            daySelector:   '#agjCalendar-start-day'
+          });
+          assertInitializeDoomedIntegration(assert, {
+            inputType:        'dropdown',
+            monthSelector:    '#agjCalendar-start-month',
+            daySelector:      '#agjCalendar-start-day',
+            allowRange:       true,
+            endMonthSelector: '#agjCalendar-end-month',
+            endDaySelector:   '#invalid'
+          });
+          assertInitializeDoomedIntegration(assert, {
+            inputType:        'dropdown',
+            monthSelector:    '#agjCalendar-start-month',
+            daySelector:      '#agjCalendar-start-day',
+            allowRange:       true,
+            endMonthSelector: '#invalid',
+            endDaySelector:   '#agjCalendar-end-day'
+          });
+
+          var expanderIntegration = assertInitializeIntegration(assert, {
+            dateSelector:     '#agjCalendar-start-date',
+            expanderSelector: '#agjCalendar-start-icon'
+          });
+          assertInitializeDoomedIntegration(assert, {
+            dateSelector:     '#agjCalendar-start-date',
+            expanderSelector: '#agjCalendar-start-icon'
+          });
+          assertDisableIntegration(assert, expanderIntegration);
+
+          var expanderRangeIntegration = assertInitializeIntegration(assert, {
+            dateSelector:        '#agjCalendar-start-date',
+            expanderSelector:    '#agjCalendar-extra-icon',
+            allowRange:          true,
+            endDateSelector:     '#agjCalendar-end-date',
+            endExpanderSelector: '#agjCalendar-end-icon'
+          });
+          assertInitializeDoomedIntegration(assert, {
+            dateSelector:        '#agjCalendar-start-date',
+            expanderSelector:    '#agjCalendar-start-icon',
+            allowRange:          true,
+            endDateSelector:     '#agjCalendar-end-date',
+            endExpanderSelector: '#agjCalendar-end-icon'
+          });
+          assertDisableIntegration(assert, expanderRangeIntegration);
+
+          var textIntegration = assertInitializeIntegration(assert, {
+            dateSelector: '#agjCalendar-end-date'
+          });
+          assertInitializeDoomedIntegration(assert, {
+            dateSelector:    '#agjCalendar-start-date',
+            allowRange:      true,
+            endDateSelector: '#agjCalendar-end-date'
+          });
+          assertDisableIntegration(assert, textIntegration);
+
+          var dropdownDayIntegration = assertInitializeIntegration(assert, {
+            inputType:     'dropdown',
+            monthSelector: '#agjCalendar-extra-month',
+            daySelector:   '#agjCalendar-start-day'
+          });
+          assertInitializeDoomedIntegration(assert, {
+            inputType:     'dropdown',
+            monthSelector: '#agjCalendar-start-month',
+            daySelector:   '#agjCalendar-start-day'
+          });
+          assertDisableIntegration(assert, dropdownDayIntegration);
+
+          var dropdownMonthIntegration = assertInitializeIntegration(assert, {
+            inputType:     'dropdown',
+            monthSelector: '#agjCalendar-start-month',
+            daySelector:   '#agjCalendar-extra-day'
+          });
+          assertInitializeDoomedIntegration(assert, {
+            inputType:     'dropdown',
+            monthSelector: '#agjCalendar-start-month',
+            daySelector:   '#agjCalendar-start-day'
+          });
+          assertDisableIntegration(assert, dropdownMonthIntegration);
+
+          var dropdownRangeDayIntegration = assertInitializeIntegration(
+            assert, {
+              inputType:     'dropdown',
+              monthSelector: '#agjCalendar-extra-month',
+              daySelector:   '#agjCalendar-end-day'
+            }
+          );
+          assertInitializeDoomedIntegration(assert, {
+            inputType:        'dropdown',
+            monthSelector:    '#agjCalendar-start-month',
+            daySelector:      '#agjCalendar-start-day',
+            allowRange:       true,
+            endMonthSelector: '#agjCalendar-end-month',
+            endDaySelector:   '#agjCalendar-end-day'
+          });
+          assertDisableIntegration(assert, dropdownRangeDayIntegration);
+
+          var dropdownRangeMonthIntegration = assertInitializeIntegration(
+            assert, {
+              inputType:     'dropdown',
+              monthSelector: '#agjCalendar-end-month',
+              daySelector:   '#agjCalendar-extra-day'
+            }
+          );
+          assertInitializeDoomedIntegration(assert, {
+            inputType:        'dropdown',
+            monthSelector:    '#agjCalendar-start-month',
+            daySelector:      '#agjCalendar-start-day',
+            allowRange:       true,
+            endMonthSelector: '#agjCalendar-end-month',
+            endDaySelector:   '#agjCalendar-end-day'
+          });
+          assertDisableIntegration(assert, dropdownRangeMonthIntegration);
+
+
+          assertInitializeDoomedIntegration(assert, {
+            dateSelector: '#agjCalendar-start-day',
+            translations: {
+              days: {
+                full: {
+                  0: '—'
+                }
+              }
+            }
+          });
+          assertInitializeDoomedIntegration(assert, {
+            dateSelector: '#agjCalendar-start-day',
+            translations: {
+              months: {
+                full: {
+                  0: '—'
+                }
+              }
+            }
+          });
+          assertInitializeDoomedIntegration(assert, {
+            dateSelector: '#agjCalendar-start-day',
+            translations: {
+              ordinalSuffixes: {
+                1: '—'
+              }
+            }
+          });
+          assertInitializeDoomedIntegration(assert, {
+            dateSelector: '#agjCalendar-start-day',
+            translations: {
+              meridiemIndicators: {
+                lowercase: {
+                  0: '—'
+                }
+              }
+            }
+          });
+          assertInitializeDoomedIntegration(assert, {
+            dateSelector: '#agjCalendar-start-day',
+            translations: {
+              hideCalendar: '—'
+            }
+          });
+        }
+      );
     }
   );
 
-  /**
-   * $.fn.agjCalendar() module.
-   */
   QUnit.module(
     '$.fn.agjCalendar() module',
     function(hooks) {
@@ -1261,43 +1607,70 @@
             }, function(value) {
               integration = value;
             });
-
-            assert.notStrictEqual(
-              integration,
-              -1,
-              'Successfully initialize an integration (return value !== -1)'
-            );
-
-            assert.strictEqual(
-              typeof integration,
-              'number',
-              'Successfully initialize an integration (return value is a ' +
-              'number)'
-            );
-
-            assert.ok(
-              integration >= 0,
-              'Successfully initialize an integration (return value is >= 0)'
-            );
-
-            assert.ok(
-              $.agjCalendar.disable(integration),
-              'Successfully disable an integration'
-            );
-
-            assert.notOk(
-              $.agjCalendar.disable(integration),
-              'Fail to disable an integration a second time'
-            );
+            assertInitializedIntegration(assert, integration);
+            assertDisableIntegration(assert, integration);
           }
+        }
+      );
+
+      QUnit.test(
+        'Test novel scenarios in $.fn.agjCalendar()',
+        function(assert) {
+          var integration;
+
+          $('#agjCalendar-start-icon').agjCalendar({}, function(value) {
+            integration = value;
+          });
+
+          assert.strictEqual(
+            integration,
+            -1,
+            'Fail to initialize an integration on a non-input element'
+          );
+
+
+          // test using non-objects as the first parameter
+          for (var variableType in sampleVariables) {
+            if (
+              Object.prototype.hasOwnProperty.call(
+                sampleVariables,
+                variableType
+              )
+            ) {
+              $('#agjCalendar-start-date').agjCalendar(false, function(value) {
+                integration = value;
+              });
+
+              assert.notStrictEqual(
+                sampleVariables[variableType],
+                -1,
+                'Successfully initialize an integration with ' + variableType +
+                ' sample variable as the first parameter'
+              );
+
+              assertDisableIntegration(assert, integration);
+            }
+          }
+
+
+          // we want to test passing a non-function as the second parameter but
+          // because the only way to retrieve an integration (to later disable
+          // it) is via that second parameter function we first initialize a
+          // valid integration then use its position calculate the next position
+          integration = assertInitializeIntegration(assert, {
+            dateSelector: '#agjCalendar-start-date'
+          });
+
+          assertDisableIntegration(assert, integration);
+
+          $('#agjCalendar-start-date').agjCalendar({}, false);
+
+          assertDisableIntegration(assert, integration + 1);
         }
       );
     }
   );
 
-  /**
-   * $.agjCalendar.addRegexTextPattern() module.
-   */
   QUnit.module(
     '$.agjCalendar.addRegexTextPattern() module',
     function(hooks) {
@@ -1419,9 +1792,17 @@
             }
           };
 
-          assert.strictEqual(
-            $.agjCalendar(integrationOptions),
-            -1,
+          assertInitializeDoomedIntegration(
+            assert,
+            integrationOptions,
+            'Fail to initialize an integration with custom translations ' +
+            'using unique unicode characters without first calling ' +
+            '$.agjCalendar.addRegexTextPattern()'
+          );
+
+          assertInitializeDoomedIntegration(
+            assert,
+            integrationOptions,
             'Fail to initialize an integration with custom translations ' +
             'using unique unicode characters without first calling ' +
             '$.agjCalendar.addRegexTextPattern()'
@@ -1429,15 +1810,15 @@
 
           $.agjCalendar.addRegexTextPattern('\\u2014'); // em dash (—)
 
-          assertAgjCalendarIntegration(assert, integrationOptions);
+          assertDisableIntegration(
+            assert,
+            assertInitializeIntegration(assert, integrationOptions)
+          );
         }
       );
     }
   );
 
-  /**
-   * $.agjCalendar.dateToString() module.
-   */
   QUnit.module(
     '$.agjCalendar.dateToString() module',
     function(hooks) {
@@ -1476,6 +1857,7 @@
               switch (variableType) {
                 case 'Date':
                 case 'Recent Date':
+                case 'Semirecent Date':
                 case 'Medieval Date':
                 case 'Ancient Date':
                 case 'Future Date':
@@ -1545,30 +1927,71 @@
           );
         })(sampleDates[i]);
       }
+
+      /*
+      QUnit.test(
+        'Test novel scenarios in $.agjCalendar.dateToString()',
+        function(assert) {
+          assert.notStrictEqual(
+            $.agjCalendar.dateToString(new Date(), 'z'),
+            -1,
+            'Test the z character'
+          );
+        }
+      );
+      */
     }
   );
 
-  /**
-   * $.agjCalendar.disable() module.
-   */
+  QUnit.module(
+    '$.agjCalendar.deactivate() module',
+    function(hooks) {
+      QUnit.test(
+        'Test $.agjCalendar.deactivate()',
+        function(assert) {
+          $.agjCalendar.deactivate();
+
+          // we need at least once assertion in this test
+          assert.strictEqual(true, true, 'Placeholder');
+        }
+      );
+    }
+  );
+
   QUnit.module(
     '$.agjCalendar.disable() module',
     function(hooks) {
       QUnit.test(
         'Test initializing and then disabling an integration',
         function(assert) {
-          assertAgjCalendarIntegration(assert, {
-            dateSelector: '#agjCalendar-start-date'
+          assertDisableIntegration(
+            assert,
+            assertInitializeIntegration(assert, {
+              dateSelector: '#agjCalendar-start-date'
+            })
+          );
+        }
+      );
+
+      QUnit.test(
+        'Test novel scenarios in $.agjCalendar.disable()',
+        function(assert) {
+          var integration = assertInitializeIntegration(assert, {
+            dateSelector: '#agjCalendar-start-icon'
           });
+
+          assertDisableIntegration(assert, integration);
+
+          assert.strictEqual(
+            $.agjCalendar.disable(integration + 1),
+            false,
+            'fail to  disable a calculated integration'
+          );
         }
       );
     }
   );
 
-  /**
-   * $.agjCalendar.disableEmojiSupport() / $.agjCalendar.enableEmojiSupport()
-   * module.
-   */
   QUnit.module(
     '$.agjCalendar.disableEmojiSupport() / ' +
     '$.agjCalendar.enableEmojiSupport() module',
@@ -1691,37 +2114,40 @@
             }
           };
 
-          assert.strictEqual(
-            $.agjCalendar(integrationOptions),
-            -1,
+          assertInitializeDoomedIntegration(
+            assert,
+            integrationOptions,
             'Fail to initialize an integration with custom translations ' +
             'using emoji without enabling emoji support'
           );
 
           $.agjCalendar.enableEmojiSupport();
 
-          assertAgjCalendarIntegration(assert, integrationOptions);
+          assertDisableIntegration(
+            assert,
+            assertInitializeIntegration(assert, integrationOptions)
+          );
 
           $.agjCalendar.disableEmojiSupport();
 
-          assert.strictEqual(
-            $.agjCalendar(integrationOptions),
-            -1,
+          assertInitializeDoomedIntegration(
+            assert,
+            integrationOptions,
             'Fail to initialize an integration with custom translations ' +
             'using emoji after disabling emoji support'
           );
 
           $.agjCalendar.addRegexTextPattern('😊🏳️‍🌈');
 
-          assertAgjCalendarIntegration(assert, integrationOptions);
+          assertDisableIntegration(
+            assert,
+            assertInitializeIntegration(assert, integrationOptions)
+          );
         }
       );
     }
   );
 
-  /**
-   * $.agjCalendar.getIncludedTranslations() module.
-   */
   QUnit.module(
     '$.agjCalendar.getIncludedTranslations() module',
     function(hooks) {
@@ -1866,23 +2292,12 @@
                 );
               }
 
-              var integration = $.agjCalendar({
+              var integration = assertInitializeIntegration(assert, {
                 dateSelector: '#agjCalendar-start-date',
                 translations: includedTranslations
               });
 
-              assert.notStrictEqual(
-                integration,
-                -1,
-                'Successfully initialize an integration by passing the ' +
-                'included translations in the `translations` option'
-              );
-
-              assert.strictEqual(
-                $.agjCalendar.disable(integration),
-                true,
-                'Successfully disable the integration'
-              );
+              assertDisableIntegration(assert, integration);
             }
           );
         })(includedLanguages[i]);
@@ -1890,9 +2305,6 @@
     }
   );
 
-  /**
-   * $.agjCalendar.isActive() module.
-   */
   QUnit.module(
     '$.agjCalendar.isActive() module',
     function(hooks) {
@@ -1910,9 +2322,6 @@
     }
   );
 
-  /**
-   * $.agjCalendar.stringToDate() module.
-   */
   QUnit.module(
     '$.agjCalendar.stringToDate() module',
     function(hooks) {
@@ -2020,4 +2429,21 @@
       }
     }
   );
-})(jQuery);
+
+  QUnit.module(
+    '$.ctcCalendar() module',
+    function(hooks) {
+      QUnit.test(
+        'Test initializing an integration using $.ctcCalendar()',
+        function(assert) {
+          var integrationOptions = {
+            dateSelector: '#agjCalendar-start-date'
+          };
+          var integration = $.ctcCalendar(integrationOptions);
+          assertInitializedIntegration(assert, integration, integrationOptions);
+          assertDisableIntegration(assert, integration);
+        }
+      );
+    }
+  );
+})(jQuery, QUnit);

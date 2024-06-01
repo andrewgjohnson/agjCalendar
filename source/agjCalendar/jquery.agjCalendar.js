@@ -3071,6 +3071,7 @@
    * @returns {boolean} - Returns true if the user’s browser supports ECMAScript
    * 2018 or false if not.
    */
+  /* istanbul ignore next */
   var es2018IsSupported = function() {
     try {
       // Check for Promise.prototype.finally (introduced in ES2018)
@@ -3381,6 +3382,7 @@
    */
   var mergeObjects = function(object1, object2) {
     if (typeof object1 !== 'object' || typeof object2 !== 'object') {
+      /* istanbul ignore next */
       return -1;
     }
 
@@ -4086,6 +4088,7 @@
     errorMessage = 'agjCalendar Error! ' + errorMessage;
 
     var console = window.console;
+    /* istanbul ignore else if */
     if (console && console.error) {
       console.error(errorMessage);
     } else if (console && console.log) {
@@ -4120,7 +4123,9 @@
     return unicode.replace(/\\u([\dA-F]{4})/gi, function(match, grp) {
       return String.fromCharCode(parseInt(grp, 16));
     }).replace(/\\u\{([\dA-F]{1,6})\}/gi, function(match, grp) {
+      /* istanbul ignore next */
       var codePoint = parseInt(grp, 16);
+      /* istanbul ignore next */
       if (codePoint <= 0xFFFF) {
         return String.fromCharCode(codePoint);
       } else {
@@ -4469,6 +4474,7 @@
 
     switch (jQueryMajorVersion) {
       case 1:
+        /* istanbul ignore next */
         if (data === undefined) {
           return element.bind(event, fn);
         } else {
@@ -4496,6 +4502,7 @@
   var versionlessTrigger = function(element, event) {
     switch (jQueryMajorVersion) {
       case 1:
+        /* istanbul ignore next */
         return element[event]();
 
       case 2:
@@ -5306,6 +5313,7 @@
     };
 
     var expanderElement = $(options['expanderSelector']);
+    var endExpanderElement = $(options['endExpanderSelector']);
     if (options['expanderSelector'] !== null) {
       if (expanderElement.length !== 1) {
         throwError(
@@ -5322,65 +5330,64 @@
           '" (`data-agjCalendar-bound-to` attribute found, missing required)'
         );
         return -1;
-      } else {
-        agjCalendar['expanderSelector'] = options['expanderSelector'];
+      } else if (
+        agjCalendar['allowRange'] && options['endExpanderSelector'] !== null
+      ) {
+        if (endExpanderElement.length !== 1) {
+          throwError(
+            'Invalid `endExpanderSelector` value: "' +
+            options['endExpanderSelector'] + '" (' +
+            endExpanderElement.length + ' elements found, 1 required)'
+          );
+          return -1;
+        } else if (
+          endExpanderElement.attr('data-agjCalendar-bound-to') !==
+            undefined &&
+          endExpanderElement.attr('data-agjCalendar-bound-to').length > 0
+        ) {
+          throwError(
+            'Already used `endExpanderSelector`: "' +
+            options['endExpanderSelector'] +
+            '" (`data-agjCalendar-bound-to` attribute found, missing ' +
+            'required)'
+          );
+          return -1;
+        }
+      }
 
-        expanderElement
+      agjCalendar['expanderSelector'] = options['expanderSelector'];
+
+      expanderElement
+        .attr('data-agjCalendar-bound-to', agjCalendar['position']);
+      versionlessBind(
+        expanderElement,
+        'click',
+        {
+          isEnd: false
+        },
+        inputFocusEvent
+      );
+
+      if (agjCalendar['allowRange']) {
+        agjCalendar['endExpanderSelector'] = options['endExpanderSelector'];
+
+        endExpanderElement
           .attr('data-agjCalendar-bound-to', agjCalendar['position']);
         versionlessBind(
-          expanderElement,
+          endExpanderElement,
           'click',
           {
-            isEnd: false
+            isEnd: true
           },
           inputFocusEvent
         );
-
-        if (agjCalendar['allowRange']) {
-          var endExpanderElement = $(options['endExpanderSelector']);
-          if (options['endExpanderSelector'] !== null) {
-            if (endExpanderElement.length !== 1) {
-              throwError(
-                'Invalid `endExpanderSelector` value: "' +
-                options['endExpanderSelector'] + '" (' +
-                endExpanderElement.length + ' elements found, 1 required)'
-              );
-              return -1;
-            } else if (
-              endExpanderElement.attr('data-agjCalendar-bound-to') !==
-                undefined &&
-              endExpanderElement.attr('data-agjCalendar-bound-to').length > 0
-            ) {
-              throwError(
-                'Already used `endExpanderSelector`: "' +
-                options['endExpanderSelector'] +
-                '" (`data-agjCalendar-bound-to` attribute found, missing ' +
-                'required)'
-              );
-              return -1;
-            } else {
-              agjCalendar['endExpanderSelector'] =
-                options['endExpanderSelector'];
-
-              endExpanderElement
-                .attr('data-agjCalendar-bound-to', agjCalendar['position']);
-              versionlessBind(
-                endExpanderElement,
-                'click',
-                {
-                  isEnd: true
-                },
-                inputFocusEvent
-              );
-            }
-          }
-        }
       }
     }
 
     switch (agjCalendar['inputType']) {
       case 'text':
         var dateElement = $(options['dateSelector']);
+        var endDateElement = $(options['endDateSelector']);
         if (dateElement.length !== 1) {
           throwError(
             'Invalid `dateSelector` value: "' + options['dateSelector'] +
@@ -5396,121 +5403,123 @@
             '" (`data-agjCalendar-bound-to` attribute found, missing required)'
           );
           return -1;
-        } else {
-          agjCalendar['dateSelector'] = options['dateSelector'];
+        } else if (agjCalendar['allowRange']) {
+          if (endDateElement.length !== 1) {
+            throwError(
+              'Invalid `endDateSelector` value: "' +
+              options['endDateSelector'] + '" (' + endDateElement.length +
+              ' elements found, 1 required)'
+            );
+            return -1;
+          } else if (
+            endDateElement.attr('data-agjCalendar-bound-to') !== undefined &&
+            endDateElement.attr('data-agjCalendar-bound-to').length > 0
+          ) {
+            throwError(
+              'Already used `endDateSelector`: "' +
+              options['endDateSelector'] +
+              '" (`data-agjCalendar-bound-to` attribute found, missing ' +
+              'required)'
+            );
+            return -1;
+          }
+        }
 
-          /**
-           * The inputBlurEvent() function will handle events when an
-           * integration’s input loses focus.
-           * @param {object} event - The event object.
-           * @returns {boolean|void} - Returns true to allow chaining.
-           */
-          var inputBlurEvent = function(event) {
-            if (
-              $(this).attr('data-agjCalendar-bound-to') !== undefined &&
-              $(this).attr('data-agjCalendar-bound-to').length > 0
-            ) {
-              setTimeout(function() {
-                switch (agjCalendar['calendarDisplay']) {
-                  case 'full':
-                  case 'modal':
-                    break;
+        agjCalendar['dateSelector'] = options['dateSelector'];
 
-                  default:
-                    if (!lastClickWasOnAgjCalendar) {
-                      $.agjCalendar.deactivate();
-                      if (event.data.isEnd) {
-                        autoSetEndDate(agjCalendar);
-                      }
+        /**
+         * The inputBlurEvent() function will handle events when an
+         * integration’s input loses focus.
+         * @param {object} event - The event object.
+         * @returns {boolean|void} - Returns true to allow chaining.
+         */
+        var inputBlurEvent = function(event) {
+          if (
+            $(this).attr('data-agjCalendar-bound-to') !== undefined &&
+            $(this).attr('data-agjCalendar-bound-to').length > 0
+          ) {
+            setTimeout(function() {
+              switch (agjCalendar['calendarDisplay']) {
+                case 'full':
+                case 'modal':
+                  break;
+
+                default:
+                  if (!lastClickWasOnAgjCalendar) {
+                    $.agjCalendar.deactivate();
+                    if (event.data.isEnd) {
+                      autoSetEndDate(agjCalendar);
                     }
-                    break;
-                }
-              }, 1);
-              return true;
-            }
-          };
+                  }
+                  break;
+              }
+            }, 1);
+            return true;
+          }
+        };
 
-          var originalValue = dateElement.val();
+        var originalValue = dateElement.val();
 
-          dateElement
+        dateElement
+          .attr('data-agjCalendar-bound-to', agjCalendar['position']);
+        versionlessBind(
+          dateElement,
+          'blur',
+          {
+            isEnd: false
+          },
+          inputBlurEvent
+        );
+        versionlessBind(
+          dateElement,
+          'focus',
+          {
+            isEnd: false
+          },
+          inputFocusEvent
+        );
+
+        setDate(agjCalendar, agjCalendar['defaultDate']);
+        if (originalValue.length > 0) {
+          dateElement.val(originalValue);
+        }
+
+        if (agjCalendar['allowRange']) {
+          agjCalendar['endDateSelector'] = options['endDateSelector'];
+
+          originalValue = endDateElement.val();
+
+          endDateElement
             .attr('data-agjCalendar-bound-to', agjCalendar['position']);
           versionlessBind(
-            dateElement,
+            endDateElement,
             'blur',
             {
-              isEnd: false
+              isEnd: true
             },
             inputBlurEvent
           );
           versionlessBind(
-            dateElement,
+            endDateElement,
             'focus',
             {
-              isEnd: false
+              isEnd: true
             },
             inputFocusEvent
           );
 
-          setDate(agjCalendar, agjCalendar['defaultDate']);
+          setDate(agjCalendar, agjCalendar['defaultEndDate'], true);
           if (originalValue.length > 0) {
-            dateElement.val(originalValue);
-          }
-
-          if (agjCalendar['allowRange']) {
-            var endDateElement = $(options['endDateSelector']);
-            if (endDateElement.length !== 1) {
-              throwError(
-                'Invalid `endDateSelector` value: "' +
-                options['endDateSelector'] + '" (' + endDateElement.length +
-                ' elements found, 1 required)'
-              );
-              return -1;
-            } else if (
-              endDateElement.attr('data-agjCalendar-bound-to') !== undefined &&
-              endDateElement.attr('data-agjCalendar-bound-to').length > 0
-            ) {
-              throwError(
-                'Already used `endDateSelector`: "' +
-                options['endDateSelector'] +
-                '" (`data-agjCalendar-bound-to` attribute found, missing ' +
-                'required)'
-              );
-              return -1;
-            } else {
-              agjCalendar['endDateSelector'] = options['endDateSelector'];
-
-              originalValue = endDateElement.val();
-
-              endDateElement
-                .attr('data-agjCalendar-bound-to', agjCalendar['position']);
-              versionlessBind(
-                endDateElement,
-                'blur',
-                {
-                  isEnd: true
-                },
-                inputBlurEvent
-              );
-              versionlessBind(
-                endDateElement,
-                'focus',
-                {
-                  isEnd: true
-                },
-                inputFocusEvent
-              );
-
-              setDate(agjCalendar, agjCalendar['defaultEndDate'], true);
-              if (originalValue.length > 0) {
-                endDateElement.val(originalValue);
-              }
-            }
+            endDateElement.val(originalValue);
           }
         }
         break;
 
       case 'dropdown':
         var monthElement = $(options['monthSelector']);
+        var dayElement = $(options['daySelector']);
+        var endMonthElement = $(options['endMonthSelector']);
+        var endDayElement = $(options['endDaySelector']);
         if (monthElement.length !== 1) {
           throwError(
             'Invalid `monthSelector` value: "' +
@@ -5527,196 +5536,188 @@
             '" (`data-agjCalendar-bound-to` attribute found, missing required)'
           );
           return -1;
-        } else {
-          var dayElement = $(options['daySelector']);
-          if (dayElement.length !== 1) {
+        } else if (dayElement.length !== 1) {
+          throwError(
+            'Invalid `daySelector` value: "' + options['daySelector'] +
+            '" (' + dayElement.length + ' elements found, 1 required)'
+          );
+          return -1;
+        } else if (
+          dayElement.attr('data-agjCalendar-bound-to') !== undefined &&
+          dayElement.attr('data-agjCalendar-bound-to').length > 0
+        ) {
+          throwError(
+            'Already used `daySelector`: "' + options['daySelector'] +
+            '" (`data-agjCalendar-bound-to` attribute found, missing ' +
+            'required)'
+          );
+          return -1;
+        } else if (agjCalendar['allowRange']) {
+          if (endMonthElement.length !== 1) {
             throwError(
-              'Invalid `daySelector` value: "' + options['daySelector'] +
-              '" (' + dayElement.length + ' elements found, 1 required)'
+              'Invalid `endMonthSelector` value: "' +
+              options['endMonthSelector'] + '" (' +
+              endMonthElement.length + ' elements found, 1 required)'
             );
             return -1;
           } else if (
-            dayElement.attr('data-agjCalendar-bound-to') !== undefined &&
-            dayElement.attr('data-agjCalendar-bound-to').length > 0
+            endMonthElement.attr('data-agjCalendar-bound-to') !==
+              undefined &&
+            endMonthElement.attr('data-agjCalendar-bound-to').length > 0
           ) {
             throwError(
-              'Already used `daySelector`: "' + options['daySelector'] +
+              'Already used `endMonthSelector`: "' +
+              options['endMonthSelector'] +
               '" (`data-agjCalendar-bound-to` attribute found, missing ' +
               'required)'
             );
             return -1;
-          } else {
-            dayElement
-              .attr('data-agjCalendar-bound-to', agjCalendar['position']);
-            monthElement
-              .attr('data-agjCalendar-bound-to', agjCalendar['position']);
+          } else if (endDayElement.length !== 1) {
+            throwError(
+              'Invalid `endDaySelector` value: "' +
+              options['endDaySelector'] + '" (' + endDayElement.length +
+              ' elements found, 1 required)'
+            );
+            return -1;
+          } else if (
+            endDayElement.attr('data-agjCalendar-bound-to') !==
+              undefined &&
+            endDayElement.attr('data-agjCalendar-bound-to').length > 0
+          ) {
+            throwError(
+              'Already used `endDaySelector`: "' +
+              options['endDaySelector'] +
+              '" (`data-agjCalendar-bound-to` attribute found, missing ' +
+              'required)'
+            );
+            return -1;
+          }
+        }
 
-            agjCalendar['monthSelector'] = options['monthSelector'];
-            agjCalendar['daySelector'] = options['daySelector'];
+        dayElement.attr('data-agjCalendar-bound-to', agjCalendar['position']);
+        monthElement.attr('data-agjCalendar-bound-to', agjCalendar['position']);
 
-            /**
-             * The monthChangeEvent() function will handle events when an
-             * integration’s month input changes.
-             * @param {object} event - The event object.
-             * @returns {void}
-             */
-            var monthChangeEvent = function(event) {
+        agjCalendar['monthSelector'] = options['monthSelector'];
+        agjCalendar['daySelector'] = options['daySelector'];
+
+        /**
+         * The monthChangeEvent() function will handle events when an
+         * integration’s month input changes.
+         * @param {object} event - The event object.
+         * @returns {void}
+         */
+        var monthChangeEvent = function(event) {
+          if (
+            $(this).attr('data-agjCalendar-bound-to') !== undefined &&
+            $(this).attr('data-agjCalendar-bound-to').length > 0
+          ) {
+            updateDayElement(agjCalendar, event.data.isEnd);
+            if (!event.data.isEnd) {
+              autoSetEndDate(agjCalendar);
+            }
+          }
+        };
+
+        var originalMonthValue = monthElement.val();
+        var originalDayValue = dayElement.val();
+
+        versionlessBind(
+          monthElement,
+          'change',
+          {
+            isEnd: false
+          },
+          monthChangeEvent
+        );
+
+        updateMonthElement(agjCalendar);
+        updateDayElement(agjCalendar);
+
+        if (
+          originalMonthValue !== null &&
+          originalMonthValue.length > 0 &&
+          monthElement.find(
+            'option[value=' + originalMonthValue + ']'
+          ).length > 0
+        ) {
+          monthElement.val(originalMonthValue);
+          versionlessTrigger(monthElement, 'change');
+        }
+
+        if (
+          originalDayValue !== null &&
+          originalDayValue.length > 0 &&
+          dayElement.find(
+            'option[value=' + originalDayValue + ']'
+          ).length > 0
+        ) {
+          dayElement.val(originalDayValue);
+          versionlessTrigger(dayElement, 'change');
+        }
+
+        if (agjCalendar['allowRange']) {
+          endMonthElement = $(options['endMonthSelector']);
+          endMonthElement
+            .attr('data-agjCalendar-bound-to', agjCalendar['position']);
+          endDayElement
+            .attr('data-agjCalendar-bound-to', agjCalendar['position']);
+
+          agjCalendar['endMonthSelector'] = options['endMonthSelector'];
+          agjCalendar['endDaySelector'] = options['endDaySelector'];
+
+          var originalMonthValue = endMonthElement.val();
+          var originalDayValue = endDayElement.val();
+
+          versionlessBind(
+            dayElement,
+            'change',
+            function() {
               if (
-                $(this).attr('data-agjCalendar-bound-to') !== undefined &&
+                $(this).attr('data-agjCalendar-bound-to') !==
+                  undefined &&
                 $(this).attr('data-agjCalendar-bound-to').length > 0
               ) {
-                updateDayElement(agjCalendar, event.data.isEnd);
-                if (!event.data.isEnd) {
-                  autoSetEndDate(agjCalendar);
-                }
-              }
-            };
-
-            var originalMonthValue = monthElement.val();
-            var originalDayValue = dayElement.val();
-
-            versionlessBind(
-              monthElement,
-              'change',
-              {
-                isEnd: false
-              },
-              monthChangeEvent
-            );
-
-            updateMonthElement(agjCalendar);
-            updateDayElement(agjCalendar);
-
-            if (
-              originalMonthValue !== null &&
-              originalMonthValue.length > 0 &&
-              monthElement.find(
-                'option[value=' + originalMonthValue + ']'
-              ).length > 0
-            ) {
-              monthElement.val(originalMonthValue);
-              versionlessTrigger(monthElement, 'change');
-            }
-
-            if (
-              originalDayValue !== null &&
-              originalDayValue.length > 0 &&
-              dayElement.find(
-                'option[value=' + originalDayValue + ']'
-              ).length > 0
-            ) {
-              dayElement.val(originalDayValue);
-              versionlessTrigger(dayElement, 'change');
-            }
-
-            if (agjCalendar['allowRange']) {
-              var endMonthElement = $(options['endMonthSelector']);
-              if (endMonthElement.length !== 1) {
-                throwError(
-                  'Invalid `endMonthSelector` value: "' +
-                  options['endMonthSelector'] + '" (' +
-                  endMonthElement.length + ' elements found, 1 required)'
-                );
-                return -1;
-              } else if (
-                endMonthElement.attr('data-agjCalendar-bound-to') !==
-                  undefined &&
-                endMonthElement.attr('data-agjCalendar-bound-to').length > 0
-              ) {
-                throwError(
-                  'Already used `endMonthSelector`: "' +
-                  options['endMonthSelector'] +
-                  '" (`data-agjCalendar-bound-to` attribute found, missing ' +
-                  'required)'
-                );
-                return -1;
-              } else {
-                var endDayElement = $(options['endDaySelector']);
-                if (endDayElement.length !== 1) {
-                  throwError(
-                    'Invalid `endDaySelector` value: "' +
-                    options['endDaySelector'] + '" (' + endDayElement.length +
-                    ' elements found, 1 required)'
-                  );
-                  return -1;
-                } else if (
-                  endDayElement.attr('data-agjCalendar-bound-to') !==
-                    undefined &&
-                  endDayElement.attr('data-agjCalendar-bound-to').length > 0
-                ) {
-                  throwError(
-                    'Already used `endDaySelector`: "' +
-                    options['endDaySelector'] +
-                    '" (`data-agjCalendar-bound-to` attribute found, missing ' +
-                    'required)'
-                  );
-                  return -1;
-                } else {
-                  endMonthElement
-                    .attr('data-agjCalendar-bound-to', agjCalendar['position']);
-                  endDayElement
-                    .attr('data-agjCalendar-bound-to', agjCalendar['position']);
-
-                  agjCalendar['endMonthSelector'] = options['endMonthSelector'];
-                  agjCalendar['endDaySelector'] = options['endDaySelector'];
-
-                  var originalMonthValue = endMonthElement.val();
-                  var originalDayValue = endDayElement.val();
-
-                  versionlessBind(
-                    dayElement,
-                    'change',
-                    function() {
-                      if (
-                        $(this).attr('data-agjCalendar-bound-to') !==
-                          undefined &&
-                        $(this).attr('data-agjCalendar-bound-to').length > 0
-                      ) {
-                        autoSetEndDate(agjCalendar);
-                        updateMonthElement(agjCalendar, true);
-                        updateDayElement(agjCalendar, true);
-                      }
-                    }
-                  );
-
-                  endMonthElement
-                    .attr('data-agjCalendar-bound-to', agjCalendar['position']);
-                  versionlessBind(
-                    endMonthElement,
-                    'change',
-                    {
-                      isEnd: true
-                    },
-                    monthChangeEvent
-                  );
-
-                  updateMonthElement(agjCalendar, true);
-                  updateDayElement(agjCalendar, true);
-
-                  if (
-                    originalMonthValue !== null &&
-                    originalMonthValue.length > 0 &&
-                    endMonthElement.find(
-                      'option[value=' + originalMonthValue + ']'
-                    ).length > 0
-                  ) {
-                    endMonthElement.val(originalMonthValue);
-                    versionlessTrigger(endMonthElement, 'change');
-                  }
-
-                  if (
-                    originalDayValue !== null &&
-                    originalDayValue.length > 0 &&
-                    endDayElement.find(
-                      'option[value=' + originalDayValue + ']'
-                    ).length > 0
-                  ) {
-                    endDayElement.val(originalDayValue);
-                    versionlessTrigger(endDayElement, 'change');
-                  }
-                }
+                autoSetEndDate(agjCalendar);
+                updateMonthElement(agjCalendar, true);
+                updateDayElement(agjCalendar, true);
               }
             }
+          );
+
+          endMonthElement
+            .attr('data-agjCalendar-bound-to', agjCalendar['position']);
+          versionlessBind(
+            endMonthElement,
+            'change',
+            {
+              isEnd: true
+            },
+            monthChangeEvent
+          );
+
+          updateMonthElement(agjCalendar, true);
+          updateDayElement(agjCalendar, true);
+
+          if (
+            originalMonthValue !== null &&
+            originalMonthValue.length > 0 &&
+            endMonthElement.find(
+              'option[value=' + originalMonthValue + ']'
+            ).length > 0
+          ) {
+            endMonthElement.val(originalMonthValue);
+            versionlessTrigger(endMonthElement, 'change');
+          }
+
+          if (
+            originalDayValue !== null &&
+            originalDayValue.length > 0 &&
+            endDayElement.find(
+              'option[value=' + originalDayValue + ']'
+            ).length > 0
+          ) {
+            endDayElement.val(originalDayValue);
+            versionlessTrigger(endDayElement, 'change');
           }
         }
 
@@ -5790,6 +5791,7 @@
         var utcSeconds = date.getUTCSeconds();
         var utcMinutes = date.getUTCMinutes();
         var utcHours = date.getUTCHours();
+        /* istanbul ignore if */
         if (utcHours >= 24) {
           utcHours -= 24; // Adjust for overflow
         }
@@ -5947,6 +5949,7 @@
             return i;
           }
         }
+        /* istanbul ignore next */
         return -1;
       }
     };
@@ -6072,6 +6075,7 @@
    * @returns {void}
    */
   $.agjCalendar.disableEmojiSupport = function() {
+    /* istanbul ignore else  */
     if (es2018IsSupported()) {
       emojiSupportEnabled = false;
     } else {
@@ -6092,6 +6096,7 @@
    * @returns {void}
    */
   $.agjCalendar.enableEmojiSupport = function() {
+    /* istanbul ignore else  */
     if (es2018IsSupported()) {
       emojiSupportEnabled = true;
     } else {
@@ -6464,7 +6469,7 @@
         'Invalid tag "' + this.prop('tagName').toLowerCase() +
         '" ("input" expected)'
       );
-      callback(false);
+      callback(-1);
     }
 
     return this;
