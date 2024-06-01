@@ -1,5 +1,5 @@
 /**
- * QUnit test suite of agjCalendar v1.2.0.
+ * QUnit test suite of agjCalendar v1.2.1.
  *
  * Copyright (c) 2013–2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,7 +23,7 @@
  * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
  * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
  * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
- * @version 1.2.0
+ * @version 1.2.1
  */
 
 /**
@@ -195,7 +195,6 @@
       dateFormatCharacters: {
         a: 'am',
         A: 'AM',
-        // B: '298',
         c: '2000-01-02T01:10:11',
         d: '02',
         D: 'Sun',
@@ -246,7 +245,6 @@
       dateFormatCharacters: {
         a: 'am',
         A: 'AM',
-        // B: '298',
         c: '1999-01-02T01:10:11',
         d: '02',
         D: 'Sat',
@@ -296,7 +294,6 @@
       dateFormatCharacters: {
         a: 'am',
         A: 'AM',
-        // B: '492',
         c: '0900-02-16T05:20:22',
         d: '16',
         D: 'Tue',
@@ -346,7 +343,6 @@
       dateFormatCharacters: {
         a: 'am',
         A: 'AM',
-        // B: '707',
         c: '-0100-03-22T10:30:33',
         d: '22',
         D: 'Thu',
@@ -396,7 +392,6 @@
       dateFormatCharacters: {
         a: 'pm',
         A: 'PM',
-        // B: '903',
         c: '20000-12-30T15:40:44',
         d: '30',
         D: 'Sat',

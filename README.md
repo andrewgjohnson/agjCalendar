@@ -142,7 +142,6 @@ t|Number of days in the given month|28
 *Time*|---|---
 a|Lowercase Ante meridiem and Post meridiem|am or pm
 A|Uppercase Ante meridiem and Post meridiem|AM or PM
-B|Swatch Internet time|000 through 999
 g|12-hour format of an hour without leading zeros|1 through 12
 G|24-hour format of an hour without leading zeros|0 through 23
 h|12-hour format of an hour with leading zeros|01 through 12

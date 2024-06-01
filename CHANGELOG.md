@@ -4,6 +4,10 @@ All notable changes to the [agjCalendar plugin](https://github.com/andrewgjohnso
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this plugin adheres to [Semantic Versioning](https://semver.org/).
 
+## [v1.2.1](https://github.com/andrewgjohnson/agjCalendar/releases/tag/v1.2.1) (June 1, 2024)
+ * Fixed bug with the U date format character to remove timezone errors
+ * Dropped support for the B date format character (Swatch Internet Time)
+
 ## [v1.2.0](https://github.com/andrewgjohnson/agjCalendar/releases/tag/v1.2.0) (May 31, 2024)
  * The first big new feature set in v1.2.0 is *languages* and *translations*
    * Went from two included languages (`en` & `fr`) to twenty (`en`, `ar`, `bn`, `de`, `es`, `fr`, `he`, `hi`, `it`, `ja`, `ko`, `mr`, `pa`, `pt`, `ru`, `te`, `tr`, `ur`, `vi` & `zh`)

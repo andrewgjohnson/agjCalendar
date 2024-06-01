@@ -1,5 +1,5 @@
 /**
- * Javascript source code of agjCalendar v1.2.0.
+ * Javascript source code of agjCalendar v1.2.1.
  *
  * Copyright (c) 2013–2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,7 +23,7 @@
  * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
  * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
  * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
- * @version 1.2.0
+ * @version 1.2.1
  */
 
 /**
@@ -2965,7 +2965,6 @@
     var exampleDateFormats = {
       a: 'am',
       A: 'AM',
-      B: '000',
       c: '2000-01-01T00:00:00+00:00',
       d: '01',
       D: includedTranslations['en']['days']['abbreviated'][0],
@@ -5786,26 +5785,6 @@
         var key = date.getHours() < 12 ? 0 : 1;
         return translations['meridiemIndicators']['uppercase'][key];
       },
-      B: function(date) {
-        // Get UTC time components
-        var utcSeconds = date.getUTCSeconds();
-        var utcMinutes = date.getUTCMinutes();
-        var utcHours = date.getUTCHours();
-        /* istanbul ignore if */
-        if (utcHours >= 24) {
-          utcHours -= 24; // Adjust for overflow
-        }
-
-        // Calculate total seconds since the start of the day in CET
-        var totalSeconds = (utcHours * 3600) + (utcMinutes * 60) + utcSeconds;
-
-        // Calculate .beats
-        var beats = Math.floor(totalSeconds / 86.4);
-
-        // Ensure the result is three digits
-        var beatsString = '000' + beats;
-        return beatsString.slice(-3);
-      },
       c: function(date) {
         return $.agjCalendar.dateToString(
           date,
@@ -6170,7 +6149,6 @@
     var regexDateFormats = {
       a: '(am|pm)',
       A: '(AM|PM)',
-      B: '[0-9]{1,3}',
       c: '-?([0-9]+)-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})',
       d: '([0-9]{2})',
       D: regexTextPattern(),
