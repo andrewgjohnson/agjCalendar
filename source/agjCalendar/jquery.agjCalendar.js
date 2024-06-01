@@ -5894,7 +5894,14 @@
         return date.getMilliseconds() * 1000;
       },
       U: function(date) {
-        return Math.round(date.getTime() / 1000);
+        return Math.round(Date.UTC(
+          date.getFullYear(),
+          date.getMonth(),
+          date.getDate(),
+          date.getHours(),
+          date.getMinutes(),
+          date.getMilliseconds()
+        ) / 1000);
       },
       v: function(date) {
         return date.getMilliseconds();
@@ -6335,6 +6342,22 @@
               var date = new Date(
                 parseInt(regexMatches.groups[key], 10) * 1000
               );
+
+              var utcDifference = (parseInt(
+                regexMatches.groups[key],
+                10
+              ) * 1000) - Date.UTC(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate(),
+                date.getHours(),
+                date.getMinutes(),
+                date.getSeconds(),
+                date.getMilliseconds()
+              );
+
+              date.setTime(date.getTime() + utcDifference);
+
               fullYear = date.getFullYear();
               month = date.getMonth();
               day = date.getDate();
