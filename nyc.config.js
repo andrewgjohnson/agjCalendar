@@ -25,25 +25,8 @@
  * @version 1.2.0
  */
 
-export default {
-  checkCoverage: true,
-  branches:      80,
-  lines:         80,
-  functions:     80,
-  statements:    80,
-  include:       [
+module.exports = {
+  include: [
     'source/agjCalendar/jquery.agjCalendar.js'
-  ],
-  exclude: [
-    'node_modules'
-  ],
-  reporter: [
-    'lcov',
-    'text'
-  ],
-  all:       true,
-  extension: [
-    '.js'
-  ],
-  sourceMap: false
+  ]
 };

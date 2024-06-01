@@ -4,7 +4,7 @@ All notable changes to the [agjCalendar plugin](https://github.com/andrewgjohnso
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this plugin adheres to [Semantic Versioning](https://semver.org/).
 
-## v1.2.0 (May tk, 2024)
+## [v1.2.0](https://github.com/andrewgjohnson/agjCalendar/releases/tag/v1.2.0) (May 31, 2024)
  * The first big new feature set in v1.2.0 is *languages* and *translations*
    * Went from two included languages (`en` & `fr`) to twenty (`en`, `ar`, `bn`, `de`, `es`, `fr`, `he`, `hi`, `it`, `ja`, `ko`, `mr`, `pa`, `pt`, `ru`, `te`, `tr`, `ur`, `vi` & `zh`)
    * Added support for custom translations
@@ -13,20 +13,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
  * The second big new feature set in v1.2.0 is a refactoring of *date formats*
    * Went from five hard coded date formats to custom date formats
    * You can now customize much more of the formatting of your integrations using the `dateFormat`, `dateFormatDate`, `dateFormatDateTooltip`, `dateFormatDayInput`, `dateFormatDayOfWeekTooltip`, `dateFormatMonthDropdown`, `dateFormatMonthInput` and `dateFormatMonthLabel` options
+ * The third big new feature set in v1.2.0 is *unit tests*
+   * Integrated `QUnit` framework to add unit tests to the plugin
+   * The unit tests can be run via CLI with the `npm run qunit` command 
+   * The unit tests can be run in-browser at [agjCalendar.agjjQuery.org/tests/index.html](https://agjCalendar.agjjQuery.org/tests/index.html)
+   * The in-browser experience will allow tests to run on jQuery `1.12.4`, `2.2.4`, `3.7.1` or `4.0.0 beta` as well as with or without the minified plugin source
+   * Integrated `Istanbul (nyc)` to measure code coverage
+   * Integrated `coveralls.io` to allow for public code coverage analysis (available online at [coveralls.io/github/andrewgjohnson/agjCalendar](https://coveralls.io/github/andrewgjohnson/agjCalendar))
  * Added [*Translations*](https://agjCalendar.agjjQuery.org/translations/) page to online documentation
  * Added [*Customize*](https://agjCalendar.agjjQuery.org/customize/) page to online documentation
  * Added [*QUnit Test Suite Source*](https://agjCalendar.agjjQuery.org/source/qunit-test-suite/) page to online documentation
  * Added [*gulp.js Configuration File Source*](https://agjCalendar.agjjQuery.org/source/gulp.js-configuration-file/) page to online documentation
  * Added [*Contribute*](https://agjCalendar.agjjQuery.org/contribute/) page to online documentation
  * Updated the plugin’s [contributing guidelines](https://github.com/andrewgjohnson/agjCalendar/blob/master/.github/CONTRIBUTING.md)
- * Integrated `QUnit` framework to add unit tests to plugin (available online at [agjCalendar.agjjQuery.org/tests/index.html](https://agjCalendar.agjjQuery.org/tests/index.html))
  * Added `'use strict';` to Javascript source
  * Added `autoBlur`, `calendarSize`, `dateFormatDate`, `dateFormatDateTooltip`, `dateFormatDayInput`, `dateFormatDayOfWeekTooltip`, `dateFormatMonthDropdown`, `dateFormatMonthInput`, `dateFormatMonthLabel`, `dateNameEllipsis`, `forceMaxZIndex` and `translations` options
  * Added second optional `callback` parameter to `$.fn.agjCalendar`
  * Added `$.agjCalendar.addRegexTextPattern()`, `$.agjCalendar.dateToString()`, `$.agjCalendar.disable()`, `$.agjCalendar.disableEmojiSupport()`, `$.agjCalendar.enableEmojiSupport()`, `$.agjCalendar.getIncludedTranslations()` and `$.agjCalendar.stringToDate()` functions
  * Removed `.stylelintrc.yml` and replaced with `stylelint.config.js`
  * Added comment blocks to the top of `gulpfile.js`, `eslint.config.js` and `stylelint.config.js` then removed all inline ESLint exceptions
- * Added exceptions for examples and configuration files to `eslint.config.js`
+ * Added exceptions for `examples/*` and `tests/cli.js` to `eslint.config.js`
  * Added `jQuery`, `$` and `QUnit` globals to `eslint.config.js`
  * Refactored `gulpfile.js` to avoid duplicate code
  * Updated all references to the jQuery source to use the minified path
@@ -37,8 +43,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
  * Fixed a bug that prevented an integration from intializing with a blank `defaultDate` and a non-blank `defaultEndDate` when `allowRange` was set to `true`
  * Fixed a bug that in rare circumstances could cause the month dropdown on the date picker to not show all vaid month options
  * Fixed multiple bugs relating to years that outside of 1000-9999
+ * Fixed multiple bugs relating to invalid end date selectors used with valid start date selectors
 
-## v1.1.0 (April 28, 2024)
+## [v1.1.0](https://github.com/andrewgjohnson/agjCalendar/releases/tag/v1.1.0) (April 28, 2024)
  * The big new feature set in v1.1.0 is *themes*
    * Added the `theme` option
    * Included eight built-in themes (`red`, `orange`, `yellow`, `green`, `cyan`, `blue`, `purple` & `pink`)
@@ -59,10 +66,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
  * Added new one-off files to `exclude` list of `_config.yml`
  * Various fixes for typos throughout comments and documentation
 
-## v1.0.3 (August 5, 2023)
+## [v1.0.3](https://github.com/andrewgjohnson/agjCalendar/releases/tag/v1.0.3) (August 5, 2023)
  * Fixed a bug where the `defaultDate` or `defaultEndDate` option being set to `"blank"` would occasionally throw a Javascript error
 
-## v1.0.2 (August 5, 2023)
+## [v1.0.2](https://github.com/andrewgjohnson/agjCalendar/releases/tag/v1.0.2) (August 5, 2023)
  * Cleaned up [example 6](https://github.com/andrewgjohnson/agjCalendar/blob/master/examples/example6-existing-values.js) to better illustrate existing/original values
  * Enabled the `eqeqeq` rule in ESLint and ensured all comparisons are `===`/`!==` instead of `==`/`!=`
  * Fixed a typo in the documentation of the `dateToString()` function
@@ -75,7 +82,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
  * Updated `highlight.js` on the documentation website to v11.8.0 and explicitly defined the languages (CSS and Javascript) used in code snippets
  * Added some details to README.md
 
-## v1.0.1 (July 30, 2023)
+## [v1.0.1](https://github.com/andrewgjohnson/agjCalendar/releases/tag/v1.0.1) (July 30, 2023)
  * Added retina display support for images
  * Updated `Stylelint` to allow retina display support in the CSS stylesheet
  * Added support for original/existing values and added an example showing how they work
@@ -83,7 +90,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
  * Updated comments on layout.html template
  * Images were optimized by [@ImgBotApp](https://github.com/ImgBotApp)
 
-## v1.0.0 (July 30, 2023)
+## [v1.0.0](https://github.com/andrewgjohnson/agjCalendar/releases/tag/v1.0.0) (July 30, 2023)
  * Renamed ctcCalendar to agjCalendar (the `$.ctcCalender()` function is still supported for backwards compatibility)
  * Added support for `npm`, `Yarn` and `Bower` dependency managers
  * Added `.github` folder for extended GitHub support
@@ -116,7 +123,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
  * Revamped the [examples](https://github.com/andrewgjohnson/agjCalendar/tree/master/examples)
  * Created the [agjCalendar.agjjQuery.org documentation website](https://agjCalendar.agjjQuery.org/)
 
-## v0.9.4 (June 23, 2023)
+## [v0.9.4](https://github.com/andrewgjohnson/agjCalendar/releases/tag/v0.9.4) (June 23, 2023)
  * Updated the plugin to support the most recent version of `jQuery` (3.7.0), although it also works with 2.2.4
  * Dropped special handling for Internet Explorer 6
  * Replaced `google-code-prettify` with `highlight.js` for HTML syntax highlighting

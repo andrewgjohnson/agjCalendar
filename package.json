@@ -6,15 +6,16 @@
   "license": "MIT",
   "version": "1.2.0",
   "repository": "https://github.com/andrewgjohnson/agjCalendar",
+  "bugs": {
+    "url": "https://github.com/andrewgjohnson/agjCalendar/issues"
+  },
   "main": "source/agjCalendar/jquery.agjCalendar.min.js",
-  "type": "module",
   "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-plugin-istanbul": "^6.1.1",
     "coveralls": "^3.1.1",
     "eslint": "^9.3.0",
     "eslint-config-google-jsdocless": "^0.14.1",
-    "eslint-plugin-jsdoc": "^48.2.3",
+    "eslint-plugin-jsdoc": "^48.2.7",
+    "eslint-plugin-qunit": "^8.1.1",
     "gulp": "^5.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
@@ -41,8 +42,10 @@
     "dates"
   ],
   "scripts": {
-    "test": "qunit tests/cli.js --reporter tap",
-    "coverage": "nyc --reporter=html --reporter=text qunit tests/cli.js --reporter tap",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "lint": "eslint source/agjCalendar/jquery.agjCalendar.js & eslint tests/*.js & eslint examples/*.js & eslint eslint.config.js & eslint nyc.config.js & eslint stylelint.config.js & eslint gulpfile.js & stylelint source/agjCalendar/jquery.agjCalendar.css & stylelint source/agjCalendar/jquery.agjCalendar.themes.css",
+    "qunit": "qunit tests/cli.js",
+    "test": "npm run lint & npm run qunit",
+    "coverage": "nyc --reporter=text qunit tests/cli.js",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   }
 }

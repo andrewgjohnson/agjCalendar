@@ -24,7 +24,7 @@
  * @version 1.2.0
  */
 
-export default {
+module.exports = {
   extends: [
     'stylelint-config-standard'
   ],
