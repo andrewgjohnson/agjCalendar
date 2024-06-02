@@ -1980,7 +1980,7 @@
           assert.strictEqual(
             $.agjCalendar.disable(integration + 1),
             false,
-            'fail to  disable a calculated integration'
+            'Fail to disable a calculated integration'
           );
         }
       );
