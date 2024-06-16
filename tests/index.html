@@ -55,9 +55,10 @@
         });
 
         QUnit.config.urlConfig.push({
-          id:    'jquery',
-          label: 'jQuery Version',
-          value: (function() {
+          id:      'jquery',
+          label:   'jQuery Version',
+          tooltip: 'Which version of jQuery to test with',
+          value:   (function() {
             var versions = [];
             for (var version in jQueryURLs) {
               if (Object.prototype.hasOwnProperty.call(jQueryURLs, version) && version !== 'default') {
@@ -65,8 +66,7 @@
               }
             }
             return versions;
-          })(),
-          tooltip: 'Which version of jQuery to test with'
+          })()
         });
 
         QUnit.config.urlConfig.push({
