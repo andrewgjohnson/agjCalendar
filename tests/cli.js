@@ -36,7 +36,7 @@ global.document = document;
 global.navigator = navigator;
 global.jQuery = jQuery(window);
 
-console.error = function() {}; // supress console.error output
+console.error = function() {}; // suppress console.error output
 
 require('../source/agjCalendar/jquery.agjCalendar.js');
 require('./qunit.js');
