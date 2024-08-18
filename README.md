@@ -6,7 +6,7 @@
 [![Coveralls Coverage](https://img.shields.io/coverallsCoverage/github/andrewgjohnson/agjCalendar.png?colorB=0366d6&style=flat-square&logoColor=white&logo=coveralls)](https://coveralls.io/github/andrewgjohnson/agjCalendar)
 [![Issues](https://img.shields.io/github/issues/andrewgjohnson/agjCalendar.png?colorB=0366d6&style=flat-square&logoColor=white&logo=github)](https://github.com/andrewgjohnson/agjCalendar/issues)
 [![npm Downloads](https://img.shields.io/npm/dt/agjcalendar.png?colorB=0366d6&style=flat-square&logoColor=white&logo=npm)](https://www.npmjs.com/package/agjcalendar)
-[![Patreon](https://agjCalendar.agjjQuery.org/documentation/agjgd.org/images/patreon-badge.png)](https://patreon.com/agjopensource)
+[![Patreon](https://agjCalendar.agjjQuery.org/documentation/agjCalendar.agjjQuery.org/images/patreon-badge.png)](https://patreon.com/agjopensource)
 
 <p align="center">
   <a href="https://agjcalendar.agjjquery.org/" title="">
