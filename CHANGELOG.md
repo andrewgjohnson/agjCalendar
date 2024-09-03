@@ -4,6 +4,10 @@ All notable changes to the [agjCalendar plugin](https://github.com/andrewgjohnso
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this plugin adheres to [Semantic Versioning](https://semver.org/).
 
+## [v1.2.2](https://github.com/andrewgjohnson/agjCalendar/releases/tag/v1.2.2) (September 2, 2024)
+ * Fixed major bug that would cause an infinite loop with would crash Javascript in a user’s browser
+ * Please cease using v1.2.0 & v1.2.1 and update to v1.2.2 immediately
+
 ## [v1.2.1](https://github.com/andrewgjohnson/agjCalendar/releases/tag/v1.2.1) (June 1, 2024)
  * Fixed bug with the U date format character to remove timezone errors
  * Dropped support for the B date format character (Swatch Internet Time)
