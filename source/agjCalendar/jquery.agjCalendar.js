@@ -1,5 +1,5 @@
 /**
- * Javascript source code of agjCalendar v1.2.1.
+ * Javascript source code of agjCalendar v1.2.2.
  *
  * Copyright (c) 2013–2024 Andrew G. Johnson <andrew@andrewgjohnson.com>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,7 +23,7 @@
  * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
  * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
  * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
- * @version 1.2.1
+ * @version 1.2.2
  */
 
 /**
@@ -2540,7 +2540,7 @@
         exampleDate.setFullYear(
           exampleDate.getFullYear(),
           exampleDate.getMonth(),
-          exampleDate.getDay() + 1
+          exampleDate.getDate() + 1
         );
       }
 

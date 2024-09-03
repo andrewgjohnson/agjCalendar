@@ -21,7 +21,7 @@
  * @see {@link https://github.com/andrewgjohnson/agjCalendar GitHub Repository}
  * @see {@link https://agjCalendar.agjjQuery.org/ Online Documentation}
  * @author Andrew G. Johnson <andrew@andrewgjohnson.com>
- * @version 1.2.1
+ * @version 1.2.2
  */
 
 const jQuery = require('jquery');
